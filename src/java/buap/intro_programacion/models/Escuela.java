@@ -2,6 +2,7 @@ package buap.intro_programacion.models;
 
 import java.util.Arrays;
 
+//Jorge
 public class Escuela {
     private String nombre;
     private Empleado[] empleados;

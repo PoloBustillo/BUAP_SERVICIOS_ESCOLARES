@@ -2,7 +2,7 @@ package buap.intro_programacion;
 
 import javax.swing.*;
 import java.awt.*;
-
+//TODOS
 public class SistemaEscolarUI extends JFrame {
 
     private JPanel Hola;

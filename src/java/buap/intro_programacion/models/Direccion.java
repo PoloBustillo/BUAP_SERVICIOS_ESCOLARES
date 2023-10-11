@@ -1,5 +1,7 @@
 package buap.intro_programacion.models;
 
+
+//Rey
 public class Direccion {
     private String calle;
     private String colonia;
