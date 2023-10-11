@@ -3,109 +3,20 @@
   <ID>JAVA</ID>
   <OriginalElement />
   <nodes>
-    <node x="-685.2735247208931" y="-510.99999999999994">buap.intro_programacion.models.Escuela</node>
-    <node x="-1257.0" y="-487.99999999999994">buap.intro_programacion.models.Direccion</node>
     <node x="-75.25" y="-430.0">buap.intro_programacion.models.Grado</node>
-    <node x="-1214.8616427432216" y="68.0">buap.intro_programacion.models.E_Administrativo</node>
     <node x="-616.420653907496" y="67.99999999999994">buap.intro_programacion.models.E_Academico</node>
-    <node x="-899.3480861244019" y="-209.5">buap.intro_programacion.models.Empleado</node>
-    <node x="-558.1351674641148" y="-209.5">buap.intro_programacion.models.Estudiante</node>
+    <node x="-1257.0" y="-487.99999999999994">buap.intro_programacion.models.Direccion</node>
     <node x="-124.25" y="67.99999999999994">buap.intro_programacion.models.HistorialAcademico</node>
-    <node x="-246.65590111642746" y="-210.0">buap.intro_programacion.models.Curso</node>
     <node x="-919.3480861244019" y="68.0">buap.intro_programacion.models.E_NoAdministrativo</node>
+    <node x="-246.65590111642746" y="-210.0">buap.intro_programacion.models.Curso</node>
+    <node x="-1214.8616427432216" y="68.0">buap.intro_programacion.models.E_Administrativo</node>
+    <node x="-558.1351674641148" y="-209.5">buap.intro_programacion.models.Estudiante</node>
+    <node x="-899.3480861244019" y="-209.5">buap.intro_programacion.models.Empleado</node>
+    <node x="-685.2735247208931" y="-510.99999999999994">buap.intro_programacion.models.Escuela</node>
   </nodes>
   <notes />
-  <edges>
-    <edge source="buap.intro_programacion.models.E_Academico" target="buap.intro_programacion.models.Curso" relationship="TO_MANY">
-      <point x="50.5" y="-62.5" />
-      <point x="-464.920653907496" y="5.0" />
-      <point x="-149.65590111642746" y="5.0" />
-      <point x="0.0" y="97.5" />
-    </edge>
-    <edge source="buap.intro_programacion.models.E_Administrativo" target="buap.intro_programacion.models.Empleado" relationship="GENERALIZATION">
-      <point x="0.0" y="-51.0" />
-      <point x="-1117.3616427432216" y="46.5" />
-      <point x="-809.8480861244019" y="46.5" />
-      <point x="0.0" y="97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Escuela" target="buap.intro_programacion.models.Empleado" relationship="TO_MANY">
-      <point x="0.0" y="109.0" />
-      <point x="-466.7735247208931" y="-239.75" />
-      <point x="-854.5980861244019" y="-239.75" />
-      <point x="-44.75" y="-97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Empleado" target="buap.intro_programacion.models.Direccion" relationship="TO_ONE">
-      <point x="44.75" y="-97.0" />
-      <point x="-765.0980861244019" y="-260.0" />
-      <point x="-1097.5" y="-260.0" />
-      <point x="0.0" y="86.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.HistorialAcademico" target="buap.intro_programacion.models.Curso" relationship="TO_MANY">
-      <point x="0.0" y="-74.0" />
-      <point x="-16.25" y="15.0" />
-      <point x="-149.65590111642746" y="15.0" />
-      <point x="0.0" y="97.5" />
-    </edge>
-    <edge source="buap.intro_programacion.models.HistorialAcademico" target="buap.intro_programacion.models.Estudiante" relationship="TO_ONE">
-      <point x="0.0" y="-74.0" />
-      <point x="-16.25" y="25.0" />
-      <point x="-433.13516746411483" y="25.0" />
-      <point x="0.0" y="97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Escuela" target="buap.intro_programacion.models.Estudiante" relationship="TO_MANY">
-      <point x="0.0" y="109.0" />
-      <point x="-466.7735247208931" y="-224.5" />
-      <point x="-495.63516746411483" y="-224.5" />
-      <point x="-62.5" y="-97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.E_Academico" target="buap.intro_programacion.models.Empleado" relationship="GENERALIZATION">
-      <point x="-50.5" y="-62.5" />
-      <point x="-565.920653907496" y="46.5" />
-      <point x="-809.8480861244019" y="46.5" />
-      <point x="0.0" y="97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Estudiante" target="buap.intro_programacion.models.HistorialAcademico" relationship="GENERALIZATION">
-      <point x="0.0" y="0.0" />
-      <point x="-346.61961722488013" y="-112.5" />
-      <point x="-346.61961722488013" y="136.81578947368416" />
-      <point x="-201.814992025518" y="136.81578947368416" />
-      <point x="-201.814992025518" y="141.99999999999994" />
-      <point x="0.0" y="0.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.E_NoAdministrativo" target="buap.intro_programacion.models.Empleado" relationship="GENERALIZATION">
-      <point x="0.0" y="-51.0" />
-      <point x="0.0" y="97.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Estudiante" target="buap.intro_programacion.models.Direccion" relationship="TO_ONE">
-      <point x="62.5" y="-97.0" />
-      <point x="-370.63516746411483" y="-240.0" />
-      <point x="-580.0" y="-240.0" />
-      <point x="-580.0" y="-260.0" />
-      <point x="-1097.5" y="-260.0" />
-      <point x="0.0" y="86.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.HistorialAcademico" target="buap.intro_programacion.models.Grado" relationship="TO_ONE">
-      <point x="0.0" y="-74.0" />
-      <point x="0.0" y="51.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Estudiante" target="buap.intro_programacion.models.Grado" relationship="TO_ONE">
-      <point x="62.5" y="-97.0" />
-      <point x="-370.63516746411483" y="-230.0" />
-      <point x="-16.25" y="-230.0" />
-      <point x="0.0" y="51.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Escuela" target="buap.intro_programacion.models.Direccion" relationship="TO_ONE">
-      <point x="-218.5" y="-0.0" />
-      <point x="159.5" y="-0.0" />
-    </edge>
-    <edge source="buap.intro_programacion.models.Curso" target="buap.intro_programacion.models.Grado" relationship="TO_ONE">
-      <point x="0.0" y="-97.5" />
-      <point x="-149.65590111642746" y="-220.0" />
-      <point x="-16.25" y="-220.0" />
-      <point x="0.0" y="51.0" />
-    </edge>
-  </edges>
-  <settings layout="Hierarchic Compact" zoom="0.7941735275490817" showDependencies="true" x="-467.4999999999998" y="-137.5" />
+  <edges />
+  <settings layout="Hierarchic Compact" zoom="0.7941735275490817" showDependencies="true" x="-113.17304625199358" y="27.95135566188202" />
   <SelectedNodes />
   <Categories>
     <Category>Constructors</Category>
