@@ -10,34 +10,31 @@ public class SistemaEscolarUI extends JFrame {
 
     private JPanel mainPanel;
 
+
     public SistemaEscolarUI(String title) throws HeadlessException {
         super(title);
+
+        add(mainPanel);
         centerFrame(this);
         createMenu(this);
         setResizable(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-//        /* Creamos los dos primeros objetos de la clase JMenuItem y los asociamos con el segundo JMenu */
-//        menuItem21=new JMenuItem("640*480");
-//        menu2.add(menuItem21);
-//        menuItem21.addActionListener(this);
-//        menuItem22=new JMenuItem("1024*768");
-//        menu2.add(menuItem22);
-//        menuItem22.addActionListener(this);
-//
-//        /* Creamos los otros dos objetos de la clase JMenuItem y los  asociamos con el tercer JMenu */
-//        menuItem31=new JMenuItem("Rojo");
-//        menu3.add(menuItem31);
-//        menuItem31.addActionListener(this);
-//        menuItem32=new JMenuItem("Verde");
-//        menu3.add(menuItem32);
-//        menuItem32.addActionListener(this);
 
         setVisible(true);
 
     }
 
     public static void main(String[] args) {
+        try {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (Exception e) {
+            // If Nimbus is not available, you can set the GUI to another look and feel.
+        }
         new SistemaEscolarUI("Proyecto Programación");
     }
 
@@ -97,4 +94,6 @@ public class SistemaEscolarUI extends JFrame {
     public void actionPerformed(ActionEvent e) {
         System.out.println("CLCIK");
     }
+
+
 }
