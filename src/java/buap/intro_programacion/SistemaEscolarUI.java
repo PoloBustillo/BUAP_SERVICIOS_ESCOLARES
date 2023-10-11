@@ -5,6 +5,9 @@ import java.awt.*;
 
 public class SistemaEscolarUI extends JFrame {
 
+    private JPanel Hola;
+    private JButton XD;
+
     public SistemaEscolarUI(String title) throws HeadlessException {
         super(title);
         setVisible(true);
