@@ -1,0 +1,29 @@
+apply plugin: 'idea'
+apply plugin: 'java'
+apply plugin: 'application'
+
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "com.couchbase.lite:couchbase-lite-java:3.1.1"
+}
+
+application {
+    mainClass = 'buap.intro_programacion.MainUI'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'buap.intro_programacion.MainUI'
+    }
+
+    from sourceSets.main.output
+
+    dependsOn configurations.runtimeClasspath
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar') }.collect { zipTree(it) }
+    }
+}
