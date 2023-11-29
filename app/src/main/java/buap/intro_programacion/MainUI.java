@@ -29,14 +29,14 @@ public class MainUI extends javax.swing.JFrame {
 
     //Se prefiere ArrayList porque tiene metodos de utilidad como contains
     //Lista de las escuelas creadas
-    private ArrayList<Escuela> escuelas = new ArrayList<>();
+    static ArrayList<Escuela> escuelas = new ArrayList<>();
 
     //JList utiliza modelos en lugar de arrays para poblar la lista
     ArrayList<DefaultListModel> empleadosListas = new ArrayList<>();
     ArrayList<DefaultListModel> estudiantesListas = new ArrayList<>();
     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-    //usado para centrar el frame inicial y tener un tamaño adecuado
+    //usado para centrar el frame inicial y tener un tamaï¿½o adecuado
     private void centerFrame() {
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
@@ -89,9 +89,10 @@ public class MainUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MenuBar.setBackground(new java.awt.Color(135, 35, 235));
+        MenuBar.setBackground(new java.awt.Color(255, 153, 153));
         MenuBar.setToolTipText("");
 
+        MenuAcciones.setForeground(new java.awt.Color(51, 51, 51));
         MenuAcciones.setText("Acciones");
         MenuAcciones.setMargin(new java.awt.Insets(3, 15, 3, 15));
 
@@ -175,7 +176,7 @@ public class MainUI extends javax.swing.JFrame {
             //Si el usuario da un nombre valido
             if (name != null && !"".equals(name)) {
 
-                //Añade la escuela al arraylist con el nombre valido
+                //Aï¿½ade la escuela al arraylist con el nombre valido
                 escuela.setNombre(name);
                 escuelas.add(escuela);
 
@@ -195,10 +196,10 @@ public class MainUI extends javax.swing.JFrame {
                 JList<String> listaEstudiantes = new JList<>(estudianteModel);
                 listaEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 16));
 
-                //Crear Listeners para cada lista, escucharan la selección de algun elemento en la lista
+                //Crear Listeners para cada lista, escucharan la selecciï¿½n de algun elemento en la lista
                 listaEmpleados.addListSelectionListener((ListSelectionEvent event) -> {
                     if (!event.getValueIsAdjusting()) {
-                        //Obtiene componente lista a partir del evento (click en una posición)
+                        //Obtiene componente lista a partir del evento (click en una posiciï¿½n)
                         JList source = (JList) event.getSource();
 
                         //Si el elemento seleccionado es el primero, crea una UI para actualizar la escuela
@@ -209,8 +210,6 @@ public class MainUI extends javax.swing.JFrame {
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         }
-                        TabPanel.setTitleAt(escuelas.size() - 1, (String) empleadosListas.get(escuelas.size() - 1).getElementAt(0));
-
                     }
                 });
                 listaEstudiantes.addListSelectionListener((ListSelectionEvent event) -> {
@@ -222,7 +221,6 @@ public class MainUI extends javax.swing.JFrame {
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         }
-                        TabPanel.setTitleAt(escuelas.size() - 1, (String) empleadosListas.get(escuelas.size() - 1).getElementAt(0));
                     }
                 });
 
@@ -231,7 +229,7 @@ public class MainUI extends javax.swing.JFrame {
                         listaEmpleados, listaEstudiantes);
                 splitPane.setDividerLocation((int) (screenSize.getWidth() / 2.3));
 
-                //Agrega el componente de division al Tab en la ultima posición, cambia el focus a esa posicion
+                //Agrega el componente de division al Tab en la ultima posiciï¿½n, cambia el focus a esa posicion
                 TabPanel.addTab(name, splitPane);
                 TabPanel.setSelectedIndex(escuelas.size() - 1);
             }

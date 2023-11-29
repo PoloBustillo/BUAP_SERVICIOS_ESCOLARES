@@ -78,7 +78,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + ", idEmpleado=" + idEmpleado;
+        return "Nombre: " + nombre + ", idEmpleado=" + idEmpleado.toString().substring(0, 5);
     }
 
 }
