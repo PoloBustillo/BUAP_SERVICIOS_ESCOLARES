@@ -4,6 +4,9 @@ public class E_Administrativo extends Empleado {
 
     private String area;
 
+    public E_Administrativo() {
+    }
+
     public E_Administrativo(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
         super(direccion, nombre, RFC, cuenta, sueldo);
     }

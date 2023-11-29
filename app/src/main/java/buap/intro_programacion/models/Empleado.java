@@ -9,7 +9,7 @@ public class Empleado {
     private String nombre;
     private String RFC;
     private String cuenta;
-    private Float sueldoDiario;
+    private Float sueldoDiario = 0.0f;
 
     public Empleado(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
         this.idEmpleado = UUID.randomUUID();
@@ -78,7 +78,7 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Nombre: " + nombre + ", idEmpleado=" + idEmpleado.toString().substring(0, 5);
+        return "Nombre: " + nombre + ", idEmpleado=" + idEmpleado.toString().substring(0, 5) + "...";
     }
 
 }

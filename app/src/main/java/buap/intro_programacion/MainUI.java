@@ -5,20 +5,27 @@
 package buap.intro_programacion;
 
 import buap.intro_programacion.models.Curso;
+import buap.intro_programacion.models.E_Academico;
+import buap.intro_programacion.models.E_Administrativo;
 import buap.intro_programacion.models.E_Auxiliar;
+import buap.intro_programacion.models.Empleado;
 import buap.intro_programacion.models.Escuela;
+import buap.intro_programacion.models.Estudiante;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
-import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+import javax.swing.WindowConstants;
 import javax.swing.event.ListSelectionEvent;
 
 /**
@@ -58,6 +65,18 @@ public class MainUI extends javax.swing.JFrame {
                 }
             }
             initComponents();
+            this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+            this.addWindowListener(new WindowAdapter() {
+
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    int i = JOptionPane.showConfirmDialog(null, "Seguro que quiere salir?");
+                    System.out.println(i);
+                    if (i == 0) {
+                        System.exit(0);//cierra aplicacion
+                    }
+                }
+            });
             centerFrame();
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
@@ -191,9 +210,23 @@ public class MainUI extends javax.swing.JFrame {
                 estudiantesListas.add(estudianteModel);
 
                 //Crea dos listas con los modelos
-                JList<String> listaEmpleados = new JList<>(empleadoModel);
+                JList<String> listaEmpleados = new JList<>(empleadoModel) {
+                    @Override
+                    public String getToolTipText(MouseEvent event) {
+                        int row = locationToIndex(event.getPoint());
+                        Empleado emp = (Empleado) getModel().getElementAt(row);
+                        return "Empleado: " + emp.getNombre() + " --- " + emp.getDireccion() + " --- RFC:" + emp.getRFC();
+                    }
+                };
                 listaEmpleados.setFont(new Font("Tahoma", 1, 16));
-                JList<String> listaEstudiantes = new JList<>(estudianteModel);
+                JList<String> listaEstudiantes = new JList<>(estudianteModel) {
+                    @Override
+                    public String getToolTipText(MouseEvent event) {
+                        int row = locationToIndex(event.getPoint());
+                        Estudiante est = (Estudiante) getModel().getElementAt(row);
+                        return "Empleado: " + est.getNombre() + " --- " + est.getMiGrado() + " --- RFC:" + est.getDireccionEstudiante();
+                    }
+                };;
                 listaEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 16));
 
                 //Crear Listeners para cada lista, escucharan la selecciï¿½n de algun elemento en la lista
@@ -204,11 +237,18 @@ public class MainUI extends javax.swing.JFrame {
 
                         //Si el elemento seleccionado es el primero, crea una UI para actualizar la escuela
                         int selected = source.getSelectedIndex();
+                        System.out.println(selected);
                         if (selected == 0) {
                             EscuelaUI escuelaUI = new EscuelaUI(escuela);
                             //Cuando se cierre la ventana de actualizar escuela no se terminara el programa
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
+                        } else if (selected != -1) {
+                            EmpleadoUI empleadoUI = new EmpleadoUI((Empleado) empleadoModel.get(selected));
+                            empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+                            //listaEmpleados.setToolTipText((String) empleadosListas.get(TabPanel.getSelectedIndex()).getElementAt(selected));
+                            empleadoUI.setVisible(true);
                         }
                     }
                 });
@@ -245,35 +285,58 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
     private void empleadoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoMenuItemActionPerformed
+
+        //Si no hay niguna escuela no puedo crear un empleado, manda mensaje de ERROR
         if (escuelas.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Se necesita almenos una escuela", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
+            //Tipos de empleados
             Object[] tiposEmpleados = Utils.EMPLEADOS_TYPES;
+
+            //Dropdown para seleccionar un tipo
             Object selectionObject = JOptionPane.showInputDialog(this, "Elige un tipo de empleado", "Menu", JOptionPane.PLAIN_MESSAGE, null, tiposEmpleados, tiposEmpleados[0]);
-            String selectionTipo = selectionObject.toString();
+            String empleadoType = selectionObject.toString();
+
+            //Obten la escuela a la que esta asignado
             Escuela selectionEscuela = (Escuela) JOptionPane.showInputDialog(this, "A que escuela esta asignado", "Menu", JOptionPane.PLAIN_MESSAGE, null, escuelas.toArray(), escuelas.toArray()[0]);
+
+            //Obten el nombre del empleado
             String nombreEmpleado = JOptionPane.showInputDialog(this, "Nombre del empleado", Utils.CREATE_EMPLEADO_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
-            DefaultListModel empleadosModel = new DefaultListModel();
+
+            //Recupera el indice de la escuela que es el mismo que la TAB
             Integer escuelaIndex = escuelas.indexOf(selectionEscuela);
-            JList listaEmpleados = ((JList) ((JSplitPane) TabPanel.getComponentAt(escuelaIndex)).getLeftComponent());
-            if (selectionTipo.equals(Utils.EMPLEADO_AUXILIAR)) {
+
+            //SI ES EMPLEADO AUXILIAR
+            if (empleadoType.equals(Utils.EMPLEADO_AUXILIAR)) {
                 E_Auxiliar empleado = new E_Auxiliar();
                 empleado.setNombre(nombreEmpleado);
+                //recupero la lista de la escuela y añado el empleado creado
+                DefaultListModel modelo = empleadosListas.get(escuelaIndex);
+                modelo.addElement(empleado);
+            }
 
-                ListModel modeloEmpleados = listaEmpleados.getModel();
-                for (int i = 0; i < modeloEmpleados.getSize(); i++) {
-                    empleadosModel.addElement(modeloEmpleados.getElementAt(i));
+            //SI ES EMPLEADO ADMINISTRATIVO
+            if (empleadoType.equals(Utils.EMPLEADO_ADMINISTRATIVO)) {
+                E_Administrativo empleado = new E_Administrativo();
+                empleado.setNombre(nombreEmpleado);
+                //recupero la lista de la escuela y añado el empleado creado
+                DefaultListModel modelo = empleadosListas.get(escuelaIndex);
+                modelo.addElement(empleado);
+            }
 
-                }
-                empleadosModel.addElement(empleado);
-                listaEmpleados.setModel(empleadosModel);
+            //SI ES EMPLEADO ADMINISTRATIVO
+            if (empleadoType.equals(Utils.EMPLEADO_ACADEMICO)) {
+                E_Academico empleado = new E_Academico();
+                empleado.setNombre(nombreEmpleado);
+                //recupero la lista de la escuela y añado el empleado creado
+                DefaultListModel modelo = empleadosListas.get(escuelaIndex);
+                modelo.addElement(empleado);
             }
 
         }
     }//GEN-LAST:event_empleadoMenuItemActionPerformed
 
     private void cursoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoMenuItemActionPerformed
-        Escuela selectionEscuela = (Escuela) JOptionPane.showInputDialog(this, "A que escuela esta asignado", "Menu", JOptionPane.PLAIN_MESSAGE, null, escuelas.toArray(), escuelas.toArray()[0]);
         Curso curso = new Curso();
         String salon = JOptionPane.showInputDialog(this, "Salon de la escuela", Utils.CREATE_CURSO_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
         curso.setSalon(salon);
@@ -307,10 +370,8 @@ public class MainUI extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MainUI().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new MainUI().setVisible(true);
         });
     }
 

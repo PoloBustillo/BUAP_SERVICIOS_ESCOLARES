@@ -1,10 +1,13 @@
 package buap.intro_programacion.models;
 
 public class E_Academico extends Empleado {
+
     private Curso[] cursos;
     private String materia;
     private String turno;
 
+    public E_Academico() {
+    }
 
     public E_Academico(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
         super(direccion, nombre, RFC, cuenta, sueldo);
