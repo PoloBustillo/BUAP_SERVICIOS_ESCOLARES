@@ -4,6 +4,7 @@
  */
 package buap.intro_programacion;
 
+import buap.intro_programacion.models.E_Auxiliar;
 import buap.intro_programacion.models.Escuela;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,13 +27,13 @@ public class MainUI extends javax.swing.JFrame {
 
     private ArrayList<Escuela> escuelas;
 
-    private void centerFrame(JFrame frame) {
+    private void centerFrame() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
         setSize(new Dimension((int) (width - 200), (int) (height - 200)));
-        int x = (int) ((screenSize.getWidth() - frame.getWidth()) / 2);
-        int y = (int) ((screenSize.getHeight() - frame.getHeight()) / 2);
+        int x = (int) ((screenSize.getWidth() - this.getWidth()) / 2);
+        int y = (int) ((screenSize.getHeight() - this.getHeight()) / 2);
         setLocation(x, y);
     }
 
@@ -49,7 +50,7 @@ public class MainUI extends javax.swing.JFrame {
                 }
             }
             initComponents();
-            centerFrame(this);
+            centerFrame();
         } catch (Exception e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
@@ -73,6 +74,7 @@ public class MainUI extends javax.swing.JFrame {
         MenuAcciones = new javax.swing.JMenu();
         CrearMenuSub = new javax.swing.JMenu();
         MenuItemEscuela = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         ExitMenuItem = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -97,6 +99,16 @@ public class MainUI extends javax.swing.JFrame {
         });
         CrearMenuSub.add(MenuItemEscuela);
 
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jMenuItem2.setText("Empleado");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        CrearMenuSub.add(jMenuItem2);
+
         MenuAcciones.add(CrearMenuSub);
         MenuAcciones.add(jSeparator1);
 
@@ -115,7 +127,7 @@ public class MainUI extends javax.swing.JFrame {
         jMenu2.setText("Informacion");
         jMenu2.setMargin(new java.awt.Insets(5, 10, 5, 10));
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("Salvar a un archivo");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
@@ -156,55 +168,55 @@ public class MainUI extends javax.swing.JFrame {
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
             String name = JOptionPane.showInputDialog(this, "NOMBRE DE LA ESCUELA", Utils.CREATE_ESCUELA_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
-            escuela.setNombre(name);
-            escuelas.add(escuela);
+            if (name != null && !"".equals(name)) {
+                escuela.setNombre(name);
+                escuelas.add(escuela);
+                DefaultListModel listModel = new DefaultListModel();
+                DefaultListModel listModel1 = new DefaultListModel();
+                listModel.add(0, Utils.EMPLEADOS_LABEL + " (" + name + ")");
+                JList<String> listaEmpleados = new JList<>(listModel);
+                listaEmpleados.setFont(new Font("Tahoma", 0, 24));
+                listaEmpleados.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        if (!event.getValueIsAdjusting()) {
+                            JList source = (JList) event.getSource();
+                            int selected = source.getSelectedIndex();
+                            if (selected == 0) {
+                                EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
+                                escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                escuelaUI.setVisible(true);
+                            }
 
-            DefaultListModel listModel = new DefaultListModel();
-            DefaultListModel listModel1 = new DefaultListModel();
-            listModel.add(0, Utils.EMPLEADOS_LABEL + " (" + name + ")");
-            JList<String> listaEmpleados = new JList<>(listModel);
-            listaEmpleados.setFont(new Font("Tahoma", 0, 24));
-            listaEmpleados.addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent event) {
-                    if (!event.getValueIsAdjusting()) {
-                        JList source = (JList) event.getSource();
-                        int selected = source.getSelectedIndex();
-                        if (selected == 0) {
-                            EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
-                            escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            escuelaUI.setVisible(true);
                         }
-
                     }
-                }
-            });
+                });
 
-            listModel1.add(0, Utils.ESTUDIANTES_LABEL + " (" + name + ")");
-            JList<String> listaEstudiantes = new JList<>(listModel1);
-            listaEstudiantes.setFont(new java.awt.Font("Tahoma", 0, 24));
-            listaEstudiantes.addListSelectionListener(new ListSelectionListener() {
-                @Override
-                public void valueChanged(ListSelectionEvent event) {
-                    if (!event.getValueIsAdjusting()) {
-                        JList source = (JList) event.getSource();
-                        int selected = source.getSelectedIndex();
-                        if (selected == 0) {
-                            EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
-                            escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                            escuelaUI.setVisible(true);
+                listModel1.add(0, Utils.ESTUDIANTES_LABEL + " (" + name + ")");
+                JList<String> listaEstudiantes = new JList<>(listModel1);
+                listaEstudiantes.setFont(new java.awt.Font("Tahoma", 0, 24));
+                listaEstudiantes.addListSelectionListener(new ListSelectionListener() {
+                    @Override
+                    public void valueChanged(ListSelectionEvent event) {
+                        if (!event.getValueIsAdjusting()) {
+                            JList source = (JList) event.getSource();
+                            int selected = source.getSelectedIndex();
+                            if (selected == 0) {
+                                EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
+                                escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                                escuelaUI.setVisible(true);
+                            }
+
                         }
-
                     }
-                }
-            });
-            JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
-                    listaEmpleados, listaEstudiantes);
-            splitPane.setDividerLocation((int) (screenSize.getWidth() / 2.3));
+                });
+                JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
+                        listaEmpleados, listaEstudiantes);
+                splitPane.setDividerLocation((int) (screenSize.getWidth() / 2.3));
 
-            TabPanel.addTab(name, splitPane);
-            TabPanel.setSelectedIndex(escuelas.size() - 1);
-
+                TabPanel.addTab(name, splitPane);
+                TabPanel.setSelectedIndex(escuelas.size() - 1);
+            }
         } else {
             JOptionPane.showMessageDialog(this, "NUMERO MAXIMO DE ESCUELAS ALCANZADO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
@@ -217,10 +229,33 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        escuelas.get(0).setNombre("kasdkaskd");
-        System.out.println(escuelas);
-        revalidate();        // TODO add your handling code here:
+
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        if (escuelas.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Se necesita almenos una escuela", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Object[] tiposEmpleados = Utils.EMPLEADOS_TYPES;
+            Object selectionObject = JOptionPane.showInputDialog(this, "Elige un tipo de empleado", "Menu", JOptionPane.PLAIN_MESSAGE, null, tiposEmpleados, tiposEmpleados[0]);
+            String selectionTipo = selectionObject.toString();
+            Escuela selectionEscuela = (Escuela) JOptionPane.showInputDialog(this, "A que escuela esta asignado", "Menu", JOptionPane.PLAIN_MESSAGE, null, escuelas.toArray(), escuelas.toArray()[0]);
+            String nombreEmpleado = JOptionPane.showInputDialog(this, "Nombre del empleado", Utils.CREATE_EMPLEADO_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
+            DefaultListModel empleadosModel = new DefaultListModel();
+            Integer escuelaIndex = escuelas.indexOf(selectionEscuela);
+            JList listaEmpleados = ((JList) ((JSplitPane) TabPanel.getComponentAt(escuelaIndex)).getLeftComponent());
+
+            if (selectionTipo.equals(Utils.EMPLEADO_AUXILIAR)) {
+                E_Auxiliar empleado = new E_Auxiliar();
+                empleado.setNombre(nombreEmpleado);
+                empleadosModel.addElement(empleado);
+
+            }
+
+            System.out.println(escuelaIndex);
+
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,6 +300,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JTabbedPane TabPanel;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;

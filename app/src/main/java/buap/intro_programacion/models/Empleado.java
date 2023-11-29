@@ -4,7 +4,6 @@ import java.util.UUID;
 
 public class Empleado {
 
-
     private UUID idEmpleado;
     private Direccion direccion;
     private String nombre;
@@ -21,6 +20,9 @@ public class Empleado {
         this.sueldoDiario = sueldo;
     }
 
+    public Empleado() {
+        this.idEmpleado = UUID.randomUUID();
+    }
 
     public Float calcularSueldo(int diasTrabajados) {
         return sueldoDiario * diasTrabajados;
@@ -73,4 +75,10 @@ public class Empleado {
     public void setSueldoDiario(Float sueldoDiario) {
         this.sueldoDiario = sueldoDiario;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre: " + nombre + ", idEmpleado=" + idEmpleado;
+    }
+
 }

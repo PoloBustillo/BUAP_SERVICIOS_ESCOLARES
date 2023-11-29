@@ -1,6 +1,7 @@
 package buap.intro_programacion.models;
 
 public class E_Auxiliar extends Empleado {
+
     private String turno;
     private String area;
 
@@ -12,6 +13,10 @@ public class E_Auxiliar extends Empleado {
         super(direccion, nombre, RFC, cuenta, sueldo);
         this.turno = turno;
         this.area = area;
+    }
+
+    public E_Auxiliar() {
+
     }
 
     public String getTurno() {

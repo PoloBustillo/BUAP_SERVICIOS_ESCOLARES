@@ -1,23 +1,20 @@
 package buap.intro_programacion.models;
 
-import java.util.Arrays;
-
-//Jorge
 public class Escuela {
 
     private String nombre;
     private Empleado[] empleados;
     private Estudiante[] estudiantes;
     private Direccion direccionEscuela;
-    private String nivel;
+    private String[] niveles;
     private String codigo;
 
-    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String nivel, String codigo) {
+    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String[] niveles, String codigo) {
         this.nombre = nombre;
         this.empleados = empleados;
         this.estudiantes = estudiantes;
         this.direccionEscuela = direccionEscuela;
-        this.nivel = nivel;
+        this.niveles = niveles;
         this.codigo = codigo;
     }
 
@@ -26,20 +23,15 @@ public class Escuela {
         this.empleados = null;
         this.estudiantes = null;
         this.direccionEscuela = null;
-        this.nivel = null;
+        this.niveles = null;
         this.codigo = null;
     }
 
     @Override
     public String toString() {
-        return "Escuela{"
-                + "nombre='" + nombre + '\''
-                + ", empleados=" + Arrays.toString(empleados)
-                + ", estudiantes=" + Arrays.toString(estudiantes)
-                + ", direccionEscuela=" + direccionEscuela
-                + ", nivel='" + nivel + '\''
-                + ", codigo='" + codigo + '\''
-                + '}';
+        return "Nombre:'" + nombre + '\''
+                + "   Codigo:'" + codigo + '\'';
+
     }
 
     public void setEmpleados(Empleado[] empleados) {
@@ -54,8 +46,8 @@ public class Escuela {
         this.direccionEscuela = direccionEscuela;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+    public void setNiveles(String[] niveles) {
+        this.niveles = niveles;
     }
 
     public void setCodigo(String codigo) {
@@ -82,8 +74,8 @@ public class Escuela {
         return direccionEscuela;
     }
 
-    public String getNivel() {
-        return nivel;
+    public String[] getNiveles() {
+        return niveles;
     }
 
     public String getCodigo() {

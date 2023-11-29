@@ -209,7 +209,7 @@ DEFAULT_JVM_OPTS=""
 
 set -- \
         -classpath "$CLASSPATH" \
-        buap.intro_programacion.SistemaEscolarUIMain \
+        buap.intro_programacion.MainUI \
         "$@"
 
 # Stop when "xargs" is not available.

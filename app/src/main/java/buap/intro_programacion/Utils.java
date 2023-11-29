@@ -11,8 +11,12 @@ package buap.intro_programacion;
 public class Utils {
 
     static final String[] EMPLEADOS_TYPES = {"Academico", "Administrativo", "Auxiliar"};
+    static final String EMPLEADO_AUXILIAR = "Auxiliar";
+    static final String EMPLEADO_ADMINISTRATIVO = "Administrativo";
+    static final String EMPLEADO_ACADEMICO = "Academico";
     static final String[] SCHOOL_LEVELS = {"Primaria", "Secundaria", "Preparatoria"};
     static final String CREATE_ESCUELA_FLOW_NAME = "Crear Escuela";
+    static final String CREATE_EMPLEADO_FLOW_NAME = "Crear Empleado";
     static final String EMPLEADOS_LABEL = "EMPLEADOS";
     static final String ESTUDIANTES_LABEL = "ESTUDIANTES";
     static final Integer MAX_SCHOOLS = 100;
