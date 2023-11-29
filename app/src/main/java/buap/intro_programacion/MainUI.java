@@ -128,7 +128,7 @@ public class MainUI extends javax.swing.JFrame {
         MenuAcciones.add(CrearMenuSub);
         MenuAcciones.add(jSeparator1);
 
-        ExitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_X, java.awt.event.InputEvent.CTRL_DOWN_MASK));
+        ExitMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ESCAPE, 0));
         ExitMenuItem.setText("Salir");
         ExitMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,6 +186,8 @@ public class MainUI extends javax.swing.JFrame {
 
                 empleadoModel.add(0, Utils.EMPLEADOS_LABEL);
                 estudianteModel.add(0, Utils.ESTUDIANTES_LABEL);
+                empleadosListas.add(empleadoModel);
+                estudiantesListas.add(estudianteModel);
 
                 //Crea dos listas con los modelos
                 JList<String> listaEmpleados = new JList<>(empleadoModel);
@@ -193,35 +195,43 @@ public class MainUI extends javax.swing.JFrame {
                 JList<String> listaEstudiantes = new JList<>(estudianteModel);
                 listaEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 16));
 
+                //Crear Listeners para cada lista, escucharan la selección de algun elemento en la lista
                 listaEmpleados.addListSelectionListener((ListSelectionEvent event) -> {
                     if (!event.getValueIsAdjusting()) {
+                        //Obtiene componente lista a partir del evento (click en una posición)
                         JList source = (JList) event.getSource();
+
+                        //Si el elemento seleccionado es el primero, crea una UI para actualizar la escuela
                         int selected = source.getSelectedIndex();
                         if (selected == 0) {
-                            EscuelaUI escuelaUI = new EscuelaUI(escuela, empleadoModel, estudianteModel);
+                            EscuelaUI escuelaUI = new EscuelaUI(escuela);
+                            //Cuando se cierre la ventana de actualizar escuela no se terminara el programa
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         }
+                        TabPanel.setTitleAt(escuelas.size() - 1, (String) empleadosListas.get(escuelas.size() - 1).getElementAt(0));
 
                     }
                 });
-
                 listaEstudiantes.addListSelectionListener((ListSelectionEvent event) -> {
                     if (!event.getValueIsAdjusting()) {
                         JList source = (JList) event.getSource();
                         int selected = source.getSelectedIndex();
                         if (selected == 0) {
-                            EscuelaUI escuelaUI = new EscuelaUI(escuela, empleadoModel, estudianteModel);
+                            EscuelaUI escuelaUI = new EscuelaUI(escuela);
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         }
-
+                        TabPanel.setTitleAt(escuelas.size() - 1, (String) empleadosListas.get(escuelas.size() - 1).getElementAt(0));
                     }
                 });
+
+                //Crea un componente con division para las dos listas
                 JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                         listaEmpleados, listaEstudiantes);
                 splitPane.setDividerLocation((int) (screenSize.getWidth() / 2.3));
 
+                //Agrega el componente de division al Tab en la ultima posición, cambia el focus a esa posicion
                 TabPanel.addTab(name, splitPane);
                 TabPanel.setSelectedIndex(escuelas.size() - 1);
             }
@@ -310,7 +320,7 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenu CrearMenuSub;
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JMenu MenuAcciones;
-    private javax.swing.JTabbedPane TabPanel;
+    public static javax.swing.JTabbedPane TabPanel;
     private javax.swing.JMenuItem cursoMenuItem;
     private javax.swing.JMenuItem empleadoMenuItem;
     private javax.swing.JMenuItem escuelaMenuItem;

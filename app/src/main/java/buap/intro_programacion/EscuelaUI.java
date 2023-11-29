@@ -10,7 +10,6 @@ import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -19,8 +18,6 @@ import javax.swing.DefaultListModel;
 public class EscuelaUI extends javax.swing.JFrame {
 
     private Escuela escuela;
-    private DefaultListModel modelEmpleados;
-    private DefaultListModel modelEstudiantes;
 
     private void centerFrame() {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -33,13 +30,10 @@ public class EscuelaUI extends javax.swing.JFrame {
      * Creates new form EscuelaUI
      *
      * @param escuela
-     * @param model
-     * @param model1
      */
-    public EscuelaUI(Escuela escuela, DefaultListModel model, DefaultListModel model1) {
+    public EscuelaUI(Escuela escuela) {
         this.escuela = escuela;
-        this.modelEmpleados = model;
-        this.modelEstudiantes = model1;
+
         initComponents();
         centerFrame();
         titleLabel.setText("DATOS ESCUELA: " + escuela.getNombre());
@@ -382,7 +376,9 @@ public class EscuelaUI extends javax.swing.JFrame {
 
         Direccion nuevaDireccion = new Direccion();
         nuevaDireccion.setCalle(calleInput.getText());
-        nuevaDireccion.setCodigoPostal(Integer.valueOf(codigoInput.getText()));
+        if (codigoInput.getText() != null && !codigoInput.getText().isEmpty()) {
+            nuevaDireccion.setCodigoPostal(Integer.valueOf(codigoInput.getText()));
+        }
         nuevaDireccion.setColonia(coloniaInput.getText());
         nuevaDireccion.setCiudad((String) ciudadInput.getSelectedItem());
         escuela.setDireccionEscuela(nuevaDireccion);
@@ -398,8 +394,8 @@ public class EscuelaUI extends javax.swing.JFrame {
             nuevosNiveles[2] = "Preparatoria";
         }
         escuela.setNiveles(nuevosNiveles);
-        modelEmpleados.set(0, Utils.EMPLEADOS_LABEL + " (" + newName + ")");
-        modelEstudiantes.set(0, Utils.ESTUDIANTES_LABEL + " (" + newName + ")");
+        MainUI.TabPanel.setTitleAt(0, newName);
+
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
     private void nameInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameInputActionPerformed
