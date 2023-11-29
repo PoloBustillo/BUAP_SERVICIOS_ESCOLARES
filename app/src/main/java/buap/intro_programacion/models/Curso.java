@@ -3,13 +3,14 @@ package buap.intro_programacion.models;
 import java.util.UUID;
 
 public class Curso {
+
     private final UUID id;
     private String aforo;
-    private Integer salon;
+    private String salon;
     private String horario;
     private Grado gradoCurso;
 
-    public Curso(String aforo, Integer salon, String horario, Grado gradoCurso) {
+    public Curso(String aforo, String salon, String horario, Grado gradoCurso) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
@@ -29,11 +30,11 @@ public class Curso {
         this.aforo = aforo;
     }
 
-    public Integer getSalon() {
+    public String getSalon() {
         return salon;
     }
 
-    public void setSalon(Integer salon) {
+    public void setSalon(String salon) {
         this.salon = salon;
     }
 

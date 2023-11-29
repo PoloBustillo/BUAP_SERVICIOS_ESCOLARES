@@ -4,6 +4,7 @@
  */
 package buap.intro_programacion;
 
+import buap.intro_programacion.models.Curso;
 import buap.intro_programacion.models.E_Auxiliar;
 import buap.intro_programacion.models.Escuela;
 import java.awt.Dimension;
@@ -15,9 +16,10 @@ import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JSplitPane;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -25,10 +27,17 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MainUI extends javax.swing.JFrame {
 
-    private ArrayList<Escuela> escuelas;
+    //Se prefiere ArrayList porque tiene metodos de utilidad como contains
+    //Lista de las escuelas creadas
+    private ArrayList<Escuela> escuelas = new ArrayList<>();
 
+    //JList utiliza modelos en lugar de arrays para poblar la lista
+    ArrayList<DefaultListModel> empleadosListas = new ArrayList<>();
+    ArrayList<DefaultListModel> estudiantesListas = new ArrayList<>();
+    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+    //usado para centrar el frame inicial y tener un tamaño adecuado
     private void centerFrame() {
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         double width = screenSize.getWidth();
         double height = screenSize.getHeight();
         setSize(new Dimension((int) (width - 200), (int) (height - 200)));
@@ -41,17 +50,16 @@ public class MainUI extends javax.swing.JFrame {
      * Creates new form MainUI
      */
     public MainUI() {
-        this.escuelas = new ArrayList<>();
         try {
             for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nim bus".equals(info.getName())) {
+                if (Utils.LOOK_AND_FEEL.equals(info.getName())) {
                     UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
             initComponents();
             centerFrame();
-        } catch (Exception e) {
+        } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
     }
@@ -73,12 +81,11 @@ public class MainUI extends javax.swing.JFrame {
         javax.swing.JMenuBar MenuBar = new javax.swing.JMenuBar();
         MenuAcciones = new javax.swing.JMenu();
         CrearMenuSub = new javax.swing.JMenu();
-        MenuItemEscuela = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        escuelaMenuItem = new javax.swing.JMenuItem();
+        empleadoMenuItem = new javax.swing.JMenuItem();
+        cursoMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         ExitMenuItem = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -90,24 +97,33 @@ public class MainUI extends javax.swing.JFrame {
 
         CrearMenuSub.setText("Crear");
 
-        MenuItemEscuela.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        MenuItemEscuela.setText("Escuela");
-        MenuItemEscuela.addActionListener(new java.awt.event.ActionListener() {
+        escuelaMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_E, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        escuelaMenuItem.setText("Escuela");
+        escuelaMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MenuItemEscuelaActionPerformed(evt);
+                escuelaMenuItemActionPerformed(evt);
             }
         });
-        CrearMenuSub.add(MenuItemEscuela);
+        CrearMenuSub.add(escuelaMenuItem);
 
-        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
-        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jMenuItem2.setText("Empleado");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        empleadoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_M, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        empleadoMenuItem.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        empleadoMenuItem.setText("Empleado");
+        empleadoMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem2ActionPerformed(evt);
+                empleadoMenuItemActionPerformed(evt);
             }
         });
-        CrearMenuSub.add(jMenuItem2);
+        CrearMenuSub.add(empleadoMenuItem);
+
+        cursoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        cursoMenuItem.setText("Curso");
+        cursoMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cursoMenuItemActionPerformed(evt);
+            }
+        });
+        CrearMenuSub.add(cursoMenuItem);
 
         MenuAcciones.add(CrearMenuSub);
         MenuAcciones.add(jSeparator1);
@@ -122,21 +138,6 @@ public class MainUI extends javax.swing.JFrame {
         MenuAcciones.add(ExitMenuItem);
 
         MenuBar.add(MenuAcciones);
-
-        jMenu2.setBorder(null);
-        jMenu2.setText("Informacion");
-        jMenu2.setMargin(new java.awt.Insets(5, 10, 5, 10));
-
-        jMenuItem1.setText("Salvar a un archivo");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        jMenu2.add(jMenuItem1);
-
-        MenuBar.add(jMenu2);
-        jMenu2.getAccessibleContext().setAccessibleDescription("");
 
         setJMenuBar(MenuBar);
 
@@ -160,54 +161,61 @@ public class MainUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MenuItemEscuelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItemEscuelaActionPerformed
-        // TODO add your handling code here:
+    private void escuelaMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escuelaMenuItemActionPerformed
+        //Cuando el usuario de click en Crear Escuela o Shift + E
 
-        Escuela escuela = new Escuela();
+        //Si el maximo de escuelas es superado -> mensaje de error
         if (Utils.MAX_SCHOOLS >= escuelas.size()) {
-            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            //Se crea un objeto escuela
+            Escuela escuela = new Escuela();
 
+            //Pide al usuario el nombre de la escuela
             String name = JOptionPane.showInputDialog(this, "NOMBRE DE LA ESCUELA", Utils.CREATE_ESCUELA_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
+
+            //Si el usuario da un nombre valido
             if (name != null && !"".equals(name)) {
+
+                //Añade la escuela al arraylist con el nombre valido
                 escuela.setNombre(name);
                 escuelas.add(escuela);
-                DefaultListModel listModel = new DefaultListModel();
-                DefaultListModel listModel1 = new DefaultListModel();
-                listModel.add(0, Utils.EMPLEADOS_LABEL + " (" + name + ")");
-                JList<String> listaEmpleados = new JList<>(listModel);
-                listaEmpleados.setFont(new Font("Tahoma", 0, 24));
-                listaEmpleados.addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent event) {
-                        if (!event.getValueIsAdjusting()) {
-                            JList source = (JList) event.getSource();
-                            int selected = source.getSelectedIndex();
-                            if (selected == 0) {
-                                EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
-                                escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                escuelaUI.setVisible(true);
-                            }
 
+                //Dos modelos para crear las listas de empleados y estudiantes
+                //TODO: checar cursos
+                DefaultListModel empleadoModel = new DefaultListModel();
+                DefaultListModel estudianteModel = new DefaultListModel();
+
+                empleadoModel.add(0, Utils.EMPLEADOS_LABEL);
+                estudianteModel.add(0, Utils.ESTUDIANTES_LABEL);
+
+                //Crea dos listas con los modelos
+                JList<String> listaEmpleados = new JList<>(empleadoModel);
+                listaEmpleados.setFont(new Font("Tahoma", 1, 16));
+                JList<String> listaEstudiantes = new JList<>(estudianteModel);
+                listaEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 16));
+
+                listaEmpleados.addListSelectionListener((ListSelectionEvent event) -> {
+                    if (!event.getValueIsAdjusting()) {
+                        JList source = (JList) event.getSource();
+                        int selected = source.getSelectedIndex();
+                        if (selected == 0) {
+                            EscuelaUI escuelaUI = new EscuelaUI(escuela, empleadoModel, estudianteModel);
+                            escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            escuelaUI.setVisible(true);
                         }
+
                     }
                 });
 
-                listModel1.add(0, Utils.ESTUDIANTES_LABEL + " (" + name + ")");
-                JList<String> listaEstudiantes = new JList<>(listModel1);
-                listaEstudiantes.setFont(new java.awt.Font("Tahoma", 0, 24));
-                listaEstudiantes.addListSelectionListener(new ListSelectionListener() {
-                    @Override
-                    public void valueChanged(ListSelectionEvent event) {
-                        if (!event.getValueIsAdjusting()) {
-                            JList source = (JList) event.getSource();
-                            int selected = source.getSelectedIndex();
-                            if (selected == 0) {
-                                EscuelaUI escuelaUI = new EscuelaUI(escuela, listModel, listModel1);
-                                escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                                escuelaUI.setVisible(true);
-                            }
-
+                listaEstudiantes.addListSelectionListener((ListSelectionEvent event) -> {
+                    if (!event.getValueIsAdjusting()) {
+                        JList source = (JList) event.getSource();
+                        int selected = source.getSelectedIndex();
+                        if (selected == 0) {
+                            EscuelaUI escuelaUI = new EscuelaUI(escuela, empleadoModel, estudianteModel);
+                            escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            escuelaUI.setVisible(true);
                         }
+
                     }
                 });
                 JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
@@ -221,18 +229,14 @@ public class MainUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "NUMERO MAXIMO DE ESCUELAS ALCANZADO", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
 
-    }//GEN-LAST:event_MenuItemEscuelaActionPerformed
+    }//GEN-LAST:event_escuelaMenuItemActionPerformed
 
     private void ExitMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExitMenuItemActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_ExitMenuItemActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void empleadoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_empleadoMenuItemActionPerformed
         if (escuelas.isEmpty()) {
             JOptionPane.showMessageDialog(null, "Se necesita almenos una escuela", "ERROR", JOptionPane.ERROR_MESSAGE);
         } else {
@@ -244,18 +248,28 @@ public class MainUI extends javax.swing.JFrame {
             DefaultListModel empleadosModel = new DefaultListModel();
             Integer escuelaIndex = escuelas.indexOf(selectionEscuela);
             JList listaEmpleados = ((JList) ((JSplitPane) TabPanel.getComponentAt(escuelaIndex)).getLeftComponent());
-
             if (selectionTipo.equals(Utils.EMPLEADO_AUXILIAR)) {
                 E_Auxiliar empleado = new E_Auxiliar();
                 empleado.setNombre(nombreEmpleado);
-                empleadosModel.addElement(empleado);
 
+                ListModel modeloEmpleados = listaEmpleados.getModel();
+                for (int i = 0; i < modeloEmpleados.getSize(); i++) {
+                    empleadosModel.addElement(modeloEmpleados.getElementAt(i));
+
+                }
+                empleadosModel.addElement(empleado);
+                listaEmpleados.setModel(empleadosModel);
             }
 
-            System.out.println(escuelaIndex);
-
         }
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_empleadoMenuItemActionPerformed
+
+    private void cursoMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cursoMenuItemActionPerformed
+        Escuela selectionEscuela = (Escuela) JOptionPane.showInputDialog(this, "A que escuela esta asignado", "Menu", JOptionPane.PLAIN_MESSAGE, null, escuelas.toArray(), escuelas.toArray()[0]);
+        Curso curso = new Curso();
+        String salon = JOptionPane.showInputDialog(this, "Salon de la escuela", Utils.CREATE_CURSO_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
+        curso.setSalon(salon);
+    }//GEN-LAST:event_cursoMenuItemActionPerformed
 
     /**
      * @param args the command line arguments
@@ -296,11 +310,10 @@ public class MainUI extends javax.swing.JFrame {
     private javax.swing.JMenu CrearMenuSub;
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JMenu MenuAcciones;
-    private javax.swing.JMenuItem MenuItemEscuela;
     private javax.swing.JTabbedPane TabPanel;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem cursoMenuItem;
+    private javax.swing.JMenuItem empleadoMenuItem;
+    private javax.swing.JMenuItem escuelaMenuItem;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;
