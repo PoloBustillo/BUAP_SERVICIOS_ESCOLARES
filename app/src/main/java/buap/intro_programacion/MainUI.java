@@ -11,6 +11,7 @@ import buap.intro_programacion.models.E_Auxiliar;
 import buap.intro_programacion.models.Empleado;
 import buap.intro_programacion.models.Escuela;
 import buap.intro_programacion.models.Estudiante;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -53,6 +54,10 @@ public class MainUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
+    private Empleado getEmpleadoSelected() {
+        return (Empleado) ((JList) ((JSplitPane) TabPanel.getSelectedComponent()).getLeftComponent()).getSelectedValue();
+    }
+
     /**
      * Creates new form MainUI
      */
@@ -71,13 +76,17 @@ public class MainUI extends javax.swing.JFrame {
                 @Override
                 public void windowClosing(WindowEvent e) {
                     int i = JOptionPane.showConfirmDialog(null, "Seguro que quiere salir?");
-                    System.out.println(i);
                     if (i == 0) {
                         System.exit(0);//cierra aplicacion
                     }
                 }
             });
             centerFrame();
+            setTitle("PROYECTO PROGRAMACION - SISTEMA ESCOLAR ");
+            ActualizaBtn.setEnabled(false);
+            EliminaBtn.setEnabled(false);
+            ActualizaBtn1.setEnabled(false);
+            EliminaBtn1.setEnabled(false);
         } catch (ClassNotFoundException | IllegalAccessException | InstantiationException | UnsupportedLookAndFeelException e) {
             // If Nimbus is not available, you can set the GUI to another look and feel.
         }
@@ -97,16 +106,86 @@ public class MainUI extends javax.swing.JFrame {
         jPopupMenu3 = new javax.swing.JPopupMenu();
         jPopupMenu4 = new javax.swing.JPopupMenu();
         TabPanel = new javax.swing.JTabbedPane();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        EliminaBtn = new javax.swing.JButton();
+        ActualizaBtn = new javax.swing.JButton();
+        EliminaBtn1 = new javax.swing.JButton();
+        ActualizaBtn1 = new javax.swing.JButton();
         javax.swing.JMenuBar MenuBar = new javax.swing.JMenuBar();
         MenuAcciones = new javax.swing.JMenu();
         CrearMenuSub = new javax.swing.JMenu();
         escuelaMenuItem = new javax.swing.JMenuItem();
         empleadoMenuItem = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         cursoMenuItem = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         ExitMenuItem = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        TabPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Escuelas"));
+        TabPanel.setTabPlacement(javax.swing.JTabbedPane.LEFT);
+        TabPanel.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentMoved(java.awt.event.ComponentEvent evt) {
+                componentMovedListener(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informacion"));
+
+        jList1.setBackground(new java.awt.Color(255, 204, 204));
+        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane1.setViewportView(jList1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        EliminaBtn.setBackground(new java.awt.Color(255, 204, 204));
+        EliminaBtn.setText("Elimina Empleado");
+        EliminaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminaBtnActionPerformed(evt);
+            }
+        });
+
+        ActualizaBtn.setBackground(new java.awt.Color(255, 255, 204));
+        ActualizaBtn.setText("Actualiza Empleado");
+        ActualizaBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizaBtnActionPerformed(evt);
+            }
+        });
+
+        EliminaBtn1.setBackground(new java.awt.Color(255, 204, 204));
+        EliminaBtn1.setText("Elimina Alumno");
+        EliminaBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                EliminaBtn1ActionPerformed(evt);
+            }
+        });
+
+        ActualizaBtn1.setBackground(new java.awt.Color(255, 255, 204));
+        ActualizaBtn1.setText("Actualiza Alumno");
+        ActualizaBtn1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ActualizaBtn1ActionPerformed(evt);
+            }
+        });
 
         MenuBar.setBackground(new java.awt.Color(255, 153, 153));
         MenuBar.setToolTipText("");
@@ -135,6 +214,15 @@ public class MainUI extends javax.swing.JFrame {
             }
         });
         CrearMenuSub.add(empleadoMenuItem);
+
+        jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_T, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
+        jMenuItem1.setText("Estudiante");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        CrearMenuSub.add(jMenuItem1);
 
         cursoMenuItem.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_C, java.awt.event.InputEvent.SHIFT_DOWN_MASK));
         cursoMenuItem.setText("Curso");
@@ -166,16 +254,37 @@ public class MainUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(77, 77, 77)
-                .addComponent(TabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 775, Short.MAX_VALUE)
-                .addGap(85, 85, 85))
+                .addGap(15, 15, 15)
+                .addComponent(TabPanel)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addComponent(ActualizaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(EliminaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+                .addComponent(ActualizaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(EliminaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addComponent(TabPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
-                .addGap(45, 45, 45))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(TabPanel))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EliminaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ActualizaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(EliminaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(ActualizaBtn1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -224,9 +333,9 @@ public class MainUI extends javax.swing.JFrame {
                     public String getToolTipText(MouseEvent event) {
                         int row = locationToIndex(event.getPoint());
                         Estudiante est = (Estudiante) getModel().getElementAt(row);
-                        return "Empleado: " + est.getNombre() + " --- " + est.getMiGrado() + " --- RFC:" + est.getDireccionEstudiante();
+                        return "Estudiante: " + est.getNombre() + " --- " + est.getMiGrado() + " --- " + est.getDireccionEstudiante();
                     }
-                };;
+                };
                 listaEstudiantes.setFont(new java.awt.Font("Tahoma", 1, 16));
 
                 //Crear Listeners para cada lista, escucharan la selecciï¿½n de algun elemento en la lista
@@ -237,21 +346,21 @@ public class MainUI extends javax.swing.JFrame {
 
                         //Si el elemento seleccionado es el primero, crea una UI para actualizar la escuela
                         int selected = source.getSelectedIndex();
-                        System.out.println(selected);
+
                         if (selected == 0) {
                             EscuelaUI escuelaUI = new EscuelaUI(escuela);
                             //Cuando se cierre la ventana de actualizar escuela no se terminara el programa
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         } else if (selected != -1) {
-                            EmpleadoUI empleadoUI = new EmpleadoUI((Empleado) empleadoModel.get(selected));
-                            empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-                            //listaEmpleados.setToolTipText((String) empleadosListas.get(TabPanel.getSelectedIndex()).getElementAt(selected));
-                            empleadoUI.setVisible(true);
+                            ActualizaBtn.setEnabled(true);
+                            EliminaBtn.setEnabled(true);
+
                         }
                     }
-                });
+                }
+                );
                 listaEstudiantes.addListSelectionListener((ListSelectionEvent event) -> {
                     if (!event.getValueIsAdjusting()) {
                         JList source = (JList) event.getSource();
@@ -260,14 +369,20 @@ public class MainUI extends javax.swing.JFrame {
                             EscuelaUI escuelaUI = new EscuelaUI(escuela);
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
+                        } else if (selected != -1) {
+                            EstudianteUI empleadoUI = new EstudianteUI((Estudiante) estudianteModel.get(selected));
+                            empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+                            empleadoUI.setVisible(true);
                         }
                     }
                 });
-
+                listaEmpleados.setBackground(Color.LIGHT_GRAY);
+                listaEstudiantes.setBackground(Color.PINK);
                 //Crea un componente con division para las dos listas
                 JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                         listaEmpleados, listaEstudiantes);
-                splitPane.setDividerLocation((int) (screenSize.getWidth() / 2.3));
+
+                splitPane.setDividerLocation((int) (screenSize.getWidth() / 3));
 
                 //Agrega el componente de division al Tab en la ultima posiciï¿½n, cambia el focus a esa posicion
                 TabPanel.addTab(name, splitPane);
@@ -313,6 +428,7 @@ public class MainUI extends javax.swing.JFrame {
                 //recupero la lista de la escuela y añado el empleado creado
                 DefaultListModel modelo = empleadosListas.get(escuelaIndex);
                 modelo.addElement(empleado);
+                selectionEscuela.getEmpleados().add(empleado);
             }
 
             //SI ES EMPLEADO ADMINISTRATIVO
@@ -322,6 +438,7 @@ public class MainUI extends javax.swing.JFrame {
                 //recupero la lista de la escuela y añado el empleado creado
                 DefaultListModel modelo = empleadosListas.get(escuelaIndex);
                 modelo.addElement(empleado);
+                selectionEscuela.getEmpleados().add(empleado);
             }
 
             //SI ES EMPLEADO ADMINISTRATIVO
@@ -331,6 +448,7 @@ public class MainUI extends javax.swing.JFrame {
                 //recupero la lista de la escuela y añado el empleado creado
                 DefaultListModel modelo = empleadosListas.get(escuelaIndex);
                 modelo.addElement(empleado);
+                selectionEscuela.getEmpleados().add(empleado);
             }
 
         }
@@ -341,6 +459,72 @@ public class MainUI extends javax.swing.JFrame {
         String salon = JOptionPane.showInputDialog(this, "Salon de la escuela", Utils.CREATE_CURSO_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
         curso.setSalon(salon);
     }//GEN-LAST:event_cursoMenuItemActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        //Si no hay niguna escuela no puedo crear un empleado, manda mensaje de ERROR
+        if (escuelas.isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Se necesita almenos una escuela", "ERROR", JOptionPane.ERROR_MESSAGE);
+        } else {
+            Estudiante estudiante = new Estudiante();
+            //Obten el nombre del estudiante
+            String nombre = JOptionPane.showInputDialog(this, "Nombre del estudiante", Utils.CREATE_ESTUDIANTE_FLOW_NAME, JOptionPane.QUESTION_MESSAGE);
+            estudiante.setNombre(nombre);
+            estudiante.setTelefono(JOptionPane.showInputDialog(
+                    this,
+                    "Telefono del estudiante",
+                    Utils.CREATE_ESTUDIANTE_FLOW_NAME,
+                    JOptionPane.QUESTION_MESSAGE
+            ));
+            estudiante.setMatricula(JOptionPane.showInputDialog(
+                    this,
+                    "Matricula del estudiante",
+                    Utils.CREATE_ESTUDIANTE_FLOW_NAME,
+                    JOptionPane.QUESTION_MESSAGE
+            ));
+
+            Escuela selectionEscuela = (Escuela) JOptionPane.showInputDialog(this,
+                    "A que escuela esta asignado",
+                    "Menu",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    escuelas.toArray(),
+                    escuelas.toArray()[0]);
+            Integer escuelaIndex = escuelas.indexOf(selectionEscuela);
+            DefaultListModel modelo = estudiantesListas.get(escuelaIndex);
+            modelo.addElement(estudiante);
+            //Obten la escuela a la que esta asignado
+
+            selectionEscuela.getEstudiantes().add(estudiante);
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void componentMovedListener(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_componentMovedListener
+        // TODO add your handling code here:]
+        System.out.println("buap.intro_programacion.MainUI.componentMovedListener()");
+    }//GEN-LAST:event_componentMovedListener
+
+    private void EliminaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaBtnActionPerformed
+        // TODO add your handling code here:
+        DefaultListModel empleadoModelo = empleadosListas.get(TabPanel.getSelectedIndex());
+        int index = empleadoModelo.indexOf(getEmpleadoSelected());
+        empleadoModelo.remove(index);
+
+    }//GEN-LAST:event_EliminaBtnActionPerformed
+
+    private void ActualizaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizaBtnActionPerformed
+
+        EmpleadoUI empleadoUI = new EmpleadoUI(getEmpleadoSelected());
+        empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        empleadoUI.setVisible(true);
+    }//GEN-LAST:event_ActualizaBtnActionPerformed
+
+    private void EliminaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_EliminaBtn1ActionPerformed
+
+    private void ActualizaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizaBtn1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ActualizaBtn1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -356,17 +540,15 @@ public class MainUI extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MainUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(MainUI.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+
         //</editor-fold>
 
         /* Create and display the form */
@@ -376,17 +558,25 @@ public class MainUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ActualizaBtn;
+    private javax.swing.JButton ActualizaBtn1;
     private javax.swing.JMenu CrearMenuSub;
+    private javax.swing.JButton EliminaBtn;
+    private javax.swing.JButton EliminaBtn1;
     private javax.swing.JMenuItem ExitMenuItem;
     private javax.swing.JMenu MenuAcciones;
     public static javax.swing.JTabbedPane TabPanel;
     private javax.swing.JMenuItem cursoMenuItem;
     private javax.swing.JMenuItem empleadoMenuItem;
     private javax.swing.JMenuItem escuelaMenuItem;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JPopupMenu jPopupMenu2;
     private javax.swing.JPopupMenu jPopupMenu3;
     private javax.swing.JPopupMenu jPopupMenu4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

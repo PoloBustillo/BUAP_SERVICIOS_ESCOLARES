@@ -1,30 +1,19 @@
 package buap.intro_programacion.models;
 
+import java.util.ArrayList;
+import java.util.UUID;
+
 public class Escuela {
 
     private String nombre;
-    private Empleado[] empleados;
-    private Estudiante[] estudiantes;
+    private ArrayList<Empleado> empleados = new ArrayList<>();
+    private ArrayList<Estudiante> estudiantes = new ArrayList<>();
     private Direccion direccionEscuela;
     private String[] niveles;
-    private String codigo;
-
-    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String[] niveles, String codigo) {
-        this.nombre = nombre;
-        this.empleados = empleados;
-        this.estudiantes = estudiantes;
-        this.direccionEscuela = direccionEscuela;
-        this.niveles = niveles;
-        this.codigo = codigo;
-    }
+    private UUID codigo;
 
     public Escuela() {
-        this.nombre = null;
-        this.empleados = null;
-        this.estudiantes = null;
-        this.direccionEscuela = null;
-        this.niveles = null;
-        this.codigo = null;
+        this.codigo = UUID.randomUUID();
     }
 
     @Override
@@ -34,11 +23,11 @@ public class Escuela {
 
     }
 
-    public void setEmpleados(Empleado[] empleados) {
+    public void setEmpleados(ArrayList<Empleado> empleados) {
         this.empleados = empleados;
     }
 
-    public void setEstudiantes(Estudiante[] estudiantes) {
+    public void setEstudiantes(ArrayList<Estudiante> estudiantes) {
         this.estudiantes = estudiantes;
     }
 
@@ -50,10 +39,6 @@ public class Escuela {
         this.niveles = niveles;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -62,11 +47,11 @@ public class Escuela {
         this.nombre = nombre;
     }
 
-    public Empleado[] getEmpleados() {
+    public ArrayList<Empleado> getEmpleados() {
         return empleados;
     }
 
-    public Estudiante[] getEstudiantes() {
+    public ArrayList<Estudiante> getEstudiantes() {
         return estudiantes;
     }
 
@@ -78,7 +63,8 @@ public class Escuela {
         return niveles;
     }
 
-    public String getCodigo() {
+    public UUID getCodigo() {
         return codigo;
     }
+
 }

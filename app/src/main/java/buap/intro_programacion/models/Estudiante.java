@@ -1,16 +1,17 @@
 package buap.intro_programacion.models;
 
 public class Estudiante {
+
     private String nombre;
     private String matricula;
     private String[] apellidos;
-    private Integer telefono;
+    private String telefono;
     private Direccion direccionEstudiante;
     private Grado miGrado;
     private String historialAcademico;
 
     public Estudiante() {
-        System.out.println("NUEVO ESTUDIANTE");
+
     }
 
     public Estudiante(String nombre, String matricula, String[] apellidos, Grado miGrado) {
@@ -20,7 +21,7 @@ public class Estudiante {
         this.miGrado = miGrado;
     }
 
-    public Estudiante(String nombre, String matricula, String[] apellidos, Integer telefono, Direccion direccionEstudiante, Grado miGrado) {
+    public Estudiante(String nombre, String matricula, String[] apellidos, String telefono, Direccion direccionEstudiante, Grado miGrado) {
         this.nombre = nombre;
         this.matricula = matricula;
         this.apellidos = apellidos;
@@ -53,11 +54,11 @@ public class Estudiante {
         this.apellidos = apellidos;
     }
 
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -76,4 +77,10 @@ public class Estudiante {
     public void setMiGrado(Grado miGrado) {
         this.miGrado = miGrado;
     }
+
+    @Override
+    public String toString() {
+        return "Nombre=" + nombre + ", Matricula=" + matricula;
+    }
+
 }
