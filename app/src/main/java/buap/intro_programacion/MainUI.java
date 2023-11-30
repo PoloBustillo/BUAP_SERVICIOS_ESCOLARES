@@ -54,6 +54,10 @@ public class MainUI extends javax.swing.JFrame {
         setLocation(x, y);
     }
 
+    private Empleado getEmpleadoSelected() {
+        return (Empleado) ((JList) ((JSplitPane) TabPanel.getSelectedComponent()).getLeftComponent()).getSelectedValue();
+    }
+
     /**
      * Creates new form MainUI
      */
@@ -349,9 +353,6 @@ public class MainUI extends javax.swing.JFrame {
                             escuelaUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
                             escuelaUI.setVisible(true);
                         } else if (selected != -1) {
-//                            EmpleadoUI empleadoUI = new EmpleadoUI((Empleado) empleadoModel.get(selected));
-//                            empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-//                            empleadoUI.setVisible(true);
 
                             ActualizaBtn.setEnabled(true);
                             EliminaBtn.setEnabled(true);
@@ -504,10 +505,17 @@ public class MainUI extends javax.swing.JFrame {
 
     private void EliminaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaBtnActionPerformed
         // TODO add your handling code here:
+        DefaultListModel empleadoModelo = empleadosListas.get(TabPanel.getSelectedIndex());
+        int index = empleadoModelo.indexOf(getEmpleadoSelected());
+        empleadoModelo.remove(index);
+
     }//GEN-LAST:event_EliminaBtnActionPerformed
 
     private void ActualizaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizaBtnActionPerformed
-        // TODO add your handling code here:
+
+        EmpleadoUI empleadoUI = new EmpleadoUI(getEmpleadoSelected());
+        empleadoUI.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        empleadoUI.setVisible(true);
     }//GEN-LAST:event_ActualizaBtnActionPerformed
 
     private void EliminaBtn1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminaBtn1ActionPerformed
