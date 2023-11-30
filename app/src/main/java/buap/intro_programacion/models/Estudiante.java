@@ -7,6 +7,7 @@ public class Estudiante {
     private Integer telefono;
     private Direccion direccionEstudiante;
     private Grado miGrado;
+    private String historialAcademico;
 
     public Estudiante() {
         System.out.println("NUEVO ESTUDIANTE");
