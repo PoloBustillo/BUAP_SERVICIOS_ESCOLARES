@@ -17,6 +17,7 @@ public class Utils {
     static final String[] SCHOOL_LEVELS = {"Primaria", "Secundaria", "Preparatoria"};
     static final String CREATE_ESCUELA_FLOW_NAME = "Crear Escuela";
     static final String CREATE_EMPLEADO_FLOW_NAME = "Crear Empleado";
+    static final String CREATE_ESTUDIANTE_FLOW_NAME = "Crear Estudiante";
     static final String CREATE_CURSO_FLOW_NAME = "Crear Curso";
     static final String EMPLEADOS_LABEL = "EMPLEADOS";
     static final String ESTUDIANTES_LABEL = "ESTUDIANTES";

@@ -53,7 +53,9 @@ public class EscuelaUI extends javax.swing.JFrame {
         setTitle("DATOS ESCUELA: " + escuela.getNombre());
 
         nameInput.setText(escuela.getNombre());
-        codigoInput.setText(escuela.getCodigo());
+        codigoInput.setEditable(false);
+
+        codigoInput.setText(escuela.getCodigo().toString());
         if (escuela.getNiveles() != null) {
             List niveles = Arrays.asList(escuela.getNiveles());
             if (niveles.contains("Primaria")) {
@@ -357,7 +359,6 @@ public class EscuelaUI extends javax.swing.JFrame {
         String newCodigo = codigoInput.getText();
 
         escuela.setNombre(newName);
-        escuela.setCodigo(newCodigo);
 
         Direccion nuevaDireccion = new Direccion();
         nuevaDireccion.setCalle(calleInput.getText());

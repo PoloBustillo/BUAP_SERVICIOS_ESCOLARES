@@ -5,9 +5,14 @@
 package buap.intro_programacion;
 
 import buap.intro_programacion.models.Direccion;
+import buap.intro_programacion.models.E_Academico;
+import buap.intro_programacion.models.E_Administrativo;
+import buap.intro_programacion.models.E_Auxiliar;
 import buap.intro_programacion.models.Empleado;
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JList;
 import javax.swing.JSplitPane;
 
@@ -33,8 +38,28 @@ public class EmpleadoUI extends javax.swing.JFrame {
      */
     public EmpleadoUI(Empleado empleado) {
         initComponents();
+
         centerFrame();
         this.empleado = empleado;
+        if (empleado instanceof E_Auxiliar) {
+            System.out.println("EMPLE");
+            EmpleadoAuxiliarPanel.setVisible(true);
+            EmpleadoAdminPanel.setVisible(false);
+            EmpleadoAcademicoPanel.setVisible(false);
+        }
+        if (empleado instanceof E_Academico) {
+            System.out.println("EMPLE");
+            EmpleadoAuxiliarPanel.setVisible(false);
+            EmpleadoAdminPanel.setVisible(false);
+            EmpleadoAcademicoPanel.setVisible(true);
+        }
+        if (empleado instanceof E_Administrativo) {
+            System.out.println("EMPLE");
+            EmpleadoAuxiliarPanel.setVisible(false);
+            EmpleadoAdminPanel.setVisible(true);
+            EmpleadoAcademicoPanel.setVisible(false);
+        }
+
         setTitle("Empleado: " + empleado.getNombre() + " - " + empleado.getIdEmpleado());
         nombreInput.setText(empleado.getNombre());
         rfcInput.setText(empleado.getRFC());
@@ -49,6 +74,16 @@ public class EmpleadoUI extends javax.swing.JFrame {
             coloniaInput.setText(String.valueOf(empleado.getDireccion().getColonia()));
             ciudadInput.setSelectedItem(String.valueOf(empleado.getDireccion().getCiudad()));
         }
+
+        this.addWindowListener(new WindowAdapter() {
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                JSplitPane splitPane = ((JSplitPane) MainUI.TabPanel.getSelectedComponent());
+                ((JList) splitPane.getLeftComponent()).clearSelection();
+                ((JList) splitPane.getRightComponent()).clearSelection();
+            }
+        });
 
     }
 
@@ -82,6 +117,22 @@ public class EmpleadoUI extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         sueldoInput = new javax.swing.JTextField();
         UpdateButton = new javax.swing.JButton();
+        EmpleadoAuxiliarPanel = new javax.swing.JPanel();
+        cuentaInput1 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        cuentaInput2 = new javax.swing.JTextField();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        EmpleadoAcademicoPanel = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
+        cuentaInput4 = new javax.swing.JTextField();
+        jLabel15 = new javax.swing.JLabel();
+        cuentaInput5 = new javax.swing.JTextField();
+        UpdateButton1 = new javax.swing.JButton();
+        EmpleadoAdminPanel = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        cuentaInput3 = new javax.swing.JTextField();
+        UpdateButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -178,7 +229,7 @@ public class EmpleadoUI extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(nombreInput, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -222,24 +273,24 @@ public class EmpleadoUI extends javax.swing.JFrame {
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(sueldoInput, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
+                .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(rfcInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(cuentaInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(sueldoInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addGap(52, 52, 52))
         );
 
         UpdateButton.setBackground(new java.awt.Color(102, 255, 102));
@@ -252,31 +303,192 @@ public class EmpleadoUI extends javax.swing.JFrame {
             }
         });
 
+        EmpleadoAuxiliarPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleado Auxiliar"));
+
+        jLabel11.setText("Turno:");
+
+        jLabel12.setText("Area:");
+
+        javax.swing.GroupLayout EmpleadoAuxiliarPanelLayout = new javax.swing.GroupLayout(EmpleadoAuxiliarPanel);
+        EmpleadoAuxiliarPanel.setLayout(EmpleadoAuxiliarPanelLayout);
+        EmpleadoAuxiliarPanelLayout.setHorizontalGroup(
+            EmpleadoAuxiliarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmpleadoAuxiliarPanelLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(EmpleadoAuxiliarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(EmpleadoAuxiliarPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cuentaInput1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(EmpleadoAuxiliarPanelLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cuentaInput2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        EmpleadoAuxiliarPanelLayout.setVerticalGroup(
+            EmpleadoAuxiliarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmpleadoAuxiliarPanelLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(EmpleadoAuxiliarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(cuentaInput1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EmpleadoAuxiliarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(cuentaInput2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
+        );
+
+        EmpleadoAcademicoPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleado Academico"));
+
+        jLabel14.setText("Turno:");
+
+        jLabel15.setText("Materia:");
+
+        UpdateButton1.setBackground(new java.awt.Color(0, 204, 255));
+        UpdateButton1.setForeground(new java.awt.Color(0, 0, 51));
+        UpdateButton1.setText("AGREGAR CURSO");
+        UpdateButton1.setBorder(new javax.swing.border.MatteBorder(null));
+        UpdateButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout EmpleadoAcademicoPanelLayout = new javax.swing.GroupLayout(EmpleadoAcademicoPanel);
+        EmpleadoAcademicoPanel.setLayout(EmpleadoAcademicoPanelLayout);
+        EmpleadoAcademicoPanelLayout.setHorizontalGroup(
+            EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                .addContainerGap(17, Short.MAX_VALUE)
+                .addGroup(EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                        .addGroup(EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cuentaInput4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(cuentaInput5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                        .addComponent(UpdateButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
+        );
+        EmpleadoAcademicoPanelLayout.setVerticalGroup(
+            EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(EmpleadoAcademicoPanelLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(cuentaInput4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(EmpleadoAcademicoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(cuentaInput5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(UpdateButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        EmpleadoAdminPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Empleado Admin."));
+
+        jLabel13.setText("Area:");
+
+        javax.swing.GroupLayout EmpleadoAdminPanelLayout = new javax.swing.GroupLayout(EmpleadoAdminPanel);
+        EmpleadoAdminPanel.setLayout(EmpleadoAdminPanelLayout);
+        EmpleadoAdminPanelLayout.setHorizontalGroup(
+            EmpleadoAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 248, Short.MAX_VALUE)
+            .addGroup(EmpleadoAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EmpleadoAdminPanelLayout.createSequentialGroup()
+                    .addGap(12, 12, 12)
+                    .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addComponent(cuentaInput3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(24, Short.MAX_VALUE)))
+        );
+        EmpleadoAdminPanelLayout.setVerticalGroup(
+            EmpleadoAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(EmpleadoAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(EmpleadoAdminPanelLayout.createSequentialGroup()
+                    .addGap(68, 68, 68)
+                    .addGroup(EmpleadoAdminPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel13)
+                        .addComponent(cuentaInput3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap(69, Short.MAX_VALUE)))
+        );
+
+        UpdateButton2.setBackground(new java.awt.Color(102, 204, 255));
+        UpdateButton2.setForeground(new java.awt.Color(0, 0, 51));
+        UpdateButton2.setText("Calcular Sueldo del Mes");
+        UpdateButton2.setBorder(null);
+        UpdateButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UpdateButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(173, 173, 173))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(156, 156, 156)
+                        .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(208, 208, 208)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(EmpleadoAuxiliarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(EmpleadoAcademicoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(EmpleadoAdminPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(42, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(609, Short.MAX_VALUE)
+                    .addComponent(UpdateButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(121, 121, 121)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(EmpleadoAcademicoPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpleadoAuxiliarPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(EmpleadoAdminPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, Short.MAX_VALUE)
                 .addComponent(UpdateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(507, Short.MAX_VALUE)
+                    .addComponent(UpdateButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(17, 17, 17)))
         );
 
         pack();
@@ -299,6 +511,9 @@ public class EmpleadoUI extends javax.swing.JFrame {
         nuevaDireccion.setColonia(coloniaInput.getText());
         nuevaDireccion.setCiudad((String) ciudadInput.getSelectedItem());
         empleado.setDireccion(nuevaDireccion);
+        empleado.setRFC(rfcInput.getText());
+        empleado.setCuenta(cuentaInput.getText());
+        empleado.setSueldoDiario(Float.valueOf(sueldoInput.getText()));
 
         setTitle("Empleado: " + empleado.getNombre() + " - " + empleado.getIdEmpleado());
 
@@ -307,15 +522,38 @@ public class EmpleadoUI extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_UpdateButtonActionPerformed
 
+    private void UpdateButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButton1ActionPerformed
+    }//GEN-LAST:event_UpdateButton1ActionPerformed
+
+    private void UpdateButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpdateButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_UpdateButton2ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel EmpleadoAcademicoPanel;
+    private javax.swing.JPanel EmpleadoAdminPanel;
+    private javax.swing.JPanel EmpleadoAuxiliarPanel;
     private javax.swing.JButton UpdateButton;
+    private javax.swing.JButton UpdateButton1;
+    private javax.swing.JButton UpdateButton2;
     private javax.swing.JTextField calleInput;
     private javax.swing.JComboBox<String> ciudadInput;
     private javax.swing.JTextField coloniaInput;
     private javax.swing.JTextField cpInput;
     private javax.swing.JTextField cuentaInput;
+    private javax.swing.JTextField cuentaInput1;
+    private javax.swing.JTextField cuentaInput2;
+    private javax.swing.JTextField cuentaInput3;
+    private javax.swing.JTextField cuentaInput4;
+    private javax.swing.JTextField cuentaInput5;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
