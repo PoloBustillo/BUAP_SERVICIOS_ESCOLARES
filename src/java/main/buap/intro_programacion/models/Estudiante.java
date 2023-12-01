@@ -1,6 +1,6 @@
 package buap.intro_programacion.models;
 
-public class Estudiante{
+public class Estudiante {
     private String nombre;
     private String matricula;
     private String[] apellidos;
@@ -9,8 +9,9 @@ public class Estudiante{
     private Grado miGrado;
 
     public Estudiante() {
-        System.out.println("NUEVO ESTUDIANTE");
+
     }
+
     public Estudiante(String nombre, String matricula, String[] apellidos, Grado miGrado) {
         this.nombre = nombre;
         this.matricula = matricula;

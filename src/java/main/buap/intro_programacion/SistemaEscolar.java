@@ -47,16 +47,18 @@ public class SistemaEscolar {
                                 Utils.creaDireccion(),
                                 (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
                         );
-                        
+
                         //Aumento mi índice de la escuela más uno
                         escuelasIndex = escuelasIndex + 1;
                     }
                     case Utils.OPCION_DOS -> {
-                        if (escuelasArray.length != 0) {
+                        if (escuelasArray[0] != null) {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-
-                            System.out.println(escuela.getNombre());
-
+                            cursosArray[cursosIndex] = new Curso(
+                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+                                    Utils.creaDireccion(),
+                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
+                            );
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
