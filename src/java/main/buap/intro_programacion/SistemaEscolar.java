@@ -6,6 +6,7 @@ import buap.intro_programacion.models.Escuela;
 import buap.intro_programacion.models.Estudiante;
 
 import javax.swing.*;
+import java.util.Arrays;
 
 public class SistemaEscolar {
 
@@ -40,6 +41,7 @@ public class SistemaEscolar {
             if (opcionElegidaPorElUsuario != null) {
                 //El switch te permite realizar una acción por cada option del menu
                 switch (opcionElegidaPorElUsuario) {
+                    //CREA ESCUELA
                     case Utils.OPCION_UNO -> {
                         //almacena una nueva escuela en la posición escuelasIndex
                         escuelasArray[escuelasIndex] = new Escuela(
@@ -51,15 +53,21 @@ public class SistemaEscolar {
                         //Aumento mi índice de la escuela más uno
                         escuelasIndex = escuelasIndex + 1;
                     }
+                    //CREA CURSO
                     case Utils.OPCION_DOS -> {
+                        //Si almenos existe una escuela
                         if (escuelasArray[0] != null) {
+                            //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
+                            //Crea el curso a partir de las preguntas del usuario.
                             cursosArray[cursosIndex] = new Curso(
                                     Utils.creaPregunta(Utils.QUESTION_AFORO),
                                     Utils.creaPregunta(Utils.QUESTION_SALON),
                                     (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS)
                             );
+                            //Añade el curso a la escuela
                             escuela.addCurso(cursosArray[cursosIndex]);
+                            //Aumenta el contador de cursos para no sobreescribir la posición en el arreglo.
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
@@ -68,12 +76,17 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
+                    //CREA EMPLEADO
                     case Utils.OPCION_TRES -> {
+                        //Si al menos existe una escuela
                         if (escuelasArray.length != 0) {
+                            //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-
-                            System.out.println(escuela.getNombre());
-
+                            //Crea un nuevo empleado
+                            empleadosArray[empleadosIndex] = new Empleado();
+                            //Añade empleado a la escuela que le corresponda
+                            escuela.addEmpleado(empleadosArray[empleadosIndex]);
+                            //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
                             empleadosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
@@ -82,11 +95,18 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
+                    //Crea Estudiante
                     case Utils.OPCION_CUATRO -> {
+                        //Si al menos existe una escuela
                         if (escuelasArray.length != 0) {
+                            //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-                            System.out.println(escuela.getNombre());
-                            estudiantesIndex++;
+                            //Crea un nuevo empleado
+                            estudiantesArray[escuelasIndex] = new Estudiante();
+                            //Añade empleado a la escuela que le corresponda
+                            escuela.addEstudiante(estudiantesArray[empleadosIndex]);
+                            //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
+                            estudiantesIndex= estudiantesIndex+1;
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "ERROR Necesitas escuelasArray sea mayor que 0",
@@ -103,10 +123,13 @@ public class SistemaEscolar {
         );
 
 
-        Escuela[] escuelasArraySinNull = new Escuela[escuelasIndex];
-        for (int i = 0; i < escuelasIndex; i++) {
-            escuelasArraySinNull[i] = escuelasArray[i];
-        }
+        //Elimina todos los nulos del arreglo para no imprimirlos
+        //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
+        Escuela[] escuelasArraySinNull =  Arrays.stream(escuelasArray)
+                .filter(s -> (s != null ))
+                .toArray(Escuela[]::new);
+
+        //Muestra el arreglo de escuelas en un menu desplegable.
         Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull);
     }
 }

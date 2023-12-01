@@ -8,6 +8,8 @@ import java.util.UUID;
 public class Escuela {
 
     private int indexCursos = 0;
+    private int indexEmpleados = 0;
+    private int indexEstudiantes = 0;
     private String nombre;
     private Empleado[] empleados = new Empleado[Utils.MAX_OBJETOS];
     private Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];
@@ -104,6 +106,12 @@ public class Escuela {
         cursos[indexCursos] = curso;
         indexCursos = indexCursos + 1;
     }
-
-
+    public void addEmpleado(Empleado empleado) {
+        empleados[indexEmpleados] = empleado;
+        indexEmpleados = indexEmpleados + 1;
+    }
+    public void addEstudiante(Estudiante estudiante) {
+        estudiantes[indexEstudiantes] = estudiante;
+        indexEstudiantes = indexEstudiantes + 1;
+    }
 }
