@@ -54,11 +54,11 @@ public class SistemaEscolar {
                     case Utils.OPCION_DOS -> {
                         if (escuelasArray[0] != null) {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-                            cursosArray[cursosIndex] = new Curso(
-                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
-                                    Utils.creaDireccion(),
-                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
-                            );
+//                            cursosArray[cursosIndex] = new Curso(
+//                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+//                                    Utils.creaDireccion(),
+//                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
+//                            );
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,

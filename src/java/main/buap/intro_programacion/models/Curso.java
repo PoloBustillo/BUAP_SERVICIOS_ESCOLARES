@@ -1,34 +1,33 @@
 package buap.intro_programacion.models;
 
+import java.util.UUID;
+
 public class Curso {
-    private String id;
+    private UUID id;
     private String aforo;
     private Integer salon;
     private String horario;
     private Grado gradoCurso;
 
-    public Curso(String id, String aforo, Integer salon, String horario) {
-        this.id = id;
+    public Curso(String aforo, Integer salon, String horario) {
+        this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
         this.horario = horario;
     }
 
-    public Curso(String id, String aforo, Integer salon, String horario, Grado gradoCurso) {
-        this.id = id;
+    public Curso(String aforo, Integer salon, String horario, Grado gradoCurso) {
+        this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
         this.horario = horario;
         this.gradoCurso = gradoCurso;
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public String getAforo() {
         return aforo;
