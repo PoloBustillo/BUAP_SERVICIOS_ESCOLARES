@@ -1,6 +1,7 @@
 package buap.intro_programacion.models;
 
 import java.util.Arrays;
+import java.util.UUID;
 
 public class Escuela {
     private String nombre;
@@ -9,21 +10,28 @@ public class Escuela {
     private Curso[] cursos;
     private Direccion direccionEscuela;
     private String nivel;
-    private String codigo;
+    private UUID codigo;
 
+
+    /**
+     * @param nombre           Nombre de la escuela a crear
+     * @param direccionEscuela Un objeto tipo Direccion, que representa la dirección de la escuela
+     * @param nivel            String que puede ser solo: Primaria o Secundaria o Preparatoría
+     */
     public Escuela(String nombre, Direccion direccionEscuela, String nivel) {
         this.nombre = nombre;
         this.direccionEscuela = direccionEscuela;
         this.nivel = nivel;
+        this.codigo = UUID.randomUUID();
     }
 
-    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String nivel, String codigo) {
+    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String nivel) {
         this.nombre = nombre;
         this.empleados = empleados;
         this.estudiantes = estudiantes;
         this.direccionEscuela = direccionEscuela;
         this.nivel = nivel;
-        this.codigo = codigo;
+        this.codigo = UUID.randomUUID();
     }
 
     public String getNombre() {
@@ -66,12 +74,8 @@ public class Escuela {
         this.direccionEscuela = direccionEscuela;
     }
 
-    public String getCodigo() {
+    public UUID getCodigo() {
         return codigo;
-    }
-
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
     }
 
     public Curso[] getCursos() {

@@ -1,124 +1,103 @@
 package buap.intro_programacion;
 
-import buap.intro_programacion.models.*;
+import buap.intro_programacion.models.Curso;
+import buap.intro_programacion.models.Empleado;
+import buap.intro_programacion.models.Escuela;
+import buap.intro_programacion.models.Estudiante;
 
 import javax.swing.*;
 
-
 public class SistemaEscolar {
 
-    private static String creaPregunta(String Question) {
-        return JOptionPane.showInputDialog(null,
-                Question,
-                Utils.PROYECT_TITLE,
-                JOptionPane.QUESTION_MESSAGE);
-
-
-    }
-
-    private static Object creaDropDownPregunta(String Question, Object[] data) {
-        return JOptionPane.showInputDialog(null,
-                Question,
-                Utils.PROYECT_TITLE,
-                JOptionPane.QUESTION_MESSAGE, null,
-                data,
-                data[0]);
-    }
-
-    private static Direccion createDireccion() {
-        try {
-            String calle = creaPregunta(Utils.QUESTION_CALLE);
-            String colonia = creaPregunta(Utils.QUESTION_COLONIA);
-            Integer cp = Integer.valueOf(creaPregunta(Utils.QUESTION_CODIGO_POSTAL));
-            String ciudad = creaPregunta(Utils.QUESTION_CIUDAD);
-            return new Direccion(calle, colonia, cp, ciudad);
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(null,
-                    "ERROR CP no es numero!!",
-                    Utils.PROYECT_TITLE,
-                    JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
-    }
-
+    //Método principal de nuestra aplicación
     public static void main(String[] args) {
 
         //CREAR arreglos e indexes que los van a manipular
+        //index sirve para manipular arrays, se inicializa en 0
         //Escuelas - Cursos - Empleados - Alumnos
-        Escuela[] escuelas = new Escuela[Utils.MAX_OBJETOS];
+        Escuela[] escuelasArray = new Escuela[Utils.MAX_OBJETOS];
         int escuelasIndex = 0;
-        Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
+        Curso[] cursosArray = new Curso[Utils.MAX_OBJETOS];
         int cursosIndex = 0;
-        Empleado[] empleados = new Empleado[Utils.MAX_OBJETOS];
+        Empleado[] empleadosArray = new Empleado[Utils.MAX_OBJETOS];
         int empleadosIndex = 0;
-        Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];
+        Estudiante[] estudiantesArray = new Estudiante[Utils.MAX_OBJETOS];
         int estudiantesIndex = 0;
 
+        //Guarde la opción que elija el usuario
+        String opcionElegidaPorElUsuario;
 
-        String opcion;
+
+        //Muestra los menus hasta que se alcance la siguiente condiciones
+        //1. El usuario no cancele
+        //2. opcionElegidaPorElUsuario sea diferente de la opción salir
         do {
-            opcion = (String) JOptionPane.showInputDialog(null,
-                    Utils.INIT_QUESTION,
-                    Utils.PROYECT_TITLE,
-                    JOptionPane.QUESTION_MESSAGE, null,
-                    Utils.MAIN_MENU,
-                    Utils.MAIN_MENU[0]);
 
-            if (opcion != null) {
-                switch (opcion) {
+            //Recupera la opcionElegidaPorElUsuario desde un menu desplegable(dropdown)
+            opcionElegidaPorElUsuario = (String) Utils.creaPreguntaDesplegable(Utils.INIT_QUESTION, Utils.MAIN_MENU);
+
+            //Si el usuario no cancelo el menu, entonces entra a un switch
+            if (opcionElegidaPorElUsuario != null) {
+                //El switch te permite realizar una acción por cada option del menu
+                switch (opcionElegidaPorElUsuario) {
                     case Utils.OPCION_UNO -> {
-                        escuelas[escuelasIndex] = new Escuela(
-                                creaPregunta(Utils.QUESTION_NOMBRE),
-                                createDireccion(),
-                                (String) creaDropDownPregunta(Utils.QUESTION_NIVEL, Utils.NIVELES)
+                        //almacena una nueva escuela en la posición escuelasIndex
+                        escuelasArray[escuelasIndex] = new Escuela(
+                                Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+                                Utils.creaDireccion(),
+                                (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
                         );
-                        escuelasIndex++;
+                        
+                        //Aumento mi índice de la escuela más uno
+                        escuelasIndex = escuelasIndex + 1;
                     }
                     case Utils.OPCION_DOS -> {
-                        if (escuelas.length != 0) {
-                            Escuela escuela = (Escuela) creaDropDownPregunta(Utils.QUESTION_ESCUELA, escuelas);
+                        if (escuelasArray.length != 0) {
+                            Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
 
                             System.out.println(escuela.getNombre());
 
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "ERROR Necesitas escuelas sea mayor que 0",
+                                    "ERROR Necesitas escuelasArray sea mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     case Utils.OPCION_TRES -> {
-                        if (escuelas.length != 0) {
-                            Escuela escuela = (Escuela) creaDropDownPregunta(Utils.QUESTION_ESCUELA, escuelas);
+                        if (escuelasArray.length != 0) {
+                            Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
 
                             System.out.println(escuela.getNombre());
 
                             empleadosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "ERROR Necesitas escuelas sea mayor que 0",
+                                    "ERROR Necesitas escuelasArray sea mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
                     case Utils.OPCION_CUATRO -> {
-                        if (escuelas.length != 0) {
-                            Escuela escuela = (Escuela) creaDropDownPregunta(Utils.QUESTION_ESCUELA, escuelas);
+                        if (escuelasArray.length != 0) {
+                            Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             System.out.println(escuela.getNombre());
                             estudiantesIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "ERROR Necesitas escuelas sea mayor que 0",
+                                    "ERROR Necesitas escuelasArray sea mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
-
-
                 }
             }
-        } while (opcion != null && !opcion.equalsIgnoreCase("SALIR"));
+        }
+        while (
+                opcionElegidaPorElUsuario != null &&
+                        !opcionElegidaPorElUsuario.equalsIgnoreCase(Utils.OPCION_SALIR)
+        );
 
 
     }
