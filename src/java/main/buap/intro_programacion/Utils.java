@@ -7,11 +7,21 @@ import javax.swing.*;
 public final class Utils {
 
     //CONSTANTES
+    public static final String QUESTION_TIPO_EMPLEADOS = "Por favor, Elige el tipo de empleado:";
+    public static final String EMPLEADO_AUXILIAR =  "Auxiliar";
+    public static final String EMPLEADO_ADMIN =  "Administrativo";
+    public static final String EMPLEADO_ACADEMICO =  "Académico";
+    public static final String[] TIPO_EMPLEADOS = {EMPLEADO_ACADEMICO,EMPLEADO_AUXILIAR,EMPLEADO_ADMIN};
     public static final String[] HORARIOS = {"Matutino (8-10)", "Matutino (10-12)", "Vespertino (12-2)", "Vespertino (2-4)"};
     public static final String OPCION_UNO = "Crear Escuela";
     public static final String OPCION_DOS = "Crear Curso";
     public static final String OPCION_TRES = "Crear Empleado";
     public static final String OPCION_CUATRO = "Crear Estudiante";
+    public static final String OPCION_CINCO = "Asignar cursos a profesor";
+    public static final String OPCION_SEIS = "Calcular nomina profesores";
+    public static final String OPCION_SIETE = "Asignar estudiante a curso";
+    public static final String OPCION_OCHO = "Generar historial académico";
+
     public static final String OPCION_SALIR = "Salir";
     public static final String QUESTION_NOMBRE = "Por favor, Introduce nombre:";
     public static final String QUESTION_AFORO = "Por favor, Introduce aforo máximo:";
@@ -24,6 +34,7 @@ public final class Utils {
     public static final String QUESTION_NIVEL = "Por favor, Selecciona nivel:";
     public static final String QUESTION_HORARIO = "Por favor, Selecciona horario:";
     public static final String[] NIVELES = {"Primaria", "Secundaria", "Preparatoria"};
+
     public static int MAX_OBJETOS = 3;
     public static String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
     public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO, OPCION_SALIR};
@@ -31,7 +42,6 @@ public final class Utils {
 
 
     //METODOS DE UTILIDAD
-
     public static void mostrarInfoArray(String message, Object[] data) {
         JOptionPane.showInputDialog(null,
                 message,

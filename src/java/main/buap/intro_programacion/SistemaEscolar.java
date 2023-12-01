@@ -1,9 +1,6 @@
 package buap.intro_programacion;
 
-import buap.intro_programacion.models.Curso;
-import buap.intro_programacion.models.Empleado;
-import buap.intro_programacion.models.Escuela;
-import buap.intro_programacion.models.Estudiante;
+import buap.intro_programacion.models.*;
 
 import javax.swing.*;
 import java.util.Arrays;
@@ -55,8 +52,8 @@ public class SistemaEscolar {
                     }
                     //CREA CURSO
                     case Utils.OPCION_DOS -> {
-                        //Si almenos existe una escuela
-                        if (escuelasArray[0] != null) {
+                        //Si almenos existe una escuela y un maestro
+                        if (escuelasArray[0] != null && empleadosArray[0] != null) {
                             //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             //Crea el curso a partir de las preguntas del usuario.
@@ -82,8 +79,21 @@ public class SistemaEscolar {
                         if (escuelasArray.length != 0) {
                             //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-                            //Crea un nuevo empleado
-                            empleadosArray[empleadosIndex] = new Empleado();
+                            //Selecciona una escuela de una ventana desplegable.
+                            String tipoEmpleado = (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TIPO_EMPLEADOS, Utils.TIPO_EMPLEADOS);
+                            if(tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_AUXILIAR)){
+                                //Crea un nuevo empleado
+                                empleadosArray[empleadosIndex] = new E_NoAdministrativo();
+                            }
+                            if(tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_ACADEMICO)){
+                                //Crea un nuevo empleado
+                                empleadosArray[empleadosIndex] = new E_Academico();
+
+                            }
+                            if(tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_ADMIN)){
+                                //Crea un nuevo empleado
+                                empleadosArray[empleadosIndex] = new E_Administrativo();
+                            }
                             //Añade empleado a la escuela que le corresponda
                             escuela.addEmpleado(empleadosArray[empleadosIndex]);
                             //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
