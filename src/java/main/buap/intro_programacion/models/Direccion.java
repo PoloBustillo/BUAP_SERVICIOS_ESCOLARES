@@ -6,11 +6,21 @@ public class Direccion {
     private Integer codigoPostal;
     private String ciudad;
 
+    /**
+     * @param calle
+     * @param colonia
+     * @param codigoPostal
+     * @param ciudad
+     */
     public Direccion(String calle, String colonia, Integer codigoPostal, String ciudad) {
         this.calle = calle;
         this.colonia = colonia;
         this.codigoPostal = codigoPostal;
         this.ciudad = ciudad;
+    }
+
+    public Direccion() {
+
     }
 
     @Override
