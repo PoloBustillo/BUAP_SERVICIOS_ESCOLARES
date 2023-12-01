@@ -4,19 +4,20 @@ import java.util.UUID;
 
 public class Curso {
     private UUID id;
+    private Escuela escuela;
     private String aforo;
-    private Integer salon;
+    private String salon;
     private String horario;
     private Grado gradoCurso;
 
-    public Curso(String aforo, Integer salon, String horario) {
+    public Curso(String aforo, String salon, String horario) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
         this.horario = horario;
     }
 
-    public Curso(String aforo, Integer salon, String horario, Grado gradoCurso) {
+    public Curso(String aforo, String salon, String horario, Grado gradoCurso) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
@@ -24,10 +25,31 @@ public class Curso {
         this.gradoCurso = gradoCurso;
     }
 
+    @Override
+    public String toString() {
+        return "Curso{" +
+                "id=" + id +
+                ", aforo='" + aforo + '\'' +
+                ", salon='" + salon + '\'' +
+                ", horario='" + horario + '\'' +
+                '}';
+    }
+
+    public Escuela getEscuela() {
+        return escuela;
+    }
+
+    public void setEscuela(Escuela escuela) {
+        this.escuela = escuela;
+    }
+
     public UUID getId() {
         return id;
     }
 
+    public void setId(UUID id) {
+        this.id = id;
+    }
 
     public String getAforo() {
         return aforo;
@@ -37,11 +59,11 @@ public class Curso {
         this.aforo = aforo;
     }
 
-    public Integer getSalon() {
+    public String getSalon() {
         return salon;
     }
 
-    public void setSalon(Integer salon) {
+    public void setSalon(String salon) {
         this.salon = salon;
     }
 

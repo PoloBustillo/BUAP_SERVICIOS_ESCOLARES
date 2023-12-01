@@ -54,11 +54,12 @@ public class SistemaEscolar {
                     case Utils.OPCION_DOS -> {
                         if (escuelasArray[0] != null) {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
-//                            cursosArray[cursosIndex] = new Curso(
-//                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
-//                                    Utils.creaDireccion(),
-//                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
-//                            );
+                            cursosArray[cursosIndex] = new Curso(
+                                    Utils.creaPregunta(Utils.QUESTION_AFORO),
+                                    Utils.creaPregunta(Utils.QUESTION_SALON),
+                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS)
+                            );
+                            escuela.addCurso(cursosArray[cursosIndex]);
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
@@ -102,5 +103,10 @@ public class SistemaEscolar {
         );
 
 
+        Escuela[] escuelasArraySinNull = new Escuela[escuelasIndex];
+        for (int i = 0; i < escuelasIndex; i++) {
+            escuelasArraySinNull[i] = escuelasArray[i];
+        }
+        Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull);
     }
 }

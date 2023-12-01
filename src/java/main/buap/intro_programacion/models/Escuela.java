@@ -1,13 +1,17 @@
 package buap.intro_programacion.models;
 
+import buap.intro_programacion.Utils;
+
 import java.util.Arrays;
 import java.util.UUID;
 
 public class Escuela {
+
+    private int indexCursos = 0;
     private String nombre;
-    private Empleado[] empleados;
-    private Estudiante[] estudiantes;
-    private Curso[] cursos;
+    private Empleado[] empleados = new Empleado[Utils.MAX_OBJETOS];
+    private Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];
+    private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
     private Direccion direccionEscuela;
     private String nivel;
     private UUID codigo;
@@ -90,11 +94,16 @@ public class Escuela {
     public String toString() {
         return "Escuela{" +
                 "nombre='" + nombre + '\'' +
-                ", empleados=" + Arrays.toString(empleados) +
-                ", estudiantes=" + Arrays.toString(estudiantes) +
-                ", direccionEscuela=" + direccionEscuela +
+                ", cursos=" + Arrays.toString(cursos) +
                 ", nivel='" + nivel + '\'' +
-                ", codigo='" + codigo + '\'' +
+                ", codigo=" + codigo +
                 '}';
     }
+
+    public void addCurso(Curso curso) {
+        cursos[indexCursos] = curso;
+        indexCursos = indexCursos + 1;
+    }
+
+
 }
