@@ -13,8 +13,6 @@ public class E_Academico extends Empleado {
         this.materia = materia;
     }
 
-}
-
     public Curso[] getCursos() {
         return cursos;
     }
