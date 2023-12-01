@@ -4,7 +4,7 @@ public final class Utils {
     public static final String OPCION_UNO = "Crear Escuela";
     public static final String OPCION_DOS = "Crear Curso";
     public static final String OPCION_TRES = "Crear Empleado";
-    public static final String OPCION_CUATRO = "Crear Curso";
+    public static final String OPCION_CUATRO = "Crear Estudiante";
     public static final String OPCION_SALIR = "Salir";
     public static final String QUESTION_NOMBRE = "Por favor, Introduce nombre:";
     public static final String QUESTION_ESCUELA = "Por favor, Introduce escuela:";
