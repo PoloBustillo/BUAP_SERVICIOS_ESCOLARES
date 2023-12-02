@@ -43,16 +43,16 @@ public class E_NoAdministrativo extends Empleado {
 
 
     //TODO: USAR GETS PARA IMPRIMIR
-//    public String imprimeDatos() {
-//        return "No administrativo{" +
-//                "id=" + idEmpleado +
-//                ", Dirección='" + direccion + '\'' +
-//                ", Nombre='" + nombre + '\'' +
-//                ", RFC='" + RFC + '\'' +
-//                ", # de cuenta='" + cuenta + '\'' +
-//                ", Sueldo= $'" + sueldo + '\'' +
-//                ", Turno Asignado='" + turno + '\'' +
-//                ", Area='" + area + '\'' +
-//                '}';
-//    }
+    public String imprimeDatos() {
+        return "No administrativo{" +
+                "id=" + getIdEmpleado() +
+                ", Dirección='" + getDireccion() + '\'' +
+                ", Nombre='" + getNombre() + '\'' +
+                ", RFC='" + getRFC() + '\'' +
+                ", # de cuenta='" + getCuenta() + '\'' +
+                ", Sueldo= $'" + getSueldo() + '\'' +
+                ", Turno Asignado='" + getTurno() + '\'' +
+                ", Area='" + getArea() + '\'' +
+                '}';
+    }
 }

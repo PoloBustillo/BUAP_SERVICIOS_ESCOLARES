@@ -39,10 +39,10 @@ public class Direccion {
     }
     public String imprimeDatos() {
         return "Dirección{" +
-                "calle=" + calle +
-                ", colonia='" + colonia + '\'' +
-                ", Codigo Postal='" + codigoPostal + '\'' +
-                ", ciudad='" + ciudad + '\'' +
+                "calle=" + getCalle() +
+                ", colonia='" + getColonia() + '\'' +
+                ", Codigo Postal='" + getCodigoPostal() + '\'' +
+                ", ciudad='" + getCiudad() + '\'' +
                 '}';
     }
 
