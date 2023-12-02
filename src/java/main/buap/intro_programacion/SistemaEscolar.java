@@ -73,7 +73,7 @@ public class SistemaEscolar {
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "ERROR Necesita que escuelasArray sea mayor que 0",
+                                    "ERROR: Necesita que escuelas y empleados sean mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
@@ -86,6 +86,7 @@ public class SistemaEscolar {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             //Selecciona una escuela de una ventana desplegable.
                             String tipoEmpleado = (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TIPO_EMPLEADOS, Utils.TIPO_EMPLEADOS);
+                            String nombre = Utils.creaPregunta(Utils.QUESTION_NOMBRE);
                             if (tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_AUXILIAR)) {
                                 //Crea un nuevo empleado
                                 empleadosArray[empleadosIndex] = new E_NoAdministrativo();
@@ -163,7 +164,7 @@ public class SistemaEscolar {
                             for (int i = 0; i < empleadoArraySinNull.length; i++) {
                                 nominas[i] = Utils.formateaNomina(empleadoArraySinNull[i], diaDelMes);
                             }
-                            Utils.mostrarInfoArray("Nominas", nominas);
+                            Utils.mostrarInfoArray("Nominas", nominas, "Pagando Nomina para:");
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "ERROR Necesita que empleados y cursos sea mayor que 0",
@@ -187,6 +188,6 @@ public class SistemaEscolar {
                 .toArray(Escuela[]::new);
 
         //Muestra el arreglo de escuelas en un menu desplegable.
-        Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull);
+        Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
     }
 }

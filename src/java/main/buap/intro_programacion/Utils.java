@@ -22,7 +22,7 @@ public final class Utils {
     public static final String OPCION_TRES = "Crear Empleado";
     public static final String OPCION_CUATRO = "Crear Estudiante";
     public static final String OPCION_CINCO = "Asignar cursos a profesor";
-    public static final String OPCION_SEIS = "Calcular nomina profesores";
+    public static final String OPCION_SEIS = "Calcular nomina para empleados";
     public static final String OPCION_SIETE = "Asignar estudiante a curso";
     public static final String OPCION_OCHO = "Generar historial académico";
 
@@ -40,7 +40,6 @@ public final class Utils {
     public static final String QUESTION_NIVEL = "Por favor, Selecciona nivel:";
     public static final String QUESTION_HORARIO = "Por favor, Selecciona horario:";
     public static final String[] NIVELES = {"Primaria", "Secundaria", "Preparatoria"};
-
     public static int MAX_OBJETOS = 3;
     public static String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
     public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
@@ -49,13 +48,16 @@ public final class Utils {
 
 
     //METODOS DE UTILIDAD
-    public static void mostrarInfoArray(String title, Object[] data) {
+    public static void mostrarInfoArray(String title, Object[] data, String mensajeClick) {
         UIManager.put("OptionPane.minimumSize", new Dimension(900, 700));
         JList list = new JList(data);
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
-
+                if (!e.getValueIsAdjusting()) {
+                    System.out.println(mensajeClick);
+                    System.out.println(list.getSelectedValue());
+                }
             }
         });
 
