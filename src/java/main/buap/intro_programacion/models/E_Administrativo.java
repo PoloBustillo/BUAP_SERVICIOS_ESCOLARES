@@ -43,7 +43,7 @@ public class E_Administrativo extends Empleado {
     @Override
     public String toString() {
         return "E_Administrativo『" +
-                " |Turno Asignado:  " + turno  +
+                " | Turno Asignado:  " + turno  +
                 " | Area:   " + area +
                 '』';
     }

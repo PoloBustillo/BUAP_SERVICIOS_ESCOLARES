@@ -10,9 +10,9 @@ public class HistorialAcademico {
     @Override
     public String toString() {
         return "HistorialAcademico『" +
-                "| Estudiante: " + estudiante +
-                "| Cursos: " + Arrays.toString(cursos) +
-                "| Competencias: " + Arrays.toString(competencias) +
+                " | Estudiante: " + estudiante +
+                " | Cursos: " + Arrays.toString(cursos) +
+                " | Calificación Promedio: " + calificacionPromedio +
                 '』';
     }
 
@@ -20,7 +20,7 @@ public class HistorialAcademico {
         return "HistorialAcademico{" +
                 "estudiante=" + estudiante +
                 ", cursos=" + Arrays.toString(cursos) +
-                ", competencias=" + Arrays.toString(competencias) +
+                ", calificación Promedio=" + calificacionPromedio +
                 '}';
     }
 

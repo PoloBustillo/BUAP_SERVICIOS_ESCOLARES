@@ -84,7 +84,7 @@ public class Estudiante {
     @Override
     public String toString() {
         return "Estudiante『" +
-                "|Nombre(s): " + nombre +
+                " |Nombre(s): " + nombre +
                 " | Matricula: " + matricula +
                 " | Apellidos: " + Arrays.toString(apellidos) +
                 " | Número de Teléfono: " + telefono +

@@ -52,10 +52,10 @@ public class E_Academico extends Empleado {
     @Override
     public String toString() {
         return "E_Academico『" +
-                "|#Cursos: " + Arrays.toString(cursos) +
-                "| Materia: " + materia  +
-                "| Turno Asignado: " + turno  +
-                "| IndexCursos: " + indexCursos +
+                " |# De Cursos: " + Arrays.toString(cursos) +
+                " | Materia: " + materia  +
+                " | Turno Asignado: " + turno  +
+                " | Index Cursos: " + indexCursos +
                 '』';
     }
 }

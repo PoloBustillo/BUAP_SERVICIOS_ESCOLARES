@@ -22,9 +22,9 @@ public class Curso {
     public String toString() {
         return "Curso:『" +
                 " ID Del Curso: " + id +
-                "| Cantidad Máxima de alumnos: " + aforo +
-                "|  Numero De Salón: " + salon  +
-                "|  Horario: " + horario  +
+                " | Cantidad Máxima de alumnos: " + aforo +
+                " |  Numero De Salón: " + salon  +
+                " |  Horario: " + horario  +
                 '』';
     }
 
