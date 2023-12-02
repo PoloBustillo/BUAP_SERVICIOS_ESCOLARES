@@ -58,4 +58,18 @@ public class E_Academico extends Empleado {
                 " | Index Cursos: " + indexCursos +
                 '』';
     }
+    public String imprimeDatos() {
+        return "Académico{" +
+                "id=" + idEmpleado +
+                ", Dirección='" + direccion + '\'' +
+                ", Nombre='" + nombre + '\'' +
+                ", RFC='" + RFC + '\'' +
+                ", # de cuenta='" + cuenta + '\'' +
+                ", Sueldo= $'" + sueldo + '\'' +
+                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
+                ", Materia='" + materia + '\'' +
+                ", Turo Asignado='" + turno + '\'' +
+                ", Index Cursos='" + indexCursos + '\'' +
+                '}';
+    }
 }

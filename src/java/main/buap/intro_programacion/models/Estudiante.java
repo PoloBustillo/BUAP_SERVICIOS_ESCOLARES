@@ -93,4 +93,15 @@ public class Estudiante {
                 " | IndexCursos: " + indexCursos +
                 '』';
     }
+    public String imprimeDatos() {
+        return "Estudiante {" +
+                "Nombre(s)=" + nombre +
+                ", Matricula='" + matricula + '\'' +
+                ", Apellidos='" + Arrays.toString(apellidos) + '\'' +
+                ", Número de Teléfono='" + telefono + '\'' +
+                ", Direciión del Estudiante='" + direccionEstudiante + '\'' +
+                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
+                ", IndexCursos='" + indexCursos + '\'' +
+                '}';
+    }
 }

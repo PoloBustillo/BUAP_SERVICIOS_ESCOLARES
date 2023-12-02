@@ -37,6 +37,14 @@ public class Direccion {
     public void setCiudad(String ciudad) {
         this.ciudad = ciudad;
     }
+    public String imprimeDatos() {
+        return "Dirección{" +
+                "calle=" + calle +
+                ", colonia='" + colonia + '\'' +
+                ", Codigo Postal='" + codigoPostal + '\'' +
+                ", ciudad='" + ciudad + '\'' +
+                '}';
+    }
 
     public Direccion(String calle) {
         this.calle = calle;

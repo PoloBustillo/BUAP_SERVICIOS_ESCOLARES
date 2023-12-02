@@ -48,4 +48,16 @@ public class E_NoAdministrativo extends Empleado {
                 " | Area: " + area  +
                 '』';
     }
+    public String imprimeDatos() {
+        return "No administrativo{" +
+                "id=" + idEmpleado +
+                ", Dirección='" + direccion + '\'' +
+                ", Nombre='" + nombre + '\'' +
+                ", RFC='" + RFC + '\'' +
+                ", # de cuenta='" + cuenta + '\'' +
+                ", Sueldo= $'" + sueldo + '\'' +
+                ", Turno Asignado='" + turno + '\'' +
+                ", Area='" + area + '\'' +
+                '}';
+    }
 }

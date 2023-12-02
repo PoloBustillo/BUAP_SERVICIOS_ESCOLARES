@@ -101,6 +101,14 @@ public class Escuela {
                 " | Código: " + codigo +
                 '』';
     }
+    public String imprimeDatos() {
+        return "Escuela{" +
+                "Nombre=" + nombre +
+                ", Cursos='" + Arrays.toString(cursos) + '\'' +
+                ", Nivel='" + nivel + '\'' +
+                ", Código='" + codigo + '\'' +
+                '}';
+    }
 
 
     public void addCurso(Curso curso) {

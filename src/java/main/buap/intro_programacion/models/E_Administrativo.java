@@ -4,9 +4,6 @@ public class E_Administrativo extends Empleado {
     private String turno;
     private String area;
 
-    public E_Administrativo() {
-    }
-
     public E_Administrativo(String cuenta, String turno, String area) {
         super(cuenta);
         this.turno = turno;
@@ -43,8 +40,21 @@ public class E_Administrativo extends Empleado {
     @Override
     public String toString() {
         return "E_Administrativo『" +
-                " | Turno Asignado:  " + turno  +
+                " | Turno Asignado:  " + turno +
                 " | Area:   " + area +
                 '』';
+    }
+
+    public String imprimeDatos() {
+        return "Administrativo{" +
+                "id=" + idEmpleado +
+                ", Dirección='" + direccion + '\'' +
+                ", Nombre='" + nombre + '\'' +
+                ", RFC='" + RFC + '\'' +
+                ", # de cuenta='" + cuenta + '\'' +
+                ", Sueldo= $'" + sueldo + '\'' +
+                ", Turno Asignado='" + turno + '\'' +
+                ", Area='" + area + '\'' +
+                '}';
     }
 }

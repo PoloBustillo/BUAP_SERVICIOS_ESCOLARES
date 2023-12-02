@@ -25,6 +25,16 @@ public class Empleado {
                 " | Sueldo:$ " + sueldo +
                 '』';
     }
+    public String imprimeDatos() {
+        return "Empleado{" +
+                "id=" + idEmpleado +
+                ", Dirección='" + direccion + '\'' +
+                ", Nombre='" + nombre + '\'' +
+                ", RFC='" + RFC  + '\'' +
+                ", # de cuenta='" + cuenta  + '\'' +
+                ", Sueldo= $'" + sueldo  + '\'' +
+                '}';
+    }
 
     public void setIdEmpleado(UUID idEmpleado) {
         this.idEmpleado = idEmpleado;
