@@ -20,6 +20,16 @@ public class E_Academico extends Empleado {
         this.materia = materia;
     }
 
+    public E_Academico(Empleado empleadoGenerico, String materia, String turno) {
+        super(empleadoGenerico.getNombre(),
+                empleadoGenerico.getDireccion(),
+                empleadoGenerico.getRFC(),
+                empleadoGenerico.getCuenta(),
+                empleadoGenerico.getSueldo());
+        this.materia = materia;
+        this.turno = turno;
+    }
+
     public Curso[] getCursos() {
         return cursos;
     }

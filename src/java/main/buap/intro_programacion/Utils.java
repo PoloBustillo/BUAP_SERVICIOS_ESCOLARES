@@ -8,10 +8,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
+
+//TODO: ORDENAR PRIMERO POR FUNCION Y DESPUES POR ALFABETO
 public final class Utils {
 
     //CONSTANTES
     public static final String QUESTION_TIPO_EMPLEADOS = "Por favor, Elige el tipo de empleado:";
+    public static final String QUESTION_TURNO = "Por favor, Elige el turno del empleado:";
+    public static final String[] TURNOS = {"Matutino", "Vespertino", "Nocturno"};
+    public static final String QUESTION_AREA = "Por favor, Elige el area del empleado:";
+    public static final String[] AREAS = {"Secretarías", "Limpieza", "Vigilancia"};
     public static final String EMPLEADO_AUXILIAR = "Auxiliar";
     public static final String EMPLEADO_ADMIN = "Administrativo";
     public static final String EMPLEADO_ACADEMICO = "Académico";
@@ -40,7 +46,12 @@ public final class Utils {
     public static final String QUESTION_NIVEL = "Por favor, Selecciona nivel:";
     public static final String QUESTION_HORARIO = "Por favor, Selecciona horario:";
     public static final String[] NIVELES = {"Primaria", "Secundaria", "Preparatoria"};
-    public static int MAX_OBJETOS = 3;
+    public static final String QUESTION_MATRICULA = "Por favor, Introduce matricula:";
+    public static final String QUESTION_TELEFONO = "Por favor, Introduce telefono:";
+    public static final String QUESTION_RFC = "Por favor, Introduce RFC:";
+    public static final String QUESTION_CUENTA = "Por favor, Introduce cuenta:";
+    public static final String QUESTION_SUELDO = "Por favor, Introduce sueldo:";
+    public static int MAX_OBJETOS = 10;
     public static String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
     public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
             OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO, OPCION_SALIR};

@@ -14,6 +14,7 @@ public class Empleado {
         this.idEmpleado = UUID.randomUUID();
     }
 
+<<<<<<< Updated upstream
     @Override
     public String toString() {
         return "Empleado『" +
@@ -41,6 +42,9 @@ public class Empleado {
     }
 
     public Empleado(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
+=======
+    public Empleado(String nombre, Direccion direccion, String RFC, String cuenta, Float sueldo) {
+>>>>>>> Stashed changes
         this.direccion = direccion;
         this.nombre = nombre;
         this.RFC = RFC;
@@ -53,10 +57,25 @@ public class Empleado {
         this.idEmpleado = UUID.randomUUID();
     }
 
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "idEmpleado=" + idEmpleado +
+                ", direccion=" + direccion +
+                ", nombre='" + nombre + '\'' +
+                ", RFC='" + RFC + '\'' +
+                ", cuenta='" + cuenta + '\'' +
+                ", sueldo=" + sueldo +
+                '}';
+    }
+
     public UUID getIdEmpleado() {
         return idEmpleado;
     }
 
+    public void setIdEmpleado(UUID idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
 
     public Direccion getDireccion() {
         return direccion;

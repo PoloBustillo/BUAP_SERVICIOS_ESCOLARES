@@ -7,8 +7,7 @@ import java.util.Arrays;
 public class Estudiante {
     private String nombre;
     private String matricula;
-    private String[] apellidos;
-    private Integer telefono;
+    private String telefono;
     private Direccion direccionEstudiante;
     private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
     private int indexCursos = 0;
@@ -17,16 +16,14 @@ public class Estudiante {
 
     }
 
-    public Estudiante(String nombre, String matricula, String[] apellidos) {
+    public Estudiante(String nombre, String matricula) {
         this.nombre = nombre;
         this.matricula = matricula;
-        this.apellidos = apellidos;
     }
 
-    public Estudiante(String nombre, String matricula, String[] apellidos, Integer telefono, Direccion direccionEstudiante) {
+    public Estudiante(String nombre, String matricula, String telefono, Direccion direccionEstudiante) {
         this.nombre = nombre;
         this.matricula = matricula;
-        this.apellidos = apellidos;
         this.telefono = telefono;
         this.direccionEstudiante = direccionEstudiante;
 
@@ -52,19 +49,11 @@ public class Estudiante {
         this.matricula = matricula;
     }
 
-    public String[] getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String[] apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public Integer getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(Integer telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 

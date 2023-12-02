@@ -4,18 +4,24 @@ public class E_Administrativo extends Empleado {
     private String turno;
     private String area;
 
+<<<<<<< Updated upstream
     public E_Administrativo(String cuenta, String turno, String area) {
         super(cuenta);
+=======
+    public E_Administrativo() {
+    }
+
+    public E_Administrativo(Empleado empleadoGenerico, String turno, String area) {
+        super(empleadoGenerico.getNombre(),
+                empleadoGenerico.getDireccion(),
+                empleadoGenerico.getRFC(),
+                empleadoGenerico.getCuenta(),
+                empleadoGenerico.getSueldo());
+>>>>>>> Stashed changes
         this.turno = turno;
         this.area = area;
     }
-
-    public E_Administrativo(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo, String turno, String area) {
-        super(direccion, nombre, RFC, cuenta, sueldo);
-        this.turno = turno;
-        this.area = area;
-    }
-
+    
     public E_Administrativo(String turno, String area) {
         this.turno = turno;
         this.area = area;

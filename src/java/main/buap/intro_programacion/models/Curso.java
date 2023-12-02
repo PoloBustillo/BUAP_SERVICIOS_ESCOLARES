@@ -1,6 +1,10 @@
 package buap.intro_programacion.models;
 
 import java.util.UUID;
+//TODO: FALTA NOMBRE DEL CURSO
+//TODO: ELIMINAR ESCUELA
+//TODO: FALTA MAESTRO, TIPO E_ACADEMICO
+//TODO: FALTA ALUMNOS ARRAY DE ESTUDIANTES
 
 public class Curso {
     private UUID id;
@@ -9,7 +13,6 @@ public class Curso {
     private String salon;
     private String horario;
 
-    //String
 
     public Curso(String aforo, String salon, String horario) {
         this.id = UUID.randomUUID();

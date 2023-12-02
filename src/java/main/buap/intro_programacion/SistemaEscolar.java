@@ -73,7 +73,7 @@ public class SistemaEscolar {
                             cursosIndex++;
                         } else {
                             JOptionPane.showMessageDialog(null,
-                                    "ERROR: Necesita que escuelas y empleados sean mayor que 0",
+                                    "ERROR: Necesita que escuelas y profesores sean mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
@@ -86,19 +86,38 @@ public class SistemaEscolar {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             //Selecciona una escuela de una ventana desplegable.
                             String tipoEmpleado = (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TIPO_EMPLEADOS, Utils.TIPO_EMPLEADOS);
-                            String nombre = Utils.creaPregunta(Utils.QUESTION_NOMBRE);
+                            //Crea un empleado genérico, que se usara como base para crear un empleado en específico.
+                            Empleado empleadoGenerico = new Empleado(
+                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+                                    Utils.creaDireccion(),
+                                    Utils.creaPregunta(Utils.QUESTION_RFC),
+                                    Utils.creaPregunta(Utils.QUESTION_CUENTA),
+                                    Float.parseFloat(Utils.creaPregunta(Utils.QUESTION_SUELDO))
+                            );
+
                             if (tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_AUXILIAR)) {
                                 //Crea un nuevo empleado
-                                empleadosArray[empleadosIndex] = new E_NoAdministrativo();
+                                empleadosArray[empleadosIndex] = new E_NoAdministrativo(
+                                        empleadoGenerico,
+                                        (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TURNO, Utils.TURNOS),
+                                        (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_AREA, Utils.AREAS)
+                                );
                             }
                             if (tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_ACADEMICO)) {
                                 //Crea un nuevo empleado
-                                empleadosArray[empleadosIndex] = new E_Academico(Utils.creaPregunta(Utils.QUESTION_MATERIA));
+                                empleadosArray[empleadosIndex] = new E_Academico(
+                                        empleadoGenerico,
+                                        Utils.creaPregunta(Utils.QUESTION_MATERIA),
+                                        (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TURNO, Utils.TURNOS)
+                                );
 
                             }
                             if (tipoEmpleado.equalsIgnoreCase(Utils.EMPLEADO_ADMIN)) {
                                 //Crea un nuevo empleado
-                                empleadosArray[empleadosIndex] = new E_Administrativo();
+                                empleadosArray[empleadosIndex] = new E_Administrativo(
+                                        empleadoGenerico,
+                                        (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_TURNO, Utils.TURNOS),
+                                        (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_AREA, Utils.AREAS));
                             }
                             //Añade empleado a la escuela que le corresponda
                             escuela.addEmpleado(empleadosArray[empleadosIndex]);
@@ -114,11 +133,15 @@ public class SistemaEscolar {
                     //CREA ESTUDIANTE
                     case Utils.OPCION_CUATRO -> {
                         //Si al menos existe una escuela
-                        if (empleadosArray[0] != null) {
+                        if (escuelasArray[0] != null) {
                             //Selecciona una escuela de una ventana desplegable.
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             //Crea un nuevo empleado
-                            estudiantesArray[escuelasIndex] = new Estudiante();
+                            estudiantesArray[estudiantesIndex] = new Estudiante(
+                                    Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+                                    Utils.creaPregunta(Utils.QUESTION_MATRICULA),
+                                    Utils.creaPregunta(Utils.QUESTION_TELEFONO),
+                                    Utils.creaDireccion());
                             //Añade empleado a la escuela que le corresponda
                             escuela.addEstudiante(estudiantesArray[empleadosIndex]);
                             //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
@@ -131,16 +154,15 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNA CURSO A PROFESOR
+                    //TODO:CHECAR POR CURSO DUPLICADO EN PROFESOR
                     case Utils.OPCION_CINCO -> {
                         //Si al menos existe un empleado y un curso
                         if (empleadosArray[0] != null && cursosArray[0] != null) {
 
                             Empleado empleado = (Empleado) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, empleadosArray);
-                            if (empleado instanceof E_Academico) {
-                                E_Academico empleadoAcademico = (E_Academico) empleado;
+                            if (empleado instanceof E_Academico empleadoAcademico) {
                                 Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
                                 empleadoAcademico.asignarCurso(curso);
-                                System.out.println("ACADEMICO");
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
@@ -176,8 +198,11 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNAR CURSO A ESTUDIANTE
+                    //TODO:CHECAR POR CURSO DUPLICADO EN ESTUDIANTE
                     case Utils.OPCION_SIETE -> {
                         //Si al menos existe un estudiante y un curso
+                        System.out.println(Arrays.toString(estudiantesArray));
+                        System.out.println(Arrays.toString(cursosArray));
                         if (estudiantesArray[0] != null && cursosArray[0] != null) {
 
                             Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
@@ -202,8 +227,9 @@ public class SistemaEscolar {
                                 Curso[] cursosDelEstudianteNth = estudiantesArray[i].getCursos();
                                 for (int j = 0; j < cursosDelEstudianteNth.length; j++) {
                                     if (cursoSeleccionado.getId().equals(cursosDelEstudianteNth[j].getId())) {
-                                        System.out.println("ENTRO");
                                         estudiantesConElCursoInscrito[indexCursosInscritos] = estudiantesArray[i];
+                                        indexCursosInscritos = indexCursosInscritos + 1;
+                                        break;
                                     }
                                 }
                             }
@@ -215,6 +241,7 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
+                    default -> throw new IllegalStateException("Unexpected value: " + opcionElegidaPorElUsuario);
                 }
             }
         }

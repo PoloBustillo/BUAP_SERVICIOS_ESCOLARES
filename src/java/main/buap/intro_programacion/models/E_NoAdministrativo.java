@@ -2,6 +2,7 @@ package buap.intro_programacion.models;
 
 public class E_NoAdministrativo extends Empleado {
     private String turno;
+    private String area;
 
     public E_NoAdministrativo(String cuenta, String turno, String area) {
         super(cuenta);
@@ -9,20 +10,23 @@ public class E_NoAdministrativo extends Empleado {
         this.area = area;
     }
 
-    public E_NoAdministrativo(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo, String turno, String area) {
-        super(direccion, nombre, RFC, cuenta, sueldo);
-        this.turno = turno;
-        this.area = area;
-    }
 
     public E_NoAdministrativo(String turno, String area) {
         this.turno = turno;
         this.area = area;
     }
 
-    private String area;
-
     public E_NoAdministrativo() {
+    }
+
+    public E_NoAdministrativo(Empleado empleadoGenerico, String turno, String area) {
+        super(empleadoGenerico.getNombre(),
+                empleadoGenerico.getDireccion(),
+                empleadoGenerico.getRFC(),
+                empleadoGenerico.getCuenta(),
+                empleadoGenerico.getSueldo());
+        this.turno = turno;
+        this.area = area;
     }
 
     public String getTurno() {
