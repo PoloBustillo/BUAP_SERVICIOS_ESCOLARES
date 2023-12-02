@@ -2,6 +2,7 @@ package buap.intro_programacion.models;
 
 import buap.intro_programacion.Utils;
 
+import javax.swing.*;
 import java.util.Arrays;
 
 public class E_Academico extends Empleado {
@@ -55,9 +56,15 @@ public class E_Academico extends Empleado {
     }
 
     public void asignarCurso(Curso curso) {
-        if (!Arrays.asList(cursos).contains(curso)) {
+        if (!curso.getMaestroAsignado()) {
             cursos[indexCursos] = curso;
             indexCursos = indexCursos + 1;
+            curso.setMaestroAsignado(true);
+        } else {
+            JOptionPane.showMessageDialog(null,
+                    "ERROR: curso ya asignado",
+                    "ERROR",
+                    JOptionPane.ERROR_MESSAGE);
         }
     }
 

@@ -184,7 +184,7 @@ public class SistemaEscolar {
                         if (empleadosArray[0] != null) {
 
                             Empleado[] empleadoArraySinNull = Arrays.stream(empleadosArray)
-                                    .filter(s -> (s != null))
+                                    .filter(Objects::nonNull)
                                     .toArray(Empleado[]::new);
 
                             Utils.mostrarInfoArray("Nominas", empleadoArraySinNull, "Pagando Nomina para:");
@@ -196,6 +196,7 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNAR CURSO A ESTUDIANTE
+                    //TODO: CHECAR AFORO
                     case Utils.OPCION_SIETE -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
@@ -222,16 +223,21 @@ public class SistemaEscolar {
                         int indexCursosInscritos = 0;
                         if (empleadosArray[0] != null && cursosArray[0] != null && estudiantesArray[0] != null) {
                             Curso cursoSeleccionado = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
-                            for (int i = 0; i < estudiantesArray.length; i++) {
-                                Curso[] cursosDelEstudianteNth = estudiantesArray[i].getCursos();
-                                for (int j = 0; j < cursosDelEstudianteNth.length; j++) {
-                                    if (cursoSeleccionado.getId().equals(cursosDelEstudianteNth[j].getId())) {
-                                        estudiantesConElCursoInscrito[indexCursosInscritos] = estudiantesArray[i];
-                                        indexCursosInscritos = indexCursosInscritos + 1;
+                            for (Estudiante estudiante : estudiantesArray) {
+                                Curso[] cursosDelEstudianteNth = estudiante.getCursos();
+                                for (Curso curso : cursosDelEstudianteNth) {
+                                    if (curso != null) {
+                                        if (cursoSeleccionado.getId().equals(curso.getId())) {
+                                            estudiantesConElCursoInscrito[indexCursosInscritos] = estudiante;
+                                            indexCursosInscritos = indexCursosInscritos + 1;
+                                            break;
+                                        }
+                                    } else {
                                         break;
                                     }
                                 }
                             }
+                            Estudiante estudianteSeleccionado = (Estudiante) Utils.creaPreguntaDesplegable("Selecciona estudiante para llenar su historial:", estudiantesConElCursoInscrito);
 
                         } else {
                             JOptionPane.showMessageDialog(null,

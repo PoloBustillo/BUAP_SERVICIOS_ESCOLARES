@@ -67,8 +67,10 @@ public class Estudiante {
 
     public void asignarCurso(Curso curso) {
         if (!Arrays.asList(cursos).contains(curso)) {
+            curso.inscribirAlumno(this);
             cursos[indexCursos] = curso;
             indexCursos = indexCursos + 1;
+
         }
     }
 

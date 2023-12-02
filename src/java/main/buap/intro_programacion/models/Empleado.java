@@ -99,11 +99,10 @@ public class Empleado {
         this.sueldo = sueldo;
     }
 
-    public double clacularSueldo() {
+    public double calcularSueldo() {
         //Calcular dia del mes
         Calendar cal = Calendar.getInstance();
         int diaDelMes = cal.get(Calendar.DAY_OF_MONTH);
-
         return sueldo * diaDelMes;
     }
 }

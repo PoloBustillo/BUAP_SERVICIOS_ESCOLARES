@@ -8,6 +8,7 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Objects;
 
@@ -85,7 +86,7 @@ public final class Utils {
                         if (Objects.equals(title, "Nominas")) {
                             System.out.println("Haciendo transferencia a cuenta: " + empleadoSeleccionado.getCuenta());
                             System.out.println("Sueldo base: " + empleadoSeleccionado.getSueldo());
-                            System.out.println("Sueldo al dia de " + new Date().toString() + ": " + empleadoSeleccionado.clacularSueldo());
+                            System.out.println("Sueldo al dia de " + new Date().toString() + ": " + empleadoSeleccionado.calcularSueldo());
                         } else {
                             System.out.println(empleadoSeleccionado.imprimeDatos());
                         }
@@ -116,12 +117,15 @@ public final class Utils {
      * @return Object: Un elemento del arreglo que se proporcionó desde los parámetros.
      */
     public static Object creaPreguntaDesplegable(String Question, Object[] data) {
+
         return JOptionPane.showInputDialog(null,
                 Question,
                 PROYECT_TITLE,
                 JOptionPane.QUESTION_MESSAGE,
                 null,
-                data,
+                Arrays.stream(data)
+                        .filter(s -> (s != null))
+                        .toArray(Object[]::new),
                 data[0]);
     }
 
