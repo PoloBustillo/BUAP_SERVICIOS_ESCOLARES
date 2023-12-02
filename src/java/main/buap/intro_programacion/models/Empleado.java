@@ -16,14 +16,14 @@ public class Empleado {
 
     @Override
     public String toString() {
-        return "Empleado{" +
-                "idEmpleado=" + idEmpleado +
-                ", direccion=" + direccion +
-                ", nombre='" + nombre + '\'' +
-                ", RFC='" + RFC + '\'' +
-                ", cuenta='" + cuenta + '\'' +
-                ", sueldo=" + sueldo +
-                '}';
+        return "Empleado『" +
+                " | IDEmpleado: " + idEmpleado +
+                " | Dirección: " + direccion +
+                " | Nombre: " + nombre +
+                " | RFC: " + RFC +
+                " | # de Cuenta: " + cuenta +
+                " | Sueldo:$ " + sueldo +
+                '』';
     }
 
     public void setIdEmpleado(UUID idEmpleado) {

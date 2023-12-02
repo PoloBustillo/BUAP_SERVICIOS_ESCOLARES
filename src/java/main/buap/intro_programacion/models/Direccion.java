@@ -61,11 +61,11 @@ public class Direccion {
 
     @Override
     public String toString() {
-        return "Direccion{" +
-                "calle='" + calle + '\'' +
-                ", colonia='" + colonia + '\'' +
-                ", codigoPostal=" + codigoPostal +
-                ", ciudad='" + ciudad + '\'' +
-                '}';
+        return "Dirección『" +
+                " | Calle: " + calle  +
+                " | Col: " + colonia  +
+                " | CP: " + codigoPostal +
+                " | Ciudad: " + ciudad  +
+                '』';
     }
 }

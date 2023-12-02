@@ -39,4 +39,12 @@ public class E_Administrativo extends Empleado {
     public void setArea(String area) {
         this.area = area;
     }
+
+    @Override
+    public String toString() {
+        return "E_Administrativo『" +
+                " |Turno Asignado:  " + turno  +
+                " | Area:   " + area +
+                '』';
+    }
 }

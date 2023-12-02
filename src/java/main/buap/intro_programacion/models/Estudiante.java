@@ -2,6 +2,8 @@ package buap.intro_programacion.models;
 
 import buap.intro_programacion.Utils;
 
+import java.util.Arrays;
+
 public class Estudiante {
     private String nombre;
     private String matricula;
@@ -77,5 +79,18 @@ public class Estudiante {
     public void asignarCurso(Curso curso) {
         cursos[indexCursos] = curso;
         indexCursos = indexCursos + 1;
+    }
+
+    @Override
+    public String toString() {
+        return "Estudiante『" +
+                "|Nombre(s): " + nombre +
+                " | Matricula: " + matricula +
+                " | Apellidos: " + Arrays.toString(apellidos) +
+                " | Número de Teléfono: " + telefono +
+                " | Direccion Del Estudiante: " + direccionEstudiante +
+                " | # De Cursos: " + Arrays.toString(cursos) +
+                " | IndexCursos: " + indexCursos +
+                '』';
     }
 }

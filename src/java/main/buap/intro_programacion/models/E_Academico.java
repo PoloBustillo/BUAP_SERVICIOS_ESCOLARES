@@ -2,6 +2,8 @@ package buap.intro_programacion.models;
 
 import buap.intro_programacion.Utils;
 
+import java.util.Arrays;
+
 public class E_Academico extends Empleado {
     private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
     private String materia;
@@ -45,5 +47,15 @@ public class E_Academico extends Empleado {
     public void asignarCurso(Curso curso) {
         cursos[indexCursos] = curso;
         indexCursos = indexCursos + 1;
+    }
+
+    @Override
+    public String toString() {
+        return "E_Academico『" +
+                "|#Cursos: " + Arrays.toString(cursos) +
+                "| Materia: " + materia  +
+                "| Turno Asignado: " + turno  +
+                "| IndexCursos: " + indexCursos +
+                '』';
     }
 }

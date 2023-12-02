@@ -20,6 +20,15 @@ public class Curso {
 
     @Override
     public String toString() {
+        return "Curso:『" +
+                " ID Del Curso: " + id +
+                "| Cantidad Máxima de alumnos: " + aforo +
+                "|  Numero De Salón: " + salon  +
+                "|  Horario: " + horario  +
+                '』';
+    }
+
+    public String imprimeDatos() {
         return "Curso{" +
                 "id=" + id +
                 ", aforo='" + aforo + '\'' +

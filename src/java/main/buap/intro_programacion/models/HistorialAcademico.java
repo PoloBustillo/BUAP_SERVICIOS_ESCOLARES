@@ -1,9 +1,28 @@
 package buap.intro_programacion.models;
 
+import java.util.Arrays;
+
 public class HistorialAcademico {
     private Estudiante estudiante;
     private Curso[] cursos;
     private String[] competencias;
+
+    @Override
+    public String toString() {
+        return "HistorialAcademico『" +
+                "| Estudiante: " + estudiante +
+                "| Cursos: " + Arrays.toString(cursos) +
+                "| Competencias: " + Arrays.toString(competencias) +
+                '』';
+    }
+
+    public String imprimeDatos() {
+        return "HistorialAcademico{" +
+                "estudiante=" + estudiante +
+                ", cursos=" + Arrays.toString(cursos) +
+                ", competencias=" + Arrays.toString(competencias) +
+                '}';
+    }
 
     public HistorialAcademico(Estudiante estudiante) {
         this.estudiante = estudiante;

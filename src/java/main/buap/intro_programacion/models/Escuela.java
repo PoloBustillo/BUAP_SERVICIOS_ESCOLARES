@@ -94,13 +94,14 @@ public class Escuela {
 
     @Override
     public String toString() {
-        return "Escuela{" +
-                "nombre='" + nombre + '\'' +
-                ", cursos=" + Arrays.toString(cursos) +
-                ", nivel='" + nivel + '\'' +
-                ", codigo=" + codigo +
-                '}';
+        return "Escuela『" +
+                " Nombre: " + nombre  +
+                " | Cursos: " + Arrays.toString(cursos) +
+                " | Nivel: " + nivel +
+                " | Código: " + codigo +
+                '』';
     }
+
 
     public void addCurso(Curso curso) {
         cursos[indexCursos] = curso;

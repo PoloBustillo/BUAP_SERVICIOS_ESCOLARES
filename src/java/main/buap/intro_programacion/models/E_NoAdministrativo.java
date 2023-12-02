@@ -40,4 +40,12 @@ public class E_NoAdministrativo extends Empleado {
     public void setArea(String area) {
         this.area = area;
     }
+
+    @Override
+    public String toString() {
+        return "E_NoAdministrativo『" +
+                " | Turno Asigando: " + turno +
+                " | Area: " + area  +
+                '』';
+    }
 }
