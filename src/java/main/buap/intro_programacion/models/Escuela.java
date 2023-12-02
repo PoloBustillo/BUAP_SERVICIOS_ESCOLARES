@@ -109,10 +109,14 @@ public class Escuela {
 
     public String imprimeDatos() {
         return "Escuela{" +
-                "Nombre=" + nombre +
-                ", Cursos='" + Arrays.toString(cursos) + '\'' +
-                ", Nivel='" + nivel + '\'' +
-                ", Código='" + codigo + '\'' +
+                "Nombre=" + getNombre() +
+                ", Cursos='" +
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                + '\'' +
+                ", Nivel='" + getNivel() + '\'' +
+                ", Código='" + getNivel() + '\'' +
                 '}';
     }
 

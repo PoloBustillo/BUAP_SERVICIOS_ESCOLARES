@@ -85,12 +85,15 @@ public class Estudiante {
     //TODO: TYPO EN DIRECCION
     public String imprimeDatos() {
         return "Estudiante {" +
-                "Nombre(s)=" + nombre +
-                ", Matricula='" + matricula + '\'' +
-                ", Número de Teléfono='" + telefono + '\'' +
-                ", Direciión del Estudiante='" + direccionEstudiante + '\'' +
-                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
-                ", IndexCursos='" + indexCursos + '\'' +
+                "Nombre(s)=" + getNombre() +
+                ", Matricula='" + getMatricula() + '\'' +
+                ", Número de Teléfono='" + getTelefono() + '\'' +
+                ", Direción del Estudiante='" + getDireccionEstudiante() + '\'' +
+                ", # de Cursos='" +
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                + '\''
                 '}';
     }
 }

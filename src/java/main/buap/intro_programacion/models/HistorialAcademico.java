@@ -18,9 +18,13 @@ public class HistorialAcademico {
 
     public String imprimeDatos() {
         return "HistorialAcademico{" +
-                "estudiante=" + estudiante +
-                ", cursos=" + Arrays.toString(cursos) +
-                ", calificación Promedio=" + calificacionPromedio +
+                "estudiante=" + getEstudiante() +
+                ", cursos=" +
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                +
+                ", calificación Promedio=" + getCalificacionPromedio()+
                 '}';
     }
 
@@ -64,5 +68,7 @@ public class HistorialAcademico {
     public void setCompetencias(double competencias) {
         this.calificacionPromedio = competencias;
     }
-}
 
+    public double getCalificacionPromedio() { return calificacionPromedio; }
+
+}

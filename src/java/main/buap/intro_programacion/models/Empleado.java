@@ -41,12 +41,12 @@ public class Empleado {
 
     public String imprimeDatos() {
         return "Empleado{" +
-                "id=" + idEmpleado +
-                ", Dirección='" + direccion + '\'' +
-                ", Nombre='" + nombre + '\'' +
-                ", RFC='" + RFC + '\'' +
-                ", # de cuenta='" + cuenta + '\'' +
-                ", Sueldo= $'" + sueldo + '\'' +
+                "id=" + getIdEmpleado() +
+                ", Dirección='" + getDireccion() + '\'' +
+                ", Nombre='" + getNombre() + '\'' +
+                ", RFC='" + getRFC() + '\'' +
+                ", # de cuenta='" + getCuenta() + '\'' +
+                ", Sueldo= $'" + getSueldo() + '\'' +
                 '}';
     }
 

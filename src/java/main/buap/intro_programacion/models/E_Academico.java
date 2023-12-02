@@ -79,7 +79,11 @@ public class E_Academico extends Empleado {
                 ", RFC='" + getRFC() + '\'' +
                ", # de cuenta='" + getCuenta() + '\'' +
                ", Sueldo= $'" + getSueldo() + '\'' +
-                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
+                ", # de Cursos='" +
+               Arrays.toString(Arrays.stream(cursos)
+               .filter(s -> (s != null))
+               .toArray(Curso[]::new))
+               + '\'' +
              ", Materia='" + getMateria() + '\'' +
              '}';
   }
