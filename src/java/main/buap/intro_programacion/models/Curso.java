@@ -10,7 +10,6 @@ public class Curso {
     private String horario;
 
     //String
-    private Grado gradoCurso;
 
     public Curso(String aforo, String salon, String horario) {
         this.id = UUID.randomUUID();
@@ -77,15 +76,5 @@ public class Curso {
         this.horario = horario;
     }
 
-    public Grado getGradoCurso() {
-        return gradoCurso;
-    }
 
-    public void setGradoCurso(Grado gradoCurso) {
-        this.gradoCurso = gradoCurso;
-    }
-
-    public void setGrado(Grado grado) {
-
-    }
 }
