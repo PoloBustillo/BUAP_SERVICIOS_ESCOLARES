@@ -3,8 +3,6 @@ package buap.intro_programacion.models;
 import java.util.UUID;
 //TODO: FALTA NOMBRE DEL CURSO
 //TODO: ELIMINAR ESCUELA
-//TODO: FALTA MAESTRO, TIPO E_ACADEMICO
-//TODO: FALTA ALUMNOS ARRAY DE ESTUDIANTES
 
 public class Curso {
     private UUID id;
@@ -21,16 +19,20 @@ public class Curso {
         this.horario = horario;
     }
 
+
+    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO
     @Override
     public String toString() {
         return "Curso:『" +
                 " ID Del Curso: " + id +
                 " | Cantidad Máxima de alumnos: " + aforo +
-                " |  Numero De Salón: " + salon  +
-                " |  Horario: " + horario  +
+                " |  Numero De Salón: " + salon +
+                " |  Horario: " + horario +
                 '』';
     }
 
+
+    //TODO: AGREGAR NOMBRE - USAR MAYUSCULAS
     public String imprimeDatos() {
         return "Curso{" +
                 "id=" + id +

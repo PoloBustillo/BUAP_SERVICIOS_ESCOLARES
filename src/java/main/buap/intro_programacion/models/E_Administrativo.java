@@ -40,7 +40,7 @@ public class E_Administrativo extends Empleado {
     }
 
     @Override
-    //TODO: FALTAN DATOS
+    //TODO: FALTAN DATOS IMPORTANTES Nombre - ID - indexCursos no se imprime es variable interna
     public String toString() {
         return "E_Administrativo『" +
                 " | Turno Asignado:  " + turno +
@@ -50,7 +50,7 @@ public class E_Administrativo extends Empleado {
 
     public String imprimeDatos() {
         return "Administrativo{" +
-                "id=" + getIdEmpleado() +
+                "Id=" + getIdEmpleado() +
                 ", Dirección='" + getDireccion() + '\'' +
                 ", Nombre='" + getNombre() + '\'' +
                 ", RFC='" + getRFC() + '\'' +

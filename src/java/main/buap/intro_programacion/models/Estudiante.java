@@ -70,30 +70,29 @@ public class Estudiante {
         indexCursos = indexCursos + 1;
     }
 
+    //TODO: Index cursos no va
+    //TODO: no imprimir cursos nulos
     @Override
     public String toString() {
         return "Estudiante『" +
                 " |Nombre(s): " + nombre +
                 " | Matricula: " + matricula +
-                " | Número de Teléfono: " + telefono +
-                " | Direccion Del Estudiante: " + direccionEstudiante +
                 " | # De Cursos: " + Arrays.toString(cursos) +
-                " | IndexCursos: " + indexCursos +
                 '』';
     }
-
-    //TODO: TYPO EN DIRECCION
+    
     public String imprimeDatos() {
         return "Estudiante {" +
                 "Nombre(s)=" + getNombre() +
                 ", Matricula='" + getMatricula() + '\'' +
                 ", Número de Teléfono='" + getTelefono() + '\'' +
-                ", Direción del Estudiante='" + getDireccionEstudiante() + '\'' +
+                ", Dirección del Estudiante='" + getDireccionEstudiante() + '\'' +
                 ", # de Cursos='" +
                 Arrays.toString(Arrays.stream(cursos)
                         .filter(s -> (s != null))
                         .toArray(Curso[]::new))
-                + '\''
+                +
+                '\'' +
                 '}';
     }
 }

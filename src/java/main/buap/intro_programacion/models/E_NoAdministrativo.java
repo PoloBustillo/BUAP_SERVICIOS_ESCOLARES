@@ -32,7 +32,7 @@ public class E_NoAdministrativo extends Empleado {
     }
 
 
-    //TODO: FALTA INFO
+    //TODO: FALTAN DATOS IMPORTANTES Nombre - ID - indexCursos no se imprime es variable interna
     @Override
     public String toString() {
         return "E_NoAdministrativo『" +
@@ -45,7 +45,7 @@ public class E_NoAdministrativo extends Empleado {
     //TODO: USAR GETS PARA IMPRIMIR
     public String imprimeDatos() {
         return "No administrativo{" +
-                "id=" + getIdEmpleado() +
+                "Id=" + getIdEmpleado() +
                 ", Dirección='" + getDireccion() + '\'' +
                 ", Nombre='" + getNombre() + '\'' +
                 ", RFC='" + getRFC() + '\'' +

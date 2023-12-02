@@ -9,11 +9,12 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 
-
-//TODO: ORDENAR PRIMERO POR FUNCION Y DESPUES POR ALFABETO
 public final class Utils {
 
     //CONSTANTES
+    public static final int MAX_OBJETOS = 10;
+    public static final String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
+    public static final String INIT_QUESTION = "SELECCIONA UNA ACCIÓN";
     public static final String QUESTION_TIPO_EMPLEADOS = "Por favor, Elige el tipo de empleado:";
     public static final String QUESTION_TURNO = "Por favor, Elige el turno del empleado:";
     public static final String[] TURNOS = {"Matutino", "Vespertino", "Nocturno"};
@@ -32,8 +33,9 @@ public final class Utils {
     public static final String OPCION_SEIS = "Calcular nomina para empleados";
     public static final String OPCION_SIETE = "Asignar estudiante a curso";
     public static final String OPCION_OCHO = "Generar historial académico";
-
     public static final String OPCION_SALIR = "Salir";
+    public static final String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
+            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO, OPCION_SALIR};
     public static final String QUESTION_NOMBRE = "Por favor, Introduce nombre:";
     public static final String QUESTION_AFORO = "Por favor, Introduce aforo máximo:";
     public static final String QUESTION_SALON = "Por favor, Introduce salón:";
@@ -52,17 +54,23 @@ public final class Utils {
     public static final String QUESTION_RFC = "Por favor, Introduce RFC:";
     public static final String QUESTION_CUENTA = "Por favor, Introduce cuenta:";
     public static final String QUESTION_SUELDO = "Por favor, Introduce sueldo:";
-    public static int MAX_OBJETOS = 10;
-    public static String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
-    public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
-            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO, OPCION_SALIR};
-    public static String INIT_QUESTION = "SELECCIONA UNA ACCIÓN";
 
 
     //METODOS DE UTILIDAD
+
+    /**
+     * Nos ayuda a imprimir arreglos de forma en una ventana JOptionPane
+     *
+     * @param title
+     * @param data
+     * @param mensajeClick
+     */
     public static void mostrarInfoArray(String title, Object[] data, String mensajeClick) {
+        //Nos permite cambiar el tamaño de las ventanas
         UIManager.put("OptionPane.minimumSize", new Dimension(900, 700));
+        //Objeto lista donde iran la info.
         JList list = new JList(data);
+        //Añade funcionalidad a la selección de algún elemento de la lista
         list.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -70,13 +78,14 @@ public final class Utils {
                     System.out.println(mensajeClick);
                     if (list.getSelectedValue() instanceof Escuela)
                         System.out.println(((Escuela) list.getSelectedValue()).imprimeDatos());
+                    if (list.getSelectedValue() instanceof Empleado)
+                        System.out.println((Empleado) list.getSelectedValue());
                 }
             }
         });
-
+        //Se crea un espacio en la ventana para mostrar la lista
         JScrollPane scrollPane = new JScrollPane(list);
         JOptionPane.showMessageDialog(null, scrollPane, title, JOptionPane.INFORMATION_MESSAGE);
-
     }
 
     /**

@@ -60,7 +60,8 @@ public class E_Academico extends Empleado {
     }
 
     @Override
-    //TODO: FALTAN DATOS IMPORTANTES indexCursos no se imprime es variable interna
+    //TODO: FALTAN DATOS IMPORTANTES Nombre - ID - indexCursos no se imprime es variable interna
+    //TODO: CURSOS ElIMINAR NULOS
     public String toString() {
         return "E_Academico『" +
                 " |# De Cursos: " + Arrays.toString(cursos) +
@@ -72,19 +73,19 @@ public class E_Academico extends Empleado {
 
     //TODO: USAR GETS PARA IMPRIMIR indexCursos no se imprime es variable interna
     public String imprimeDatos() {
-       return "Académico{" +
-               "id=" + getIdEmpleado() +
+        return "Académico{" +
+                "Id=" + getIdEmpleado() +
                 ", Dirección='" + getDireccion() + '\'' +
                 ", Nombre='" + getNombre() + '\'' +
                 ", RFC='" + getRFC() + '\'' +
-               ", # de cuenta='" + getCuenta() + '\'' +
-               ", Sueldo= $'" + getSueldo() + '\'' +
+                ", # de cuenta='" + getCuenta() + '\'' +
+                ", Sueldo= $'" + getSueldo() + '\'' +
                 ", # de Cursos='" +
-               Arrays.toString(Arrays.stream(cursos)
-               .filter(s -> (s != null))
-               .toArray(Curso[]::new))
-               + '\'' +
-             ", Materia='" + getMateria() + '\'' +
-             '}';
-  }
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                + '\'' +
+                ", Materia='" + getMateria() + '\'' +
+                '}';
+    }
 }

@@ -12,7 +12,6 @@ public class SistemaEscolar {
     //Método principal de nuestra aplicación
     public static void main(String[] args) {
 
-
         //CREAR arreglos e indexes que los van a manipular
         //index sirve para manipular arrays, se inicializa en 0
         //Escuelas - Cursos - Empleados - Alumnos
@@ -57,6 +56,7 @@ public class SistemaEscolar {
                     }
                     //CREA CURSO
                     case Utils.OPCION_DOS -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si almenos existe una escuela y un maestro
                         if (escuelasArray[0] != null && empleadosArray[0] != null) {
                             //Selecciona una escuela de una ventana desplegable.
@@ -80,6 +80,7 @@ public class SistemaEscolar {
                     }
                     //CREA EMPLEADO
                     case Utils.OPCION_TRES -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe una escuela
                         if (escuelasArray[0] != null) {
                             //Selecciona una escuela de una ventana desplegable.
@@ -122,7 +123,7 @@ public class SistemaEscolar {
                             //Añade empleado a la escuela que le corresponda
                             escuela.addEmpleado(empleadosArray[empleadosIndex]);
                             //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
-                            empleadosIndex++;
+                            empleadosIndex = empleadosIndex + 1;
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "ERROR Necesita que escuelasArray sea mayor que 0",
@@ -132,6 +133,7 @@ public class SistemaEscolar {
                     }
                     //CREA ESTUDIANTE
                     case Utils.OPCION_CUATRO -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe una escuela
                         if (escuelasArray[0] != null) {
                             //Selecciona una escuela de una ventana desplegable.
@@ -156,6 +158,7 @@ public class SistemaEscolar {
                     //ASIGNA CURSO A PROFESOR
                     //TODO:CHECAR POR CURSO DUPLICADO EN PROFESOR
                     case Utils.OPCION_CINCO -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un empleado y un curso
                         if (empleadosArray[0] != null && cursosArray[0] != null) {
 
@@ -163,6 +166,11 @@ public class SistemaEscolar {
                             if (empleado instanceof E_Academico empleadoAcademico) {
                                 Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
                                 empleadoAcademico.asignarCurso(curso);
+                            } else {
+                                JOptionPane.showMessageDialog(null,
+                                        "ERROR No es maestro",
+                                        Utils.PROYECT_TITLE,
+                                        JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
                             JOptionPane.showMessageDialog(null,
@@ -173,6 +181,7 @@ public class SistemaEscolar {
                     }
                     //CALCULAR NOMINA
                     case Utils.OPCION_SEIS -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un empleado
                         if (empleadosArray[0] != null) {
                             //Calcular dia del mes
@@ -200,6 +209,7 @@ public class SistemaEscolar {
                     //ASIGNAR CURSO A ESTUDIANTE
                     //TODO:CHECAR POR CURSO DUPLICADO EN ESTUDIANTE
                     case Utils.OPCION_SIETE -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
                         System.out.println(Arrays.toString(estudiantesArray));
                         System.out.println(Arrays.toString(cursosArray));
@@ -216,8 +226,9 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
+                    //GENERAR HISTORIAL ACADÉMICO
                     case Utils.OPCION_OCHO -> {
-
+                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
                         Estudiante[] estudiantesConElCursoInscrito = new Estudiante[Utils.MAX_OBJETOS];
                         int indexCursosInscritos = 0;
@@ -241,7 +252,6 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                    default -> throw new IllegalStateException("Unexpected value: " + opcionElegidaPorElUsuario);
                 }
             }
         }
@@ -256,7 +266,6 @@ public class SistemaEscolar {
         Escuela[] escuelasArraySinNull = Arrays.stream(escuelasArray)
                 .filter(s -> (s != null))
                 .toArray(Escuela[]::new);
-
         //Muestra el arreglo de escuelas en un menu desplegable.
         Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
     }

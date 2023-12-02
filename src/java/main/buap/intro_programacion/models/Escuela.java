@@ -92,6 +92,7 @@ public class Escuela {
         this.cursos = cursos;
     }
 
+
     @Override
     public String toString() {
         return "Escuela『" +
@@ -107,6 +108,7 @@ public class Escuela {
                 '』';
     }
 
+    //TODO: Añadir estudiantes y empleados
     public String imprimeDatos() {
         return "Escuela{" +
                 "Nombre=" + getNombre() +
