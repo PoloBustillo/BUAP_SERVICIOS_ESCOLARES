@@ -1,5 +1,6 @@
 package buap.intro_programacion.models;
 
+import java.util.Calendar;
 import java.util.UUID;
 
 public class Empleado {
@@ -96,5 +97,13 @@ public class Empleado {
 
     public void setSueldo(Float sueldo) {
         this.sueldo = sueldo;
+    }
+
+    public double clacularSueldo() {
+        //Calcular dia del mes
+        Calendar cal = Calendar.getInstance();
+        int diaDelMes = cal.get(Calendar.DAY_OF_MONTH);
+
+        return sueldo * diaDelMes;
     }
 }

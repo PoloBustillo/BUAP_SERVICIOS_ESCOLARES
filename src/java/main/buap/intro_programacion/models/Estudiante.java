@@ -66,8 +66,10 @@ public class Estudiante {
     }
 
     public void asignarCurso(Curso curso) {
-        cursos[indexCursos] = curso;
-        indexCursos = indexCursos + 1;
+        if (!Arrays.asList(cursos).contains(curso)) {
+            cursos[indexCursos] = curso;
+            indexCursos = indexCursos + 1;
+        }
     }
 
     //TODO: Index cursos no va
@@ -80,7 +82,7 @@ public class Estudiante {
                 " | # De Cursos: " + Arrays.toString(cursos) +
                 '』';
     }
-    
+
     public String imprimeDatos() {
         return "Estudiante {" +
                 "Nombre(s)=" + getNombre() +

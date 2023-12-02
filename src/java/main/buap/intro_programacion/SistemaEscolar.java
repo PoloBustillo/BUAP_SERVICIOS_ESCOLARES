@@ -5,7 +5,7 @@ import buap.intro_programacion.models.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.Arrays;
-import java.util.Calendar;
+import java.util.Objects;
 
 public class SistemaEscolar {
 
@@ -156,12 +156,10 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNA CURSO A PROFESOR
-                    //TODO:CHECAR POR CURSO DUPLICADO EN PROFESOR
                     case Utils.OPCION_CINCO -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un empleado y un curso
                         if (empleadosArray[0] != null && cursosArray[0] != null) {
-
                             Empleado empleado = (Empleado) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, empleadosArray);
                             if (empleado instanceof E_Academico empleadoAcademico) {
                                 Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
@@ -184,21 +182,12 @@ public class SistemaEscolar {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un empleado
                         if (empleadosArray[0] != null) {
-                            //Calcular dia del mes
-                            Calendar cal = Calendar.getInstance();
-                            int diaDelMes = cal.get(Calendar.DAY_OF_MONTH);
 
                             Empleado[] empleadoArraySinNull = Arrays.stream(empleadosArray)
                                     .filter(s -> (s != null))
                                     .toArray(Empleado[]::new);
 
-                            //Crea mensajes para mostrar las nóminas.
-                            String[] nominas = new String[empleadoArraySinNull.length];
-                            for (int i = 0; i < empleadoArraySinNull.length; i++) {
-                                nominas[i] = Utils.formateaNomina(empleadoArraySinNull[i], diaDelMes);
-                            }
-
-                            Utils.mostrarInfoArray("Nominas", nominas, "Pagando Nomina para:");
+                            Utils.mostrarInfoArray("Nominas", empleadoArraySinNull, "Pagando Nomina para:");
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "ERROR Necesita que empleados y cursos sea mayor que 0",
@@ -207,7 +196,6 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNAR CURSO A ESTUDIANTE
-                    //TODO:CHECAR POR CURSO DUPLICADO EN ESTUDIANTE
                     case Utils.OPCION_SIETE -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
@@ -264,9 +252,13 @@ public class SistemaEscolar {
         //Elimina todos los nulos del arreglo para no imprimirlos
         //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
         Escuela[] escuelasArraySinNull = Arrays.stream(escuelasArray)
-                .filter(s -> (s != null))
+                .filter(Objects::nonNull)
                 .toArray(Escuela[]::new);
-        //Muestra el arreglo de escuelas en un menu desplegable.
-        Utils.mostrarInfoArray("Mostrar Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
+        Utils.mostrarInfoArray("Mostrar Todas las Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
+
+        Empleado[] empleadosArraySinNull = Arrays.stream(empleadosArray)
+                .filter(Objects::nonNull)
+                .toArray(Empleado[]::new);
+        Utils.mostrarInfoArray("Mostrar Todos los Empleados", empleadosArraySinNull, "Empleado seleccionado:");
     }
 }

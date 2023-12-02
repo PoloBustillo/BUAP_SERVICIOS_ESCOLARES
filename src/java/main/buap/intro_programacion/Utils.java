@@ -8,6 +8,8 @@ import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.awt.*;
+import java.util.Date;
+import java.util.Objects;
 
 public final class Utils {
 
@@ -78,8 +80,16 @@ public final class Utils {
                     System.out.println(mensajeClick);
                     if (list.getSelectedValue() instanceof Escuela)
                         System.out.println(((Escuela) list.getSelectedValue()).imprimeDatos());
-                    if (list.getSelectedValue() instanceof Empleado)
-                        System.out.println((Empleado) list.getSelectedValue());
+
+                    if (list.getSelectedValue() instanceof Empleado empleadoSeleccionado) {
+                        if (Objects.equals(title, "Nominas")) {
+                            System.out.println("Haciendo transferencia a cuenta: " + empleadoSeleccionado.getCuenta());
+                            System.out.println("Sueldo base: " + empleadoSeleccionado.getSueldo());
+                            System.out.println("Sueldo al dia de " + new Date().toString() + ": " + empleadoSeleccionado.clacularSueldo());
+                        } else {
+                            System.out.println(empleadoSeleccionado.imprimeDatos());
+                        }
+                    }
                 }
             }
         });

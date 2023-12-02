@@ -55,8 +55,10 @@ public class E_Academico extends Empleado {
     }
 
     public void asignarCurso(Curso curso) {
-        cursos[indexCursos] = curso;
-        indexCursos = indexCursos + 1;
+        if (!Arrays.asList(cursos).contains(curso)) {
+            cursos[indexCursos] = curso;
+            indexCursos = indexCursos + 1;
+        }
     }
 
     @Override
