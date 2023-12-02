@@ -4,20 +4,6 @@ public class E_NoAdministrativo extends Empleado {
     private String turno;
     private String area;
 
-    public E_NoAdministrativo(String cuenta, String turno, String area) {
-        super(cuenta);
-        this.turno = turno;
-        this.area = area;
-    }
-
-
-    public E_NoAdministrativo(String turno, String area) {
-        this.turno = turno;
-        this.area = area;
-    }
-
-    public E_NoAdministrativo() {
-    }
 
     public E_NoAdministrativo(Empleado empleadoGenerico, String turno, String area) {
         super(empleadoGenerico.getNombre(),
@@ -45,23 +31,28 @@ public class E_NoAdministrativo extends Empleado {
         this.area = area;
     }
 
+
+    //TODO: FALTA INFO
     @Override
     public String toString() {
         return "E_NoAdministrativo『" +
                 " | Turno Asigando: " + turno +
-                " | Area: " + area  +
+                " | Area: " + area +
                 '』';
     }
-    public String imprimeDatos() {
-        return "No administrativo{" +
-                "id=" + idEmpleado +
-                ", Dirección='" + direccion + '\'' +
-                ", Nombre='" + nombre + '\'' +
-                ", RFC='" + RFC + '\'' +
-                ", # de cuenta='" + cuenta + '\'' +
-                ", Sueldo= $'" + sueldo + '\'' +
-                ", Turno Asignado='" + turno + '\'' +
-                ", Area='" + area + '\'' +
-                '}';
-    }
+
+
+    //TODO: USAR GETS PARA IMPRIMIR
+//    public String imprimeDatos() {
+//        return "No administrativo{" +
+//                "id=" + idEmpleado +
+//                ", Dirección='" + direccion + '\'' +
+//                ", Nombre='" + nombre + '\'' +
+//                ", RFC='" + RFC + '\'' +
+//                ", # de cuenta='" + cuenta + '\'' +
+//                ", Sueldo= $'" + sueldo + '\'' +
+//                ", Turno Asignado='" + turno + '\'' +
+//                ", Area='" + area + '\'' +
+//                '}';
+//    }
 }

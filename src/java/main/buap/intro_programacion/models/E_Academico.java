@@ -60,26 +60,29 @@ public class E_Academico extends Empleado {
     }
 
     @Override
+    //TODO: FALTAN DATOS IMPORTANTES indexCursos no se imprime es variable interna
     public String toString() {
         return "E_Academico『" +
                 " |# De Cursos: " + Arrays.toString(cursos) +
-                " | Materia: " + materia  +
-                " | Turno Asignado: " + turno  +
+                " | Materia: " + materia +
+                " | Turno Asignado: " + turno +
                 " | Index Cursos: " + indexCursos +
                 '』';
     }
-    public String imprimeDatos() {
-        return "Académico{" +
-                "id=" + idEmpleado +
-                ", Dirección='" + direccion + '\'' +
-                ", Nombre='" + nombre + '\'' +
-                ", RFC='" + RFC + '\'' +
-                ", # de cuenta='" + cuenta + '\'' +
-                ", Sueldo= $'" + sueldo + '\'' +
-                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
-                ", Materia='" + materia + '\'' +
-                ", Turo Asignado='" + turno + '\'' +
-                ", Index Cursos='" + indexCursos + '\'' +
-                '}';
-    }
+
+    //TODO: USAR GETS PARA IMPRIMIR indexCursos no se imprime es variable interna
+//    public String imprimeDatos() {
+//        return "Académico{" +
+//                "id=" + idEmpleado +
+//                ", Dirección='" + direccion + '\'' +
+//                ", Nombre='" + nombre + '\'' +
+//                ", RFC='" + RFC + '\'' +
+//                ", # de cuenta='" + cuenta + '\'' +
+//                ", Sueldo= $'" + sueldo + '\'' +
+//                ", # de Cursos='" + Arrays.toString(cursos) + '\'' +
+//                ", Materia='" + materia + '\'' +
+//                ", Turo Asignado='" + turno + '\'' +
+//                ", Index Cursos='" + indexCursos + '\'' +
+//                '}';
+//    }
 }

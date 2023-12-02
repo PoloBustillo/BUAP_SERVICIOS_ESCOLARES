@@ -4,10 +4,6 @@ public class E_Administrativo extends Empleado {
     private String turno;
     private String area;
 
-<<<<<<< Updated upstream
-    public E_Administrativo(String cuenta, String turno, String area) {
-        super(cuenta);
-=======
     public E_Administrativo() {
     }
 
@@ -17,11 +13,11 @@ public class E_Administrativo extends Empleado {
                 empleadoGenerico.getRFC(),
                 empleadoGenerico.getCuenta(),
                 empleadoGenerico.getSueldo());
->>>>>>> Stashed changes
+
         this.turno = turno;
         this.area = area;
     }
-    
+
     public E_Administrativo(String turno, String area) {
         this.turno = turno;
         this.area = area;
@@ -44,6 +40,7 @@ public class E_Administrativo extends Empleado {
     }
 
     @Override
+    //TODO: FALTAN DATOS
     public String toString() {
         return "E_Administrativo『" +
                 " | Turno Asignado:  " + turno +
@@ -51,16 +48,17 @@ public class E_Administrativo extends Empleado {
                 '』';
     }
 
-    public String imprimeDatos() {
-        return "Administrativo{" +
-                "id=" + idEmpleado +
-                ", Dirección='" + direccion + '\'' +
-                ", Nombre='" + nombre + '\'' +
-                ", RFC='" + RFC + '\'' +
-                ", # de cuenta='" + cuenta + '\'' +
-                ", Sueldo= $'" + sueldo + '\'' +
-                ", Turno Asignado='" + turno + '\'' +
-                ", Area='" + area + '\'' +
-                '}';
-    }
+    //TODO: USAR GETS PARA IMPRIMIR
+//    public String imprimeDatos() {
+//        return "Administrativo{" +
+//                "id=" + idEmpleado +
+//                ", Dirección='" + direccion + '\'' +
+//                ", Nombre='" + nombre + '\'' +
+//                ", RFC='" + RFC + '\'' +
+//                ", # de cuenta='" + cuenta + '\'' +
+//                ", Sueldo= $'" + sueldo + '\'' +
+//                ", Turno Asignado='" + turno + '\'' +
+//                ", Area='" + area + '\'' +
+//                '}';
+//    }
 }

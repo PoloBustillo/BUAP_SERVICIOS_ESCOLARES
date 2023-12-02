@@ -75,18 +75,18 @@ public class Estudiante {
         return "Estudiante『" +
                 " |Nombre(s): " + nombre +
                 " | Matricula: " + matricula +
-                " | Apellidos: " + Arrays.toString(apellidos) +
                 " | Número de Teléfono: " + telefono +
                 " | Direccion Del Estudiante: " + direccionEstudiante +
                 " | # De Cursos: " + Arrays.toString(cursos) +
                 " | IndexCursos: " + indexCursos +
                 '』';
     }
+
+    //TODO: TYPO EN DIRECCION
     public String imprimeDatos() {
         return "Estudiante {" +
                 "Nombre(s)=" + nombre +
                 ", Matricula='" + matricula + '\'' +
-                ", Apellidos='" + Arrays.toString(apellidos) + '\'' +
                 ", Número de Teléfono='" + telefono + '\'' +
                 ", Direciión del Estudiante='" + direccionEstudiante + '\'' +
                 ", # de Cursos='" + Arrays.toString(cursos) + '\'' +

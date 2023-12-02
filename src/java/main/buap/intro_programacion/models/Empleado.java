@@ -14,7 +14,19 @@ public class Empleado {
         this.idEmpleado = UUID.randomUUID();
     }
 
-<<<<<<< Updated upstream
+    public Empleado(String nombre, Direccion direccion, String RFC, String cuenta, Float sueldo) {
+        this.idEmpleado = UUID.randomUUID();
+        this.direccion = direccion;
+        this.nombre = nombre;
+        this.RFC = RFC;
+        this.cuenta = cuenta;
+        this.sueldo = sueldo;
+    }
+
+    public Empleado() {
+        this.idEmpleado = UUID.randomUUID();
+    }
+
     @Override
     public String toString() {
         return "Empleado『" +
@@ -26,46 +38,15 @@ public class Empleado {
                 " | Sueldo:$ " + sueldo +
                 '』';
     }
+
     public String imprimeDatos() {
         return "Empleado{" +
                 "id=" + idEmpleado +
                 ", Dirección='" + direccion + '\'' +
                 ", Nombre='" + nombre + '\'' +
-                ", RFC='" + RFC  + '\'' +
-                ", # de cuenta='" + cuenta  + '\'' +
-                ", Sueldo= $'" + sueldo  + '\'' +
-                '}';
-    }
-
-    public void setIdEmpleado(UUID idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
-
-    public Empleado(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
-=======
-    public Empleado(String nombre, Direccion direccion, String RFC, String cuenta, Float sueldo) {
->>>>>>> Stashed changes
-        this.direccion = direccion;
-        this.nombre = nombre;
-        this.RFC = RFC;
-        this.cuenta = cuenta;
-        this.sueldo = sueldo;
-        this.idEmpleado = UUID.randomUUID();
-    }
-
-    public Empleado() {
-        this.idEmpleado = UUID.randomUUID();
-    }
-
-    @Override
-    public String toString() {
-        return "Empleado{" +
-                "idEmpleado=" + idEmpleado +
-                ", direccion=" + direccion +
-                ", nombre='" + nombre + '\'' +
                 ", RFC='" + RFC + '\'' +
-                ", cuenta='" + cuenta + '\'' +
-                ", sueldo=" + sueldo +
+                ", # de cuenta='" + cuenta + '\'' +
+                ", Sueldo= $'" + sueldo + '\'' +
                 '}';
     }
 
