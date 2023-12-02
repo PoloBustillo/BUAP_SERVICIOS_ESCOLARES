@@ -2,16 +2,11 @@ package buap.intro_programacion.models;
 
 public class HistorialAcademico {
     private Estudiante estudiante;
-    private Grado grado;
     private Curso[] cursos;
     private String[] competencias;
 
     public HistorialAcademico(Estudiante estudiante) {
         this.estudiante = estudiante;
-    }
-
-    public HistorialAcademico(Grado grado) {
-        this.grado = grado;
     }
 
     public HistorialAcademico(Curso[] cursos) {
@@ -28,14 +23,6 @@ public class HistorialAcademico {
 
     public void setEstudiante(Estudiante estudiante) {
         this.estudiante = estudiante;
-    }
-
-    public Grado getGrado() {
-        return grado;
-    }
-
-    public void setGrado(Grado grado) {
-        this.grado = grado;
     }
 
     public Curso[] getCursos() {

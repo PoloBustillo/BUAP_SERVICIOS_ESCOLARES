@@ -6,26 +6,25 @@ public class Estudiante {
     private String[] apellidos;
     private Integer telefono;
     private Direccion direccionEstudiante;
-    private Grado miGrado;
+
 
     public Estudiante() {
 
     }
 
-    public Estudiante(String nombre, String matricula, String[] apellidos, Grado miGrado) {
+    public Estudiante(String nombre, String matricula, String[] apellidos) {
         this.nombre = nombre;
         this.matricula = matricula;
         this.apellidos = apellidos;
-        this.miGrado = miGrado;
     }
 
-    public Estudiante(String nombre, String matricula, String[] apellidos, Integer telefono, Direccion direccionEstudiante, Grado miGrado) {
+    public Estudiante(String nombre, String matricula, String[] apellidos, Integer telefono, Direccion direccionEstudiante) {
         this.nombre = nombre;
         this.matricula = matricula;
         this.apellidos = apellidos;
         this.telefono = telefono;
         this.direccionEstudiante = direccionEstudiante;
-        this.miGrado = miGrado;
+
     }
 
     public String getNombre() {
@@ -68,11 +67,5 @@ public class Estudiante {
         this.direccionEstudiante = direccionEstudiante;
     }
 
-    public Grado getMiGrado() {
-        return miGrado;
-    }
 
-    public void setMiGrado(Grado miGrado) {
-        this.miGrado = miGrado;
-    }
 }

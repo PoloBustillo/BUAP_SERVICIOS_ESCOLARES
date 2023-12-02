@@ -18,14 +18,6 @@ public class Curso {
         this.horario = horario;
     }
 
-    public Curso(String aforo, String salon, String horario, Grado gradoCurso) {
-        this.id = UUID.randomUUID();
-        this.aforo = aforo;
-        this.salon = salon;
-        this.horario = horario;
-        this.gradoCurso = gradoCurso;
-    }
-
     @Override
     public String toString() {
         return "Curso{" +
