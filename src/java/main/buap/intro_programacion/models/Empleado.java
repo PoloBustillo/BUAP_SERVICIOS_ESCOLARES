@@ -14,6 +14,22 @@ public class Empleado {
         this.idEmpleado = UUID.randomUUID();
     }
 
+    @Override
+    public String toString() {
+        return "Empleado{" +
+                "idEmpleado=" + idEmpleado +
+                ", direccion=" + direccion +
+                ", nombre='" + nombre + '\'' +
+                ", RFC='" + RFC + '\'' +
+                ", cuenta='" + cuenta + '\'' +
+                ", sueldo=" + sueldo +
+                '}';
+    }
+
+    public void setIdEmpleado(UUID idEmpleado) {
+        this.idEmpleado = idEmpleado;
+    }
+
     public Empleado(Direccion direccion, String nombre, String RFC, String cuenta, Float sueldo) {
         this.direccion = direccion;
         this.nombre = nombre;
