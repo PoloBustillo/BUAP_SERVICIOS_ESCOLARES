@@ -1,12 +1,15 @@
 package buap.intro_programacion.models;
 
+import buap.intro_programacion.Utils;
+
 public class Estudiante {
     private String nombre;
     private String matricula;
     private String[] apellidos;
     private Integer telefono;
     private Direccion direccionEstudiante;
-
+    private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
+    private int indexCursos = 0;
 
     public Estudiante() {
 
@@ -25,6 +28,10 @@ public class Estudiante {
         this.telefono = telefono;
         this.direccionEstudiante = direccionEstudiante;
 
+    }
+
+    public Curso[] getCursos() {
+        return cursos;
     }
 
     public String getNombre() {
@@ -67,5 +74,8 @@ public class Estudiante {
         this.direccionEstudiante = direccionEstudiante;
     }
 
-
+    public void asignarCurso(Curso curso) {
+        cursos[indexCursos] = curso;
+        indexCursos = indexCursos + 1;
+    }
 }

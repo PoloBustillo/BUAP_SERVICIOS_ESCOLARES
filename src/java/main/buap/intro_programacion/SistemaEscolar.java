@@ -160,14 +160,49 @@ public class SistemaEscolar {
                             Empleado[] empleadoArraySinNull = Arrays.stream(empleadosArray)
                                     .filter(s -> (s != null))
                                     .toArray(Empleado[]::new);
+
+                            //Crea mensajes para mostrar las nóminas.
                             String[] nominas = new String[empleadoArraySinNull.length];
                             for (int i = 0; i < empleadoArraySinNull.length; i++) {
                                 nominas[i] = Utils.formateaNomina(empleadoArraySinNull[i], diaDelMes);
                             }
+
                             Utils.mostrarInfoArray("Nominas", nominas, "Pagando Nomina para:");
                         } else {
                             JOptionPane.showMessageDialog(null,
                                     "ERROR Necesita que empleados y cursos sea mayor que 0",
+                                    Utils.PROYECT_TITLE,
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    //ASIGNAR CURSO A ESTUDIANTE
+                    case Utils.OPCION_SIETE -> {
+
+                        //Si al menos existe un estudiante y un curso
+                        if (estudiantesArray[0] != null && cursosArray[0] != null) {
+
+                            Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
+                            Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
+                            estudiante.asignarCurso(curso);
+
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "ERROR Necesitas que estudiantes y cursos sean mayor que 0",
+                                    Utils.PROYECT_TITLE,
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                    case Utils.OPCION_OCHO -> {
+
+                        //Si al menos existe un estudiante y un curso
+                        if (estudiantesArray[0] != null && cursosArray[0] != null) {
+
+                            Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
+                            
+
+                        } else {
+                            JOptionPane.showMessageDialog(null,
+                                    "ERROR Necesitas que estudiantes y cursos sean mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
