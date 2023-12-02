@@ -2,6 +2,7 @@ package buap.intro_programacion;
 
 import buap.intro_programacion.models.Direccion;
 import buap.intro_programacion.models.Empleado;
+import buap.intro_programacion.models.Escuela;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -67,7 +68,8 @@ public final class Utils {
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
                     System.out.println(mensajeClick);
-                    System.out.println(list.getSelectedValue());
+                    if (list.getSelectedValue() instanceof Escuela)
+                        System.out.println(((Escuela) list.getSelectedValue()).imprimeDatos());
                 }
             }
         });

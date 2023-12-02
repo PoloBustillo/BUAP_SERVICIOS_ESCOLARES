@@ -95,12 +95,18 @@ public class Escuela {
     @Override
     public String toString() {
         return "Escuela『" +
-                " Nombre: " + nombre  +
-                " | Cursos: " + Arrays.toString(cursos) +
+                " Nombre: " + nombre +
+                " | Cursos: "
+                +
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                +
                 " | Nivel: " + nivel +
                 " | Código: " + codigo +
                 '』';
     }
+
     public String imprimeDatos() {
         return "Escuela{" +
                 "Nombre=" + nombre +
@@ -115,10 +121,12 @@ public class Escuela {
         cursos[indexCursos] = curso;
         indexCursos = indexCursos + 1;
     }
+
     public void addEmpleado(Empleado empleado) {
         empleados[indexEmpleados] = empleado;
         indexEmpleados = indexEmpleados + 1;
     }
+
     public void addEstudiante(Estudiante estudiante) {
         estudiantes[indexEstudiantes] = estudiante;
         indexEstudiantes = indexEstudiantes + 1;
