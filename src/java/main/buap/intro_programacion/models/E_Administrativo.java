@@ -48,17 +48,16 @@ public class E_Administrativo extends Empleado {
                 '』';
     }
 
-    //TODO: USAR GETS PARA IMPRIMIR
-//    public String imprimeDatos() {
-//        return "Administrativo{" +
-//                "id=" + idEmpleado +
-//                ", Dirección='" + direccion + '\'' +
-//                ", Nombre='" + nombre + '\'' +
-//                ", RFC='" + RFC + '\'' +
-//                ", # de cuenta='" + cuenta + '\'' +
-//                ", Sueldo= $'" + sueldo + '\'' +
-//                ", Turno Asignado='" + turno + '\'' +
-//                ", Area='" + area + '\'' +
-//                '}';
-//    }
+    public String imprimeDatos() {
+        return "Administrativo{" +
+                "id=" + getIdEmpleado() +
+                ", Dirección='" + getDireccion() + '\'' +
+                ", Nombre='" + getNombre() + '\'' +
+                ", RFC='" + getRFC() + '\'' +
+                ", # de cuenta='" + getCuenta() + '\'' +
+                ", Sueldo= $'" + getSueldo() + '\'' +
+                ", Turno Asignado='" + getTurno() + '\'' +
+                ", Area='" + getArea() + '\'' +
+                '}';
+    }
 }

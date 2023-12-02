@@ -34,9 +34,9 @@ public class Curso {
     public String imprimeDatos() {
         return "Curso{" +
                 "id=" + id +
-                ", aforo='" + aforo + '\'' +
-                ", salon='" + salon + '\'' +
-                ", horario='" + horario + '\'' +
+                ", aforo='" + getAforo() + '\'' +
+                ", salon='" + getSalon() + '\'' +
+                ", horario='" + getHorario() + '\'' +
                 '}';
     }
 
