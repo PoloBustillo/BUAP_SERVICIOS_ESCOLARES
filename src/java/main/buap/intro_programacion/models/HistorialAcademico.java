@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class HistorialAcademico {
     private Estudiante estudiante;
     private Curso[] cursos;
-    private String[] competencias;
+    private double calificacionPromedio;
 
     @Override
     public String toString() {
@@ -32,8 +32,13 @@ public class HistorialAcademico {
         this.cursos = cursos;
     }
 
-    public HistorialAcademico(String[] competencias) {
-        this.competencias = competencias;
+    public HistorialAcademico(double competencias) {
+        this.calificacionPromedio = competencias;
+    }
+
+    public HistorialAcademico(Estudiante estudiante, Curso[] cursos) {
+        this.estudiante = estudiante;
+        this.cursos = cursos;
     }
 
     public Estudiante getEstudiante() {
@@ -52,12 +57,12 @@ public class HistorialAcademico {
         this.cursos = cursos;
     }
 
-    public String[] getCompetencias() {
-        return competencias;
+    public double getCompetencias() {
+        return calificacionPromedio;
     }
 
-    public void setCompetencias(String[] competencias) {
-        this.competencias = competencias;
+    public void setCompetencias(double competencias) {
+        this.calificacionPromedio = competencias;
     }
 }
 

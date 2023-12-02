@@ -111,7 +111,7 @@ public class SistemaEscolar {
                                     JOptionPane.ERROR_MESSAGE);
                         }
                     }
-                    //Crea Estudiante
+                    //CREA ESTUDIANTE
                     case Utils.OPCION_CUATRO -> {
                         //Si al menos existe una escuela
                         if (empleadosArray[0] != null) {
@@ -177,7 +177,6 @@ public class SistemaEscolar {
                     }
                     //ASIGNAR CURSO A ESTUDIANTE
                     case Utils.OPCION_SIETE -> {
-
                         //Si al menos existe un estudiante y un curso
                         if (estudiantesArray[0] != null && cursosArray[0] != null) {
 
@@ -195,10 +194,19 @@ public class SistemaEscolar {
                     case Utils.OPCION_OCHO -> {
 
                         //Si al menos existe un estudiante y un curso
-                        if (estudiantesArray[0] != null && cursosArray[0] != null) {
-
-                            Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
-                            
+                        Estudiante[] estudiantesConElCursoInscrito = new Estudiante[Utils.MAX_OBJETOS];
+                        int indexCursosInscritos = 0;
+                        if (empleadosArray[0] != null && cursosArray[0] != null && estudiantesArray[0] != null) {
+                            Curso cursoSeleccionado = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
+                            for (int i = 0; i < estudiantesArray.length; i++) {
+                                Curso[] cursosDelEstudianteNth = estudiantesArray[i].getCursos();
+                                for (int j = 0; j < cursosDelEstudianteNth.length; j++) {
+                                    if (cursoSeleccionado.getId().equals(cursosDelEstudianteNth[j].getId())) {
+                                        System.out.println("ENTRO");
+                                        estudiantesConElCursoInscrito[indexCursosInscritos] = estudiantesArray[i];
+                                    }
+                                }
+                            }
 
                         } else {
                             JOptionPane.showMessageDialog(null,
