@@ -1,17 +1,21 @@
 package buap.intro_programacion;
 
 import buap.intro_programacion.models.Direccion;
+import buap.intro_programacion.models.Empleado;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.awt.*;
 
 public final class Utils {
 
     //CONSTANTES
     public static final String QUESTION_TIPO_EMPLEADOS = "Por favor, Elige el tipo de empleado:";
-    public static final String EMPLEADO_AUXILIAR =  "Auxiliar";
-    public static final String EMPLEADO_ADMIN =  "Administrativo";
-    public static final String EMPLEADO_ACADEMICO =  "Académico";
-    public static final String[] TIPO_EMPLEADOS = {EMPLEADO_ACADEMICO,EMPLEADO_AUXILIAR,EMPLEADO_ADMIN};
+    public static final String EMPLEADO_AUXILIAR = "Auxiliar";
+    public static final String EMPLEADO_ADMIN = "Administrativo";
+    public static final String EMPLEADO_ACADEMICO = "Académico";
+    public static final String[] TIPO_EMPLEADOS = {EMPLEADO_ACADEMICO, EMPLEADO_AUXILIAR, EMPLEADO_ADMIN};
     public static final String[] HORARIOS = {"Matutino (8-10)", "Matutino (10-12)", "Vespertino (12-2)", "Vespertino (2-4)"};
     public static final String OPCION_UNO = "Crear Escuela";
     public static final String OPCION_DOS = "Crear Curso";
@@ -27,7 +31,9 @@ public final class Utils {
     public static final String QUESTION_AFORO = "Por favor, Introduce aforo máximo:";
     public static final String QUESTION_SALON = "Por favor, Introduce salón:";
     public static final String QUESTION_ESCUELA = "Por favor, Introduce escuela:";
+    public static final String QUESTION_CURSO = "Por favor, Introduce curso:";
     public static final String QUESTION_CALLE = "Por favor, Introduce calle:";
+    public static final String QUESTION_MATERIA = "Por favor, Introduce materia:";
     public static final String QUESTION_COLONIA = "Por favor, Introduce colonia:";
     public static final String QUESTION_CODIGO_POSTAL = "Por favor, Introduce código postal:";
     public static final String QUESTION_CIUDAD = "Por favor, Introduce ciudad:";
@@ -37,19 +43,25 @@ public final class Utils {
 
     public static int MAX_OBJETOS = 3;
     public static String PROYECT_TITLE = "BUAP - PROGRAMACIÓN - SISTEMA ESCOLAR";
-    public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO, OPCION_SALIR};
+    public static String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
+            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO, OPCION_SALIR};
     public static String INIT_QUESTION = "SELECCIONA UNA ACCIÓN";
 
 
     //METODOS DE UTILIDAD
-    public static void mostrarInfoArray(String message, Object[] data) {
-        JOptionPane.showInputDialog(null,
-                message,
-                PROYECT_TITLE,
-                JOptionPane.INFORMATION_MESSAGE,
-                null,
-                data,
-                data[0]);
+    public static void mostrarInfoArray(String title, Object[] data) {
+        UIManager.put("OptionPane.minimumSize", new Dimension(900, 700));
+        JList list = new JList(data);
+        list.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+
+            }
+        });
+
+        JScrollPane scrollPane = new JScrollPane(list);
+        JOptionPane.showMessageDialog(null, scrollPane, title, JOptionPane.INFORMATION_MESSAGE);
+
     }
 
     /**
@@ -110,4 +122,7 @@ public final class Utils {
         }
     }
 
+    public static String formateaNomina(Empleado empleado, int diaDelMes) {
+        return "ID: " + empleado.getIdEmpleado() + "\nNombre: " + empleado.getNombre() + "\nSueldo: " + empleado.getSueldo() * diaDelMes;
+    }
 }

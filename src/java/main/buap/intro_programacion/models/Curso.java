@@ -8,6 +8,8 @@ public class Curso {
     private String aforo;
     private String salon;
     private String horario;
+
+    //String
     private Grado gradoCurso;
 
     public Curso(String aforo, String salon, String horario) {
