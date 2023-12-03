@@ -10,6 +10,7 @@ public class Estudiante {
     private String telefono;
     private Direccion direccionEstudiante;
     private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
+    private HistorialAcademico historialAcademico;
     private int indexCursos = 0;
 
     public Estudiante() {
@@ -65,6 +66,14 @@ public class Estudiante {
         this.direccionEstudiante = direccionEstudiante;
     }
 
+    public HistorialAcademico getHistorialAcademico() {
+        return historialAcademico;
+    }
+
+    public void setHistorialAcademico(HistorialAcademico historialAcademico) {
+        this.historialAcademico = historialAcademico;
+    }
+
     public void asignarCurso(Curso curso) {
         if (!Arrays.asList(cursos).contains(curso)) {
             curso.inscribirAlumno(this);
@@ -96,6 +105,7 @@ public class Estudiante {
                 ", Matricula='" + getMatricula() + '\'' +
                 ", Número de Teléfono='" + getTelefono() + '\'' +
                 ", Dirección del Estudiante='" + getDireccionEstudiante() + '\'' +
+                ", Historial academico='" + getHistorialAcademico() + '\'' +
                 ", # de Cursos='" +
                 Arrays.toString(Arrays.stream(cursos)
                         .filter(s -> (s != null))
