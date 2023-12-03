@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.UUID;
 //TODO: FALTA NOMBRE DEL CURSO
-//TODO: ELIMINAR ESCUELA
+//Listo
 
 public class Curso {
     private final UUID id;
@@ -16,6 +16,7 @@ public class Curso {
     private String salon;
     private String horario;
     private Boolean maestroAsignado = false;
+    private String nombreCurso;
 
 
     public Curso(String aforo, String salon, String horario) {
@@ -24,9 +25,16 @@ public class Curso {
         this.salon = salon;
         this.horario = horario;
     }
+    public Curso(String aforo, String salon, String horario,String nombreCurso) {
+        this.id = UUID.randomUUID();
+        this.aforo = aforo;
+        this.salon = salon;
+        this.horario = horario;
+        this.nombreCurso = nombreCurso;
+    }
 
-
-    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO
+    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO Hecho
+    //Listo
     @Override
     public String toString() {
         return "Curso:『" +
@@ -34,6 +42,7 @@ public class Curso {
                 " | Cantidad Máxima de alumnos: " + aforo +
                 " |  Numero De Salón: " + salon +
                 " |  Horario: " + horario +
+                " |  Nombre del curso: " + nombreCurso +
                 '』';
     }
 
@@ -56,14 +65,18 @@ public class Curso {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
+ public String getNombreCurso(){return nombreCurso;}
+    public void setNombreCurso(String nombreCurso){this.nombreCurso=nombreCurso;}
 
     //TODO: AGREGAR NOMBRE - USAR MAYUSCULAS
+    //Listo
     public String imprimeDatos() {
         return "Curso{" +
-                "id=" + id +
-                ", aforo='" + getAforo() + '\'' +
-                ", salon='" + getSalon() + '\'' +
-                ", horario='" + getHorario() + '\'' +
+                "ID=" + id +
+                ", Aforo='" + getAforo() + '\'' +
+                ", Salon='" + getSalon() + '\'' +
+                ", Horario='" + getHorario() + '\'' +
+                ", Nombre del curso='" + getNombreCurso() + '\'' +
                 '}';
     }
 
