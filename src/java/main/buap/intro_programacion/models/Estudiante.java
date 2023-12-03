@@ -76,12 +76,17 @@ public class Estudiante {
 
     //TODO: Index cursos no va
     //TODO: no imprimir cursos nulos
+    //Listo
     @Override
     public String toString() {
         return "Estudiante『" +
                 " |Nombre(s): " + nombre +
                 " | Matricula: " + matricula +
-                " | # De Cursos: " + Arrays.toString(cursos) +
+                " | # De Cursos: " +
+                Arrays.toString(Arrays.stream(cursos)
+                        .filter(s -> (s != null))
+                        .toArray(Curso[]::new))
+                +
                 '』';
     }
 

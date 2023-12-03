@@ -109,6 +109,7 @@ public class Escuela {
     }
 
     //TODO: Añadir estudiantes y empleados
+    //Listo
     public String imprimeDatos() {
         return "Escuela{" +
                 "Nombre=" + getNombre() +
@@ -119,6 +120,14 @@ public class Escuela {
                 + '\'' +
                 ", Nivel='" + getNivel() + '\'' +
                 ", Código='" + getNivel() + '\'' +
+                ", Estudiantes='" +
+                Arrays.toString(Arrays.stream(estudiantes)
+                .filter(s -> (s != null))
+                .toArray(estudiantes[]::new)) + '\'' +
+                ", Empleados='" +
+                Arrays.toString(Arrays.stream(empleados)
+                        .filter(s -> (s != null))
+                        .toArray(empleados[]::new)) + '\'' +
                 '}';
     }
 
