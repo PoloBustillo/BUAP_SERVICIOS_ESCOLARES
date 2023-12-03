@@ -5,8 +5,6 @@ import buap.intro_programacion.Utils;
 import javax.swing.*;
 import java.util.Arrays;
 import java.util.UUID;
-//TODO: FALTA NOMBRE DEL CURSO
-//Listo
 
 public class Curso {
     private final UUID id;
@@ -18,14 +16,14 @@ public class Curso {
     private Boolean maestroAsignado = false;
     private String nombreCurso;
 
-
     public Curso(String aforo, String salon, String horario) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
         this.horario = horario;
     }
-    public Curso(String aforo, String salon, String horario,String nombreCurso) {
+
+    public Curso(String aforo, String salon, String horario, String nombreCurso) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
@@ -33,8 +31,17 @@ public class Curso {
         this.nombreCurso = nombreCurso;
     }
 
-    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO Hecho
-    //Listo
+
+    public Estudiante[] getEstudiantes() {
+        return estudiantes;
+    }
+
+    public void setEstudiantes(Estudiante[] estudiantes) {
+        this.estudiantes = estudiantes;
+    }
+
+    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO
+
     @Override
     public String toString() {
         return "Curso:『" +
@@ -65,11 +72,15 @@ public class Curso {
                     JOptionPane.ERROR_MESSAGE);
         }
     }
- public String getNombreCurso(){return nombreCurso;}
-    public void setNombreCurso(String nombreCurso){this.nombreCurso=nombreCurso;}
 
-    //TODO: AGREGAR NOMBRE - USAR MAYUSCULAS
-    //Listo
+    public String getNombreCurso() {
+        return nombreCurso;
+    }
+
+    public void setNombreCurso(String nombreCurso) {
+        this.nombreCurso = nombreCurso;
+    }
+
     public String imprimeDatos() {
         return "Curso{" +
                 "ID=" + id +

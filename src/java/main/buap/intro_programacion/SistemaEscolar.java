@@ -200,8 +200,6 @@ public class SistemaEscolar {
                     case Utils.OPCION_SIETE -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
-                        System.out.println(Arrays.toString(estudiantesArray));
-                        System.out.println(Arrays.toString(cursosArray));
                         if (estudiantesArray[0] != null && cursosArray[0] != null) {
 
                             Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
@@ -223,21 +221,15 @@ public class SistemaEscolar {
                         int indexCursosInscritos = 0;
                         if (empleadosArray[0] != null && cursosArray[0] != null && estudiantesArray[0] != null) {
                             Curso cursoSeleccionado = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
-                            for (Estudiante estudiante : estudiantesArray) {
-                                Curso[] cursosDelEstudianteNth = estudiante.getCursos();
-                                for (Curso curso : cursosDelEstudianteNth) {
-                                    if (curso != null) {
-                                        if (cursoSeleccionado.getId().equals(curso.getId())) {
-                                            estudiantesConElCursoInscrito[indexCursosInscritos] = estudiante;
-                                            indexCursosInscritos = indexCursosInscritos + 1;
-                                            break;
-                                        }
-                                    } else {
-                                        break;
-                                    }
-                                }
+
+                            for (Estudiante estudiante : cursoSeleccionado.getEstudiantes()) {
+                                JOptionPane.showInputDialog(
+                                        null,
+                                        "Asignar calificacion para alumno " + estudiante.getNombre() +
+                                                " - Matricula: " + estudiante.getMatricula(), cursoSeleccionado.getId());
+                                System.out.println("ESTUDIANTES ASIGNADOS");
+                                System.out.println(estudiante);
                             }
-                            Estudiante estudianteSeleccionado = (Estudiante) Utils.creaPreguntaDesplegable("Selecciona estudiante para llenar su historial:", estudiantesConElCursoInscrito);
 
                         } else {
                             JOptionPane.showMessageDialog(null,
