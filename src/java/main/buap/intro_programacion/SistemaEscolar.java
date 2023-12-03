@@ -23,6 +23,8 @@ public class SistemaEscolar {
         int empleadosIndex = 0;
         Estudiante[] estudiantesArray = new Estudiante[Utils.MAX_OBJETOS];
         int estudiantesIndex = 0;
+        HistorialAcademico[] historialesAcademicos = new HistorialAcademico[Utils.MAX_OBJETOS];
+        int historialesAcademicosIndex = 0;
 
         //Guarde la opción que elija el usuario
         String opcionElegidaPorElUsuario;
@@ -33,7 +35,7 @@ public class SistemaEscolar {
         //2. opcionElegidaPorElUsuario sea diferente de la opción salir
         do {
             //Hacer la pantalla más grande para más comodidad al elegir
-            UIManager.put("OptionPane.minimumSize", new Dimension(900, 400));
+            UIManager.put("OptionPane.minimumSize", new Dimension(900, 600));
             //Recupera la opcionElegidaPorElUsuario desde un menu desplegable(dropdown)
             opcionElegidaPorElUsuario = (String) Utils.creaPreguntaDesplegable(Utils.INIT_QUESTION, Utils.MAIN_MENU);
 
@@ -43,7 +45,7 @@ public class SistemaEscolar {
                 switch (opcionElegidaPorElUsuario) {
                     //CREA ESCUELA
                     case Utils.OPCION_UNO -> {
-                        UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
                         //almacena una nueva escuela en la posición escuelasIndex
                         escuelasArray[escuelasIndex] = new Escuela(
                                 Utils.creaPregunta(Utils.QUESTION_NOMBRE),
@@ -55,6 +57,7 @@ public class SistemaEscolar {
                         escuelasIndex = escuelasIndex + 1;
                     }
                     //CREA CURSO
+                    //TODO: AGREGAR NOMBRE
                     case Utils.OPCION_DOS -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si almenos existe una escuela y un maestro
@@ -216,19 +219,39 @@ public class SistemaEscolar {
                     //GENERAR HISTORIAL ACADÉMICO
                     case Utils.OPCION_OCHO -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
+
                         //Si al menos existe un estudiante y un curso
-                        Estudiante[] estudiantesConElCursoInscrito = new Estudiante[Utils.MAX_OBJETOS];
-                        int indexCursosInscritos = 0;
                         if (empleadosArray[0] != null && cursosArray[0] != null && estudiantesArray[0] != null) {
                             Curso cursoSeleccionado = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
 
                             for (Estudiante estudiante : cursoSeleccionado.getEstudiantes()) {
-                                JOptionPane.showInputDialog(
-                                        null,
-                                        "Asignar calificacion para alumno " + estudiante.getNombre() +
-                                                " - Matricula: " + estudiante.getMatricula(), cursoSeleccionado.getId());
-                                System.out.println("ESTUDIANTES ASIGNADOS");
-                                System.out.println(estudiante);
+                                if (estudiante != null) {
+                                    Integer calificacion = Integer.parseInt(JOptionPane.showInputDialog(
+                                            null,
+                                            "Asignar calificacion para alumno " + estudiante.getNombre() +
+                                                    " - Matricula: " + estudiante.getMatricula(),
+                                            "Curso: " + cursoSeleccionado.getNombreCurso(),
+                                            JOptionPane.QUESTION_MESSAGE));
+                                    if (estudiante.getHistorialAcademico() != null) {
+                                        Curso[] cursos = estudiante.getHistorialAcademico().getCursos();
+                                        int indice = Arrays.asList(cursos).indexOf(cursoSeleccionado);
+                                        if (indice != -1) {
+                                            estudiante.getHistorialAcademico().getCalificaciones()[indice] = calificacion;
+                                        } else {
+                                            int newIndice = estudiante.getHistorialAcademico().addCurso(cursoSeleccionado);
+                                            estudiante.getHistorialAcademico().getCalificaciones()[newIndice] = calificacion;
+                                        }
+                                    } else {
+                                        HistorialAcademico historialAcademico = new HistorialAcademico(estudiante);
+                                        int newIndice = historialAcademico.addCurso(cursoSeleccionado);
+                                        historialAcademico.getCalificaciones()[newIndice] = calificacion;
+                                        estudiante.setHistorialAcademico(historialAcademico);
+                                        historialesAcademicos[historialesAcademicosIndex] = historialAcademico;
+                                        historialesAcademicosIndex = historialesAcademicosIndex + 1;
+                                    }
+                                } else {
+                                    break;
+                                }
                             }
 
                         } else {
@@ -237,6 +260,62 @@ public class SistemaEscolar {
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
                         }
+                    }
+                    //MOSTRAR ESCUELAS
+                    case Utils.OPCION_NUEVE -> {
+                        //Elimina todos los nulos del arreglo para no imprimirlos
+                        //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
+                        Escuela[] escuelasArraySinNull = Arrays.stream(escuelasArray)
+                                .filter(Objects::nonNull)
+                                .toArray(Escuela[]::new);
+                        Utils.mostrarInfoArray("Mostrar Todas las Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
+
+                    }
+                    //MOSTRAR EMPLEADOS
+                    case Utils.OPCION_DIEZ -> {
+                        Empleado[] empleadosArraySinNull = Arrays.stream(empleadosArray)
+                                .filter(Objects::nonNull)
+                                .toArray(Empleado[]::new);
+                        Utils.mostrarInfoArray("Mostrar Todos los Empleados", empleadosArraySinNull, "Empleado seleccionado:");
+
+                    }
+                    //MOSTRAR ESTUDIANTES
+                    case Utils.OPCION_ONCE -> {
+                        Estudiante[] estudiantesArraySinNull = Arrays.stream(estudiantesArray)
+                                .filter(Objects::nonNull)
+                                .toArray(Estudiante[]::new);
+                        Utils.mostrarInfoArray("Mostrar Todos los Estudiantes", estudiantesArraySinNull, "Estudiante seleccionado:");
+
+                    }
+                    //MOSTRAR CURSOS
+                    case Utils.OPCION_DOCE -> {
+                        Curso[] cursosArraySinNull = Arrays.stream(cursosArray)
+                                .filter(Objects::nonNull)
+                                .toArray(Curso[]::new);
+                        Utils.mostrarInfoArray("Mostrar Todos los Cursos", cursosArraySinNull, "Curso seleccionado:");
+
+                    }
+                    //MOSTRAR HISTORIAL ACADEMICO
+                    case Utils.OPCION_TRECE -> {
+                        Estudiante estudianteSeleccionado = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESTUDIANTE, estudiantesArray);
+                        HistorialAcademico historialAcademico = estudianteSeleccionado.getHistorialAcademico();
+                        Curso[] cursos =
+                                Arrays.stream(historialAcademico.getCursos())
+                                        .filter(s -> (s != null))
+                                        .toArray(Curso[]::new);
+                        String[] calificaciones = new String[cursos.length];
+                        for (int i = 0; i < cursos.length; i++) {
+
+                            calificaciones[i] = cursos[i].toString() + "  Calificación: " + historialAcademico.getCalificaciones()[i];
+
+                        }
+                        Utils.mostrarInfoArray("Mostrar Historial Académico de " + estudianteSeleccionado.getNombre(), calificaciones, "Curso seleccionado:");
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
+                        JOptionPane.showConfirmDialog(null,
+                                "Promedio Final: " + historialAcademico.getCalificacionPromedio(),
+                                "Calificación del semestre",
+                                JOptionPane.OK_CANCEL_OPTION);
+
                     }
                 }
             }
@@ -247,16 +326,5 @@ public class SistemaEscolar {
         );
 
 
-        //Elimina todos los nulos del arreglo para no imprimirlos
-        //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
-        Escuela[] escuelasArraySinNull = Arrays.stream(escuelasArray)
-                .filter(Objects::nonNull)
-                .toArray(Escuela[]::new);
-        Utils.mostrarInfoArray("Mostrar Todas las Escuelas", escuelasArraySinNull, "Escuela seleccionada:");
-
-        Empleado[] empleadosArraySinNull = Arrays.stream(empleadosArray)
-                .filter(Objects::nonNull)
-                .toArray(Empleado[]::new);
-        Utils.mostrarInfoArray("Mostrar Todos los Empleados", empleadosArraySinNull, "Empleado seleccionado:");
     }
 }

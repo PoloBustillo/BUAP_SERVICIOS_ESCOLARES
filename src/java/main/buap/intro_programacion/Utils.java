@@ -1,8 +1,6 @@
 package buap.intro_programacion;
 
-import buap.intro_programacion.models.Direccion;
-import buap.intro_programacion.models.Empleado;
-import buap.intro_programacion.models.Escuela;
+import buap.intro_programacion.models.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -36,9 +34,18 @@ public final class Utils {
     public static final String OPCION_SEIS = "Calcular nomina para empleados";
     public static final String OPCION_SIETE = "Asignar estudiante a curso";
     public static final String OPCION_OCHO = "Generar historial académico";
+    public static final String OPCION_NUEVE = "Mostrar Escuelas";
+    public static final String OPCION_DIEZ = "Mostrar Empleados";
+    public static final String OPCION_ONCE = "Mostrar Estudiantes";
+    public static final String OPCION_DOCE = "Mostrar Cursos";
+    public static final String OPCION_TRECE = "Mostrar Historial Académico";
+
     public static final String OPCION_SALIR = "Salir";
-    public static final String[] MAIN_MENU = {OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
-            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO, OPCION_SALIR};
+    public static final String[] MAIN_MENU = {
+            OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
+            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO,
+            OPCION_NUEVE, OPCION_DIEZ, OPCION_ONCE, OPCION_DOCE,
+            OPCION_TRECE, OPCION_SALIR};
     public static final String QUESTION_NOMBRE = "Por favor, Introduce nombre:";
     public static final String QUESTION_AFORO = "Por favor, Introduce aforo máximo:";
     public static final String QUESTION_SALON = "Por favor, Introduce salón:";
@@ -57,6 +64,7 @@ public final class Utils {
     public static final String QUESTION_RFC = "Por favor, Introduce RFC:";
     public static final String QUESTION_CUENTA = "Por favor, Introduce cuenta:";
     public static final String QUESTION_SUELDO = "Por favor, Introduce sueldo:";
+    public static final String QUESTION_ESTUDIANTE = "Por favor, selecciona estudiante:";
 
 
     //METODOS DE UTILIDAD
@@ -81,7 +89,10 @@ public final class Utils {
                     System.out.println(mensajeClick);
                     if (list.getSelectedValue() instanceof Escuela)
                         System.out.println(((Escuela) list.getSelectedValue()).imprimeDatos());
-
+                    if (list.getSelectedValue() instanceof Estudiante)
+                        System.out.println(((Estudiante) list.getSelectedValue()).imprimeDatos());
+                    if (list.getSelectedValue() instanceof Curso)
+                        System.out.println(((Curso) list.getSelectedValue()).imprimeDatos());
                     if (list.getSelectedValue() instanceof Empleado empleadoSeleccionado) {
                         if (Objects.equals(title, "Nominas")) {
                             System.out.println("Haciendo transferencia a cuenta: " + empleadoSeleccionado.getCuenta());
@@ -90,6 +101,9 @@ public final class Utils {
                         } else {
                             System.out.println(empleadoSeleccionado.imprimeDatos());
                         }
+                    }
+                    if (title.contains("Historial")) {
+                        System.out.println("Email enviado con calificaciones");
                     }
                 }
             }

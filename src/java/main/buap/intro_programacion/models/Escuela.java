@@ -97,19 +97,12 @@ public class Escuela {
     public String toString() {
         return "Escuela『" +
                 " Nombre: " + nombre +
-                " | Cursos: "
-                +
-                Arrays.toString(Arrays.stream(cursos)
-                        .filter(s -> (s != null))
-                        .toArray(Curso[]::new))
-                +
                 " | Nivel: " + nivel +
                 " | Código: " + codigo +
                 '』';
     }
 
-    //TODO: Añadir estudiantes y empleados
-    //Listo
+    //TODO: Falta Direccion
     public String imprimeDatos() {
         return "Escuela{" +
                 "Nombre=" + getNombre() +
@@ -122,8 +115,8 @@ public class Escuela {
                 ", Código='" + getNivel() + '\'' +
                 ", Estudiantes='" +
                 Arrays.toString(Arrays.stream(estudiantes)
-                .filter(s -> (s != null))
-                .toArray(Estudiante[]::new)) + '\'' +
+                        .filter(s -> (s != null))
+                        .toArray(Estudiante[]::new)) + '\'' +
                 ", Empleados='" +
                 Arrays.toString(Arrays.stream(empleados)
                         .filter(s -> (s != null))
