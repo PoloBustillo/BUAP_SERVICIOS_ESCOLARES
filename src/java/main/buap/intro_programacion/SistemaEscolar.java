@@ -7,7 +7,7 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class aSistemaEscolar {
+public class SistemaEscolar {
 
     //Método principal de nuestra aplicación
     public static void main(String[] args) {
