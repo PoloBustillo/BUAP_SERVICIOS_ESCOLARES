@@ -123,11 +123,11 @@ public class Escuela {
                 ", Estudiantes='" +
                 Arrays.toString(Arrays.stream(estudiantes)
                 .filter(s -> (s != null))
-                .toArray(estudiantes[]::new)) + '\'' +
+                .toArray(Estudiante[]::new)) + '\'' +
                 ", Empleados='" +
                 Arrays.toString(Arrays.stream(empleados)
                         .filter(s -> (s != null))
-                        .toArray(empleados[]::new)) + '\'' +
+                        .toArray(Empleado[]::new)) + '\'' +
                 '}';
     }
 
