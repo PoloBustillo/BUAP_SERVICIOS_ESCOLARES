@@ -11,20 +11,20 @@ public class Curso {
     private final UUID id;
     private Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];
     private int indexEstudiantes = 0;
-    private String aforo;
+    private int aforo;
     private String salon;
     private String horario;
     private Boolean maestroAsignado = false;
     private String nombreCurso;
 
-    public Curso(String aforo, String salon, String horario) {
+    public Curso(int aforo, String salon, String horario) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
         this.horario = horario;
     }
 
-    public Curso(String aforo, String salon, String horario, String nombreCurso) {
+    public Curso(int aforo, String salon, String horario, String nombreCurso) {
         this.id = UUID.randomUUID();
         this.aforo = aforo;
         this.salon = salon;
@@ -94,11 +94,11 @@ public class Curso {
         return id;
     }
 
-    public String getAforo() {
+    public int getAforo() {
         return aforo;
     }
 
-    public void setAforo(String aforo) {
+    public void setAforo(int aforo) {
         this.aforo = aforo;
     }
 

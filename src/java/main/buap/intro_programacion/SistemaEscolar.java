@@ -81,7 +81,7 @@ public class SistemaEscolar {
                             Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
                             //Crea el curso a partir de las preguntas del usuario.
                             cursosArray[cursosIndex] = new Curso(
-                                    Utils.creaPregunta(Utils.QUESTION_AFORO),
+                                    Integer.parseInt(Utils.creaPregunta(Utils.QUESTION_AFORO)),
                                     Utils.creaPregunta(Utils.QUESTION_SALON),
                                     (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS)
                             );
@@ -277,6 +277,7 @@ public class SistemaEscolar {
                         }
                     }
                     //MOSTRAR ESCUELAS
+                    //TODO: removel null de nivel escolar
                     case Utils.OPCION_NUEVE -> {
                         //Elimina todos los nulos del arreglo para no imprimirlos
                         //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
@@ -351,7 +352,7 @@ public class SistemaEscolar {
                             //almacena una nueva escuela en la posición escuelasIndex
                             String nombreCurso = Utils.creaPreguntaConValorInicial(Utils.QUESTION_NOMBRE, curso.getNombreCurso());
                             curso.setNombreCurso(nombreCurso);
-                            String aforo = Utils.creaPreguntaConValorInicial(Utils.QUESTION_AFORO, curso.getAforo());
+                            int aforo = Integer.parseInt(Utils.creaPreguntaConValorInicial(Utils.QUESTION_AFORO, curso.getAforo()));
                             curso.setAforo(aforo);
                             String salon = Utils.creaPreguntaConValorInicial(Utils.QUESTION_SALON, curso.getSalon());
                             curso.setSalon(salon);
