@@ -144,7 +144,7 @@ public class SistemaEscolar {
                             //Aumenta el contador de empleados para no sobreescribir la posición en el arreglo.
                             empleadosIndex = empleadosIndex + 1;
                         } else {
-                            JOptionPane.showMessageDialog(<null,
+                            JOptionPane.showMessageDialog(null,
                                     "ERROR Necesita que escuelasArray sea mayor que 0",
                                     Utils.PROYECT_TITLE,
                                     JOptionPane.ERROR_MESSAGE);
