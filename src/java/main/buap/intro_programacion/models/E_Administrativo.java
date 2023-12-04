@@ -40,8 +40,6 @@ public class E_Administrativo extends Empleado {
     }
 
     @Override
-    //TODO: FALTAN DATOS IMPORTANTES Nombre - ID - indexCursos no se imprime es variable interna
-    //Listo
     public String toString() {
         return "Administrativo『" +
                 " | Nombre:  " + getNombre() +

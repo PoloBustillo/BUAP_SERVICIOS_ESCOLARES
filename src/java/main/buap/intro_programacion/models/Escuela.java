@@ -105,7 +105,6 @@ public class Escuela {
                 '』';
     }
 
-    //TODO: Falta Direccion
     public String imprimeDatos() {
         return "Escuela{" +
                 "Nombre=" + getNombre()  + " " + direccionEscuela +

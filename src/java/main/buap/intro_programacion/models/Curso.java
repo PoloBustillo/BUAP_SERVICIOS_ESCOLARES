@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.util.Arrays;
 import java.util.UUID;
 
-//TODO: Aforo es String
+
 public class Curso {
     private final UUID id;
     private Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];

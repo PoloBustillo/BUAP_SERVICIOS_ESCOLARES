@@ -46,7 +46,6 @@ public class SistemaEscolar {
                 //El switch te permite realizar una acción por cada option del menu
                 switch (opcionElegidaPorElUsuario) {
                     //CREA ESCUELA
-                    //TODO: CIUDAD DEBE SER SOLO TRES MTY, GDL, PUEBLA
                     case Utils.OPCION_UNO -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
                         //almacena una nueva escuela en la posición escuelasIndex
@@ -72,7 +71,6 @@ public class SistemaEscolar {
                         escuelasIndex = escuelasIndex + 1;
                     }
                     //CREA CURSO
-                    //TODO: AGREGAR NOMBRE
                     case Utils.OPCION_DOS -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si almenos existe una escuela y un maestro
@@ -215,7 +213,6 @@ public class SistemaEscolar {
                         }
                     }
                     //ASIGNAR CURSO A ESTUDIANTE
-                    //TODO: CHECAR AFORO
                     case Utils.OPCION_SIETE -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un estudiante y un curso
@@ -242,7 +239,7 @@ public class SistemaEscolar {
 
                             for (Estudiante estudiante : cursoSeleccionado.getEstudiantes()) {
                                 if (estudiante != null) {
-                                    int calificacion = Integer.parseInt(JOptionPane.showInputDialog(
+                                    float calificacion = Float.parseFloat(JOptionPane.showInputDialog(
                                             null,
                                             "Asignar calificacion para alumno " + estudiante.getNombre() +
                                                     " - Matricula: " + estudiante.getMatricula(),
@@ -278,7 +275,6 @@ public class SistemaEscolar {
                         }
                     }
                     //MOSTRAR ESCUELAS
-                    //TODO: removel null de nivel escolar
                     case Utils.OPCION_NUEVE -> {
                         //Elimina todos los nulos del arreglo para no imprimirlos
                         //Ejemplo: string de 4 posiciones [Escuela] [Escuela] [null] [null] solo debe mostrar datos.
