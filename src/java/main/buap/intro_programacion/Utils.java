@@ -100,15 +100,22 @@ public final class Utils {
                         System.out.println(((Estudiante) list.getSelectedValue()).imprimeDatos());
                     if (list.getSelectedValue() instanceof Curso)
                         System.out.println(((Curso) list.getSelectedValue()).imprimeDatos());
+
                     if (list.getSelectedValue() instanceof Empleado empleadoSeleccionado) {
+
                         if (Objects.equals(title, "Nominas")) {
+
+                            //! Calcula la nómina de los empleados
                             System.out.println("Haciendo transferencia a cuenta: " + empleadoSeleccionado.getCuenta());
                             System.out.println("Sueldo base: " + empleadoSeleccionado.getSueldo());
                             System.out.println("Sueldo al dia de " + new Date().toString() + ": " + empleadoSeleccionado.calcularSueldo());
+                            //! Calcula la nómina de los empleados
+
                         } else {
                             System.out.println(empleadoSeleccionado.imprimeDatos());
                         }
                     }
+
                     if (title.contains("Historial")) {
                         System.out.println("Email enviado con calificaciones");
                     }
