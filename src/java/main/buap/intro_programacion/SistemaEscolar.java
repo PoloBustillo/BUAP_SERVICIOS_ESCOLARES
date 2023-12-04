@@ -51,13 +51,20 @@ public class SistemaEscolar {
                         UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
                         //almacena una nueva escuela en la posición escuelasIndex
                         String nombreDeEscuela = Utils.creaPregunta(Utils.QUESTION_NOMBRE);
-                        JList<String> list = new JList<String>(NIVELES);
+
+                        //Crear un lista para seleccionar multiples niveles de la escuela
+                        JList<String> list = new JList<>(NIVELES);
                         JOptionPane.showMessageDialog(
                                 null, list, Utils.QUESTION_NIVEL, JOptionPane.PLAIN_MESSAGE);
+                        String[] nivelesArray = new String[3];
+
+
+                        if (!list.getSelectedValuesList().isEmpty())
+                            nivelesArray = list.getSelectedValuesList().toArray(nivelesArray);
                         escuelasArray[escuelasIndex] = new Escuela(
                                 nombreDeEscuela,
-                                Utils.creaDireccion(),
-                                (String[]) list.getSelectedValuesList().toArray()
+                                Utils.creaDireccion(), nivelesArray
+
                         );
 
 
@@ -171,7 +178,7 @@ public class SistemaEscolar {
                         UIManager.put("OptionPane.minimumSize", new Dimension(100, 100));
                         //Si al menos existe un empleado y un curso
                         if (empleadosArray[0] != null && cursosArray[0] != null) {
-                            Empleado empleado = (Empleado) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, empleadosArray);
+                            Empleado empleado = (Empleado) Utils.creaPreguntaDesplegable(Utils.QUESTION_EMPLEADO, empleadosArray);
                             if (empleado instanceof E_Academico empleadoAcademico) {
                                 Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
                                 empleadoAcademico.asignarCurso(curso);
@@ -213,7 +220,7 @@ public class SistemaEscolar {
                         //Si al menos existe un estudiante y un curso
                         if (estudiantesArray[0] != null && cursosArray[0] != null) {
 
-                            Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, estudiantesArray);
+                            Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESTUDIANTE, estudiantesArray);
                             Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
                             estudiante.asignarCurso(curso);
 
@@ -325,6 +332,66 @@ public class SistemaEscolar {
                                 "Calificación del semestre",
                                 JOptionPane.OK_CANCEL_OPTION);
 
+                    }
+                    //ACTUALIZA ESCUELAS
+                    case Utils.OPCION_CATORCE -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
+                        Escuela escuela = (Escuela) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESCUELA, escuelasArray);
+                        if (escuela != null) {
+                            //almacena una nueva escuela en la posición escuelasIndex
+                            String nombreDeEscuela = Utils.creaPreguntaConValorInicial(Utils.QUESTION_NOMBRE, escuela.getNombre());
+                            escuela.setNombre(nombreDeEscuela);
+                        }
+                    }
+                    //ACTUALIZA CURSO
+                    case Utils.OPCION_UNO_SEIS -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
+                        Curso curso = (Curso) Utils.creaPreguntaDesplegable(Utils.QUESTION_CURSO, cursosArray);
+                        if (curso != null) {
+                            //almacena una nueva escuela en la posición escuelasIndex
+                            String nombreCurso = Utils.creaPreguntaConValorInicial(Utils.QUESTION_NOMBRE, curso.getNombreCurso());
+                            curso.setNombreCurso(nombreCurso);
+                            String aforo = Utils.creaPreguntaConValorInicial(Utils.QUESTION_AFORO, curso.getAforo());
+                            curso.setAforo(aforo);
+                            String salon = Utils.creaPreguntaConValorInicial(Utils.QUESTION_SALON, curso.getSalon());
+                            curso.setSalon(salon);
+                            String horario = (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS);
+                            curso.setSalon(horario);
+                        }
+                    }
+                    //ACTUALIZA EMPLEADO
+                    case Utils.OPCION_UNO_SIETE -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
+                        Empleado empleado = (Empleado) Utils.creaPreguntaDesplegable(Utils.QUESTION_EMPLEADO, empleadosArray);
+                        if (empleado != null) {
+                            //almacena una nueva escuela en la posición escuelasIndex
+                            String nombre = Utils.creaPreguntaConValorInicial(Utils.QUESTION_NOMBRE, empleado.getNombre());
+                            empleado.setNombre(nombre);
+                            String rfc = Utils.creaPreguntaConValorInicial(Utils.QUESTION_RFC, empleado.getRFC());
+                            empleado.setRFC(rfc);
+                            String cuenta = Utils.creaPreguntaConValorInicial(Utils.QUESTION_CUENTA, empleado.getCuenta());
+                            empleado.setCuenta(cuenta);
+                            Float sueldo = Float.parseFloat(Utils.creaPreguntaConValorInicial(Utils.QUESTION_SUELDO, empleado.getSueldo()));
+                            empleado.setSueldo(sueldo);
+                            Utils.creaDireccionConValorInicial(empleado.getDireccion());
+
+                        }
+                    }
+                    //ACTUALIZA ESTUDIANTES
+                    case Utils.OPCION_UNO_OCHO -> {
+                        UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
+                        Estudiante estudiante = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESTUDIANTE, estudiantesArray);
+                        if (estudiante != null) {
+                            //almacena una nueva escuela en la posición escuelasIndex
+                            String nombre = Utils.creaPreguntaConValorInicial(Utils.QUESTION_NOMBRE, estudiante.getNombre());
+                            estudiante.setNombre(nombre);
+                            String telefono = Utils.creaPreguntaConValorInicial(Utils.QUESTION_TELEFONO, estudiante.getTelefono());
+                            estudiante.setTelefono(telefono);
+                            String matricula = Utils.creaPreguntaConValorInicial(Utils.QUESTION_MATRICULA, estudiante.getMatricula());
+                            estudiante.setMatricula(matricula);
+                            Utils.creaDireccionConValorInicial(estudiante.getDireccionEstudiante());
+
+                        }
                     }
                 }
             }

@@ -41,11 +41,6 @@ public final class Utils {
     public static final String OPCION_TRECE = "Mostrar Historial Académico";
 
     public static final String OPCION_SALIR = "Salir";
-    public static final String[] MAIN_MENU = {
-            OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
-            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO,
-            OPCION_NUEVE, OPCION_DIEZ, OPCION_ONCE, OPCION_DOCE,
-            OPCION_TRECE, OPCION_SALIR};
     public static final String QUESTION_NOMBRE = "Por favor, Introduce nombre:";
     public static final String QUESTION_AFORO = "Por favor, Introduce aforo máximo:";
     public static final String QUESTION_SALON = "Por favor, Introduce salón:";
@@ -65,6 +60,17 @@ public final class Utils {
     public static final String QUESTION_CUENTA = "Por favor, Introduce cuenta:";
     public static final String QUESTION_SUELDO = "Por favor, Introduce sueldo:";
     public static final String QUESTION_ESTUDIANTE = "Por favor, selecciona estudiante:";
+    public static final String OPCION_CATORCE = "Actualiza Escuela";
+    public static final String QUESTION_EMPLEADO = "Elige un Empleado de la nomina:";
+    public static final String OPCION_UNO_SEIS = "Actualiza Curso";
+    public static final String OPCION_UNO_SIETE = "Actualiza Empleado";
+    public static final String OPCION_UNO_OCHO = "Actualiza Estudiante";
+    public static final String[] MAIN_MENU = {
+            OPCION_UNO, OPCION_DOS, OPCION_TRES, OPCION_CUATRO,
+            OPCION_CINCO, OPCION_SEIS, OPCION_SIETE, OPCION_OCHO,
+            OPCION_NUEVE, OPCION_DIEZ, OPCION_ONCE, OPCION_DOCE,
+            OPCION_TRECE, OPCION_CATORCE, OPCION_UNO_SEIS, OPCION_UNO_SIETE,
+            OPCION_UNO_OCHO, OPCION_SALIR};
 
 
     //METODOS DE UTILIDAD
@@ -124,6 +130,12 @@ public final class Utils {
                 JOptionPane.QUESTION_MESSAGE);
     }
 
+    public static String creaPreguntaConValorInicial(String Question, Object valorInicial) {
+        return JOptionPane.showInputDialog(null,
+                Question,
+                valorInicial);
+    }
+
     /**
      * @param Question El string de la pregunta que se realizará al usuario.
      * @param data     El arreglo de elementos que se desplegarán en la ventana,
@@ -138,7 +150,7 @@ public final class Utils {
                 JOptionPane.QUESTION_MESSAGE,
                 null,
                 Arrays.stream(data)
-                        .filter(s -> (s != null))
+                        .filter(Objects::nonNull)
                         .toArray(Object[]::new),
                 data[0]);
     }
@@ -170,6 +182,32 @@ public final class Utils {
 
             //La dirección no se crea y mando un Objeto vacío
             return null;
+
+        }
+    }
+
+    public static void creaDireccionConValorInicial(Direccion direccion) {
+        //try-catch permite el manejo de errores durante el programa
+        try {
+
+            //Realizar las preguntas a través de las ventanas.
+            String calle = creaPreguntaConValorInicial(QUESTION_CALLE, direccion.getCalle());
+            String colonia = creaPreguntaConValorInicial(QUESTION_COLONIA, direccion.getColonia());
+            Integer cp = Integer.parseInt(creaPreguntaConValorInicial(QUESTION_CODIGO_POSTAL, direccion.getCodigoPostal()));
+            String ciudad = creaPreguntaConValorInicial(QUESTION_CIUDAD, direccion.getCiudad());
+            direccion.setCalle(calle);
+            direccion.setCiudad(ciudad);
+            direccion.setColonia(colonia);
+            direccion.setCodigoPostal(cp);
+
+
+        } catch (NumberFormatException e) {
+
+            //Mensaje de error generado si el usuario manda un CP que no es un número.
+            JOptionPane.showMessageDialog(null,
+                    "ERROR en actualizar Código Postal: Dirección no creada!!",
+                    PROYECT_TITLE,
+                    JOptionPane.ERROR_MESSAGE);
 
         }
     }
