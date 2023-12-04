@@ -26,6 +26,7 @@ public final class Utils {
     public static final String EMPLEADO_ACADEMICO = "Académico";
     public static final String[] TIPO_EMPLEADOS = {EMPLEADO_ACADEMICO, EMPLEADO_AUXILIAR, EMPLEADO_ADMIN};
     public static final String[] HORARIOS = {"Matutino (8-10)", "Matutino (10-12)", "Vespertino (12-2)", "Vespertino (2-4)"};
+    public static final String[] CIUDADES = {"Puebla", "Monterrey", "Guadalajara"};
     public static final String OPCION_UNO = "Crear Escuela";
     public static final String OPCION_DOS = "Crear Curso";
     public static final String OPCION_TRES = "Crear Empleado";
@@ -166,8 +167,7 @@ public final class Utils {
             String calle = creaPregunta(QUESTION_CALLE);
             String colonia = creaPregunta(QUESTION_COLONIA);
             Integer cp = Integer.parseInt(creaPregunta(QUESTION_CODIGO_POSTAL));
-            String ciudad = creaPregunta(QUESTION_CIUDAD);
-
+            String ciudad = (String) creaPreguntaDesplegable(QUESTION_CIUDAD, CIUDADES);
             //Creo y retorno un objeto tipo Direccion, con los datos obtenidos del usuario.
             return new Direccion(calle, colonia, cp, ciudad);
 
