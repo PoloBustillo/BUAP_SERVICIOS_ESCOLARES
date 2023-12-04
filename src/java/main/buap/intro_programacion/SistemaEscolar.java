@@ -83,7 +83,8 @@ public class SistemaEscolar {
                             cursosArray[cursosIndex] = new Curso(
                                     Integer.parseInt(Utils.creaPregunta(Utils.QUESTION_AFORO)),
                                     Utils.creaPregunta(Utils.QUESTION_SALON),
-                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS)
+                                    (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_HORARIO, Utils.HORARIOS),
+                                    Utils.creaPregunta("Nombre del Curso:")
                             );
                             //Añade el curso a la escuela
                             escuela.addCurso(cursosArray[cursosIndex]);
