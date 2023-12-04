@@ -3,10 +3,12 @@ package buap.intro_programacion.models;
 import buap.intro_programacion.Utils;
 
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.UUID;
 
 public class Escuela {
 
+    private final UUID codigo;
     private int indexCursos = 0;
     private int indexEmpleados = 0;
     private int indexEstudiantes = 0;
@@ -15,28 +17,27 @@ public class Escuela {
     private Estudiante[] estudiantes = new Estudiante[Utils.MAX_OBJETOS];
     private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
     private Direccion direccionEscuela;
-    private String nivel;
-    private UUID codigo;
+    private String[] niveles;
 
 
     /**
      * @param nombre           Nombre de la escuela a crear
      * @param direccionEscuela Un objeto tipo Direccion, que representa la dirección de la escuela
-     * @param nivel            String que puede ser solo: Primaria o Secundaria o Preparatoría
+     * @param niveles          String que puede ser solo: Primaria o Secundaria o Preparatoría
      */
-    public Escuela(String nombre, Direccion direccionEscuela, String nivel) {
+    public Escuela(String nombre, Direccion direccionEscuela, String[] niveles) {
         this.nombre = nombre;
         this.direccionEscuela = direccionEscuela;
-        this.nivel = nivel;
+        this.niveles = niveles;
         this.codigo = UUID.randomUUID();
     }
 
-    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String nivel) {
+    public Escuela(String nombre, Empleado[] empleados, Estudiante[] estudiantes, Direccion direccionEscuela, String[] niveles) {
         this.nombre = nombre;
         this.empleados = empleados;
         this.estudiantes = estudiantes;
         this.direccionEscuela = direccionEscuela;
-        this.nivel = nivel;
+        this.niveles = niveles;
         this.codigo = UUID.randomUUID();
     }
 
@@ -56,12 +57,12 @@ public class Escuela {
         this.estudiantes = estudiantes;
     }
 
-    public String getNivel() {
-        return nivel;
+    public String[] getNiveles() {
+        return niveles;
     }
 
-    public void setNivel(String nivel) {
-        this.nivel = nivel;
+    public void setNiveles(String[] niveles) {
+        this.niveles = niveles;
     }
 
     public Empleado[] getEmpleados() {
@@ -97,7 +98,7 @@ public class Escuela {
     public String toString() {
         return "Escuela『" +
                 " Nombre: " + nombre +
-                " | Nivel: " + nivel +
+                " | Niveles: " + Arrays.toString(niveles) +
                 " | Código: " + codigo +
                 '』';
     }
@@ -108,18 +109,18 @@ public class Escuela {
                 "Nombre=" + getNombre() +
                 ", Cursos='" +
                 Arrays.toString(Arrays.stream(cursos)
-                        .filter(s -> (s != null))
+                        .filter(Objects::nonNull)
                         .toArray(Curso[]::new))
                 + '\'' +
-                ", Nivel='" + getNivel() + '\'' +
-                ", Código='" + getNivel() + '\'' +
+                ", Nivel='" + Arrays.toString(getNiveles()) + '\'' +
+                ", Código='" + getCodigo() + '\'' +
                 ", Estudiantes='" +
                 Arrays.toString(Arrays.stream(estudiantes)
-                        .filter(s -> (s != null))
+                        .filter(Objects::nonNull)
                         .toArray(Estudiante[]::new)) + '\'' +
                 ", Empleados='" +
                 Arrays.toString(Arrays.stream(empleados)
-                        .filter(s -> (s != null))
+                        .filter(Objects::nonNull)
                         .toArray(Empleado[]::new)) + '\'' +
                 '}';
     }

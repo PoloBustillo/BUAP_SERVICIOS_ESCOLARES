@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.Arrays;
 import java.util.Objects;
 
+import static buap.intro_programacion.Utils.NIVELES;
+
 public class SistemaEscolar {
 
     //Método principal de nuestra aplicación
@@ -44,14 +46,20 @@ public class SistemaEscolar {
                 //El switch te permite realizar una acción por cada option del menu
                 switch (opcionElegidaPorElUsuario) {
                     //CREA ESCUELA
+                    //TODO: CIUDAD DEBE SER SOLO TRES MTY, GDL, PUEBLA
                     case Utils.OPCION_UNO -> {
                         UIManager.put("OptionPane.minimumSize", new Dimension(300, 200));
                         //almacena una nueva escuela en la posición escuelasIndex
+                        String nombreDeEscuela = Utils.creaPregunta(Utils.QUESTION_NOMBRE);
+                        JList<String> list = new JList<String>(NIVELES);
+                        JOptionPane.showMessageDialog(
+                                null, list, Utils.QUESTION_NIVEL, JOptionPane.PLAIN_MESSAGE);
                         escuelasArray[escuelasIndex] = new Escuela(
-                                Utils.creaPregunta(Utils.QUESTION_NOMBRE),
+                                nombreDeEscuela,
                                 Utils.creaDireccion(),
-                                (String) Utils.creaPreguntaDesplegable(Utils.QUESTION_NIVEL, Utils.NIVELES)
+                                (String[]) list.getSelectedValuesList().toArray()
                         );
+
 
                         //Aumento mi índice de la escuela más uno
                         escuelasIndex = escuelasIndex + 1;
@@ -226,7 +234,7 @@ public class SistemaEscolar {
 
                             for (Estudiante estudiante : cursoSeleccionado.getEstudiantes()) {
                                 if (estudiante != null) {
-                                    Integer calificacion = Integer.parseInt(JOptionPane.showInputDialog(
+                                    int calificacion = Integer.parseInt(JOptionPane.showInputDialog(
                                             null,
                                             "Asignar calificacion para alumno " + estudiante.getNombre() +
                                                     " - Matricula: " + estudiante.getMatricula(),
@@ -297,11 +305,12 @@ public class SistemaEscolar {
                     }
                     //MOSTRAR HISTORIAL ACADEMICO
                     case Utils.OPCION_TRECE -> {
+                        System.out.println(Arrays.toString(historialesAcademicos));
                         Estudiante estudianteSeleccionado = (Estudiante) Utils.creaPreguntaDesplegable(Utils.QUESTION_ESTUDIANTE, estudiantesArray);
                         HistorialAcademico historialAcademico = estudianteSeleccionado.getHistorialAcademico();
                         Curso[] cursos =
                                 Arrays.stream(historialAcademico.getCursos())
-                                        .filter(s -> (s != null))
+                                        .filter(Objects::nonNull)
                                         .toArray(Curso[]::new);
                         String[] calificaciones = new String[cursos.length];
                         for (int i = 0; i < cursos.length; i++) {

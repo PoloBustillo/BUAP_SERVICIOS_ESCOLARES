@@ -56,7 +56,7 @@ public final class Utils {
     public static final String QUESTION_COLONIA = "Por favor, Introduce colonia:";
     public static final String QUESTION_CODIGO_POSTAL = "Por favor, Introduce código postal:";
     public static final String QUESTION_CIUDAD = "Por favor, Introduce ciudad:";
-    public static final String QUESTION_NIVEL = "Por favor, Selecciona nivel:";
+    public static final String QUESTION_NIVEL = "Por favor, Selecciona uno o más nivel:";
     public static final String QUESTION_HORARIO = "Por favor, Selecciona horario:";
     public static final String[] NIVELES = {"Primaria", "Secundaria", "Preparatoria"};
     public static final String QUESTION_MATRICULA = "Por favor, Introduce matricula:";

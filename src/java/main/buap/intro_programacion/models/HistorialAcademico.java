@@ -10,7 +10,7 @@ public class HistorialAcademico {
     private Curso[] cursos = new Curso[Utils.MAX_OBJETOS];
     private int indexCursos = 0;
     private double[] calificaciones = new double[Utils.MAX_OBJETOS];
-    private double calificacionPromedio;
+    private double calificacionPromedio = 0;
 
     public HistorialAcademico(Estudiante estudiante) {
         Arrays.fill(calificaciones, 0);
@@ -73,7 +73,8 @@ public class HistorialAcademico {
         for (int i = 0; i < cursosSinNulos.length; i++) {
             promedio = promedio + calificaciones[i];
         }
-        return promedio / cursosSinNulos.length;
+        calificacionPromedio = promedio / cursosSinNulos.length;
+        return calificacionPromedio;
     }
 
 
