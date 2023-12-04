@@ -31,11 +31,7 @@ public class Empleado {
     @Override
     public String toString() {
         return "Empleado『" +
-                " | IDEmpleado: " + idEmpleado +
-                " | Dirección: " + direccion +
                 " | Nombre: " + nombre +
-                " | RFC: " + RFC +
-                " | # de Cuenta: " + cuenta +
                 " | Sueldo:$ " + sueldo +
                 '』';
     }

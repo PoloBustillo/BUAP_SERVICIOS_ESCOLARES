@@ -98,7 +98,9 @@ public class Escuela {
     public String toString() {
         return "Escuela『" +
                 " Nombre: " + nombre +
-                " | Niveles: " + Arrays.toString(niveles) +
+                " | Niveles: " +  Arrays.toString(Arrays.stream(niveles)
+                .filter(Objects::nonNull)
+                .toArray(String[]::new)) +
                 " | Código: " + codigo +
                 '』';
     }
@@ -106,13 +108,15 @@ public class Escuela {
     //TODO: Falta Direccion
     public String imprimeDatos() {
         return "Escuela{" +
-                "Nombre=" + getNombre() +
+                "Nombre=" + getNombre()  + " " + direccionEscuela +
                 ", Cursos='" +
                 Arrays.toString(Arrays.stream(cursos)
                         .filter(Objects::nonNull)
                         .toArray(Curso[]::new))
                 + '\'' +
-                ", Nivel='" + Arrays.toString(getNiveles()) + '\'' +
+                ", Nivel='" + Arrays.toString(Arrays.stream(niveles)
+                .filter(Objects::nonNull)
+                .toArray(String[]::new))  + '\'' +
                 ", Código='" + getCodigo() + '\'' +
                 ", Estudiantes='" +
                 Arrays.toString(Arrays.stream(estudiantes)

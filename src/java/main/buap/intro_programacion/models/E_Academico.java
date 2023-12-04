@@ -71,12 +71,7 @@ public class E_Academico extends Empleado {
     @Override
     public String toString() {
         return "E_Academico『" +
-                " | ID: " + getIdEmpleado() +
                 " | Nombre: " + getNombre() +
-                " |# De Cursos: " +
-                Arrays.toString(Arrays.stream(cursos)
-                        .filter(s -> (s != null))
-                        .toArray(Curso[]::new)) +
                 " | Materia: " + materia +
                 '』';
     }
