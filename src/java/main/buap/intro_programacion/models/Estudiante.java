@@ -83,9 +83,7 @@ public class Estudiante {
         }
     }
 
-    //TODO: Index cursos no va
-    //TODO: no imprimir cursos nulos
-    //Listo
+ 
     @Override
     public String toString() {
         return "Estudiante『" +

@@ -41,8 +41,6 @@ public class Curso {
         this.estudiantes = estudiantes;
     }
 
-    //TODO: AGREGAR NOMBRE - ID - SALON - AFORO
-
     @Override
     public String toString() {
         return "Curso:『" +
